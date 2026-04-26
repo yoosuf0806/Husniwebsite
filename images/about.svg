@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 625">
+  <defs>
+    <linearGradient id="abg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8AFA6"/>
+      <stop offset="100%" style="stop-color:#6B5A4A"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="625" fill="url(#abg)"/>
+  <!-- desk/workspace silhouette -->
+  <rect x="60" y="300" width="380" height="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="304" width="380" height="200" fill="rgba(0,0,0,0.15)"/>
+  <!-- monitor -->
+  <rect x="180" y="220" width="140" height="85" rx="3" fill="rgba(27,42,74,0.6)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <rect x="240" y="305" width="20" height="15" fill="rgba(27,42,74,0.6)"/>
+  <rect x="220" y="320" width="60" height="3" fill="rgba(255,255,255,0.15)"/>
+  <!-- papers -->
+  <rect x="80" y="280" width="80" height="24" rx="2" fill="rgba(255,255,255,0.15)" transform="rotate(-5,80,280)"/>
+  <rect x="88" y="275" width="80" height="24" rx="2" fill="rgba(255,255,255,0.1)" transform="rotate(-2,88,275)"/>
+  <!-- coffee -->
+  <ellipse cx="370" cy="295" rx="18" ry="8" fill="rgba(255,255,255,0.2)"/>
+  <rect x="352" y="270" width="36" height="26" rx="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <!-- person silhouette outline -->
+  <circle cx="250" cy="130" r="45" fill="rgba(27,42,74,0.3)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <path d="M160,300 Q160,220 250,210 Q340,220 340,300" fill="rgba(27,42,74,0.25)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <!-- gold accent -->
+  <rect x="0" y="580" width="500" height="45" fill="#1B2A4A"/>
+  <text x="250" y="608" font-family="Georgia,serif" font-size="11" fill="rgba(255,255,255,0.7)" letter-spacing="3" text-anchor="middle">HUSNI MARIKKAR · ARCHITECT · LONDON</text>
+</svg>

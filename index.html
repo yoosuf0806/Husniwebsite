@@ -14,15 +14,13 @@
 :root{--navy:#1B2A4A;--gold:#C9A96E;--white:#FFFFFF;--offwhite:#FAFAF8;--muted:#6B6B6B;--border:#E8E8E4;--navy-light:#EEF1F7;}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);transition:box-shadow 0.3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);transition:box-shadow 0.3s}
 nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--navy);text-decoration:none;white-space:nowrap}
 .nav-logo span{color:var(--gold)}
 .nav-links{display:flex;flex-direction:row;gap:36px;list-style:none;align-items:center;margin:0;padding:0}
 .nav-links li{display:inline-block}
-.nav-links a{font-size:12px;font-weight:400;color:var(--navy);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7;transition:opacity 0.2s;white-space:nowrap}
+.nav-links a{font-size:12px;color:var(--navy);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7;transition:opacity 0.2s;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active{opacity:1}
 .nav-enquire{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;border:1px solid var(--navy);color:var(--navy);background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;white-space:nowrap}
 .nav-enquire:hover{background:var(--navy);color:var(--white)}
@@ -42,8 +40,8 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .btn-ghost{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;background:transparent;color:var(--navy);border:1px solid var(--navy);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;text-decoration:none}
 .btn-ghost:hover{background:var(--navy);color:var(--white)}
 .hero-image-col{opacity:0;transform:translateX(32px);animation:slideLeft 0.9s 0.6s forwards;position:relative}
-.hero-image-frame{width:100%;aspect-ratio:3/4;overflow:hidden;position:relative;background:linear-gradient(160deg,#B5A898 0%,#8C7B6B 40%,#6B5A4A 100%)}
-.hero-image-frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.hero-image-frame{width:100%;aspect-ratio:3/4;overflow:hidden;position:relative;background:linear-gradient(160deg,#C5BAB0 0%,#9E9288 50%,#7A6E65 100%)}
+.hero-image-frame img,.hero-image-frame svg{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
 .hero-badge{position:absolute;bottom:24px;left:-24px;background:var(--white);padding:16px 20px;box-shadow:0 8px 32px rgba(27,42,74,0.12)}
 .hero-badge-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--navy);line-height:1}
 .hero-badge-text{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
@@ -53,7 +51,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 /* ABOUT */
 #about{background:var(--white);padding:100px 0}
 .about-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
 .about-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.5vw,48px);font-weight:400;line-height:1.1;margin-bottom:24px}
 .about-text h2 em{font-style:italic;color:var(--gold)}
 .about-text p{font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:16px}
@@ -63,8 +61,8 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--navy)}
 .stat-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .about-image-frame{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,#C5BAB0 0%,#9E9288 50%,#7A6E65 100%);overflow:hidden;position:relative}
-.about-image-frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.about-image-bar{position:absolute;bottom:0;left:0;right:0;background:var(--navy);padding:14px 20px}
+.about-image-frame img,.about-image-frame svg{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.about-image-bar{position:absolute;bottom:0;left:0;right:0;background:var(--navy);padding:14px 20px;z-index:2}
 .about-image-bar p{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-align:center}
 
 /* WAVE */
@@ -75,16 +73,16 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .projects-inner{max-width:1200px;margin:0 auto;padding:0 48px}
 .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px}
 .section-header-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,52px);font-weight:400;color:var(--white);line-height:1;margin-top:8px}
-.section-link-white{font-size:12px;letter-spacing:0.08em;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s}
+.section-link-white{font-size:12px;letter-spacing:0.08em;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s;white-space:nowrap}
 .section-link-white:hover{color:var(--gold)}
 .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
-.project-card{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:var(--navy)}
-.project-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease}
+.project-card{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:#2a3a5a}
+.project-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease;position:absolute;inset:0}
 .project-card:hover img{transform:scale(1.05)}
-.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);opacity:0.4;transition:opacity 0.35s}
-.project-card:hover .project-overlay{opacity:1}
-.project-num{position:absolute;top:16px;left:16px;font-size:11px;letter-spacing:0.1em;color:rgba(255,255,255,0.8);background:rgba(0,0,0,0.3);padding:3px 8px;backdrop-filter:blur(4px)}
-.project-info{position:absolute;bottom:0;left:0;right:0;padding:20px}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);transition:opacity 0.35s}
+.project-card:hover .project-overlay{opacity:1.2}
+.project-num{position:absolute;top:16px;left:16px;font-size:11px;letter-spacing:0.1em;color:rgba(255,255,255,0.9);background:rgba(0,0,0,0.4);padding:3px 10px;backdrop-filter:blur(4px);z-index:2}
+.project-info{position:absolute;bottom:0;left:0;right:0;padding:20px;z-index:2}
 .project-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);font-weight:400}
 .project-type{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-top:4px}
 
@@ -93,7 +91,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .services-inner{max-width:1200px;margin:0 auto;padding:0 48px}
 .services-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px}
 .services-header-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,3.5vw,48px);font-weight:400;color:var(--navy);line-height:1.1;margin-top:8px}
-.section-link-navy{font-size:12px;letter-spacing:0.08em;color:var(--navy);text-decoration:none;opacity:0.7;transition:opacity 0.2s}
+.section-link-navy{font-size:12px;letter-spacing:0.08em;color:var(--navy);text-decoration:none;opacity:0.7;transition:opacity 0.2s;white-space:nowrap}
 .section-link-navy:hover{opacity:1}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border)}
 .service-tile{padding:36px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background 0.25s}
@@ -109,12 +107,16 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .contact-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px}
 .contact-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3vw,48px);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:16px}
 .contact-left h2 em{font-style:italic;color:var(--gold)}
-.contact-left .body{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:40px}
-.contact-row{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.contact-left .body{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:32px}
+.contact-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
 .contact-row:first-child{border-top:1px solid rgba(255,255,255,0.08)}
 .contact-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
 .contact-value{font-size:14px;color:rgba(255,255,255,0.85)}
 .contact-value a{color:var(--gold);text-decoration:none}
+/* WhatsApp in contact */
+.wa-contact-btn{display:flex;align-items:center;gap:12px;background:#25D366;color:var(--white);padding:14px 20px;text-decoration:none;font-size:13px;font-weight:500;margin-top:24px;transition:opacity 0.2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%}
+.wa-contact-btn:hover{opacity:0.9}
+.wa-contact-btn svg{flex-shrink:0}
 .contact-form{display:flex;flex-direction:column;gap:16px}
 .form-input,.form-select,.form-textarea{width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s}
 .form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.35)}
@@ -124,10 +126,12 @@ nav.scrolled{box-shadow:0 1px 24px rgba(27,42,74,0.10)}
 .form-textarea{resize:vertical;min-height:120px}
 .btn-gold{padding:16px 32px;background:var(--gold);color:var(--navy);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-weight:500;width:100%;transition:opacity 0.25s}
 .btn-gold:hover{opacity:0.88}
+.form-divider{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.3);font-size:12px;letter-spacing:0.1em;text-transform:uppercase}
+.form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.1)}
 .form-success{display:none;padding:16px;background:rgba(201,169,110,0.15);border:1px solid var(--gold);color:var(--gold);font-size:14px;text-align:center}
 
 /* FOOTER */
-footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;justify-content:space-between}
+footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;align-items:center;justify-content:space-between}
 .footer-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--white)}
 .footer-logo span{color:var(--gold)}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
@@ -135,31 +139,20 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
 .footer-links a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s}
 .footer-links a:hover{color:var(--gold)}
 
-/* WHATSAPP */
-.wa-btn{position:fixed;bottom:32px;right:32px;z-index:200;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.35);opacity:0;pointer-events:none;transition:opacity 0.4s,transform 0.2s;text-decoration:none}
-.wa-btn.visible{opacity:1;pointer-events:all}
-.wa-btn:hover{transform:scale(1.08)}
-.wa-tooltip{position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--navy);color:var(--white);font-size:12px;padding:6px 14px;border-radius:20px;white-space:nowrap;opacity:0;transition:opacity 0.2s;pointer-events:none}
-.wa-btn:hover .wa-tooltip{opacity:1}
+/* FLOATING WHATSAPP */
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.wa-float-btn{width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.2s;opacity:0;pointer-events:none}
+.wa-float-btn.visible{opacity:1;pointer-events:all}
+.wa-float-btn:hover{transform:scale(1.08)}
+.wa-tooltip{background:var(--navy);color:var(--white);font-size:12px;padding:6px 14px;border-radius:20px;white-space:nowrap;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.wa-float-btn:hover+.wa-tooltip,.wa-float:hover .wa-tooltip{opacity:1}
 
-/* ANIMATIONS */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 @keyframes slideLeft{to{opacity:1;transform:translateX(0)}}
 @keyframes scrollPulse{0%,100%{opacity:0.4;transform:scaleY(0.6)}50%{opacity:1;transform:scaleY(1)}}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{padding:0 24px}
-  .nav-links{display:none}
-  .hero-inner,.about-inner,.contact-inner{grid-template-columns:1fr;gap:40px}
-  .projects-grid,.services-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:16px;text-align:center}
-  .hero-badge{left:0}
-  .hero-inner,.projects-inner,.services-inner{padding-left:24px;padding-right:24px}
-  .about-inner,.contact-inner{padding-left:24px;padding-right:24px}
-}
+@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.hero-inner,.about-inner,.contact-inner{grid-template-columns:1fr;gap:40px}.projects-grid,.services-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}.hero-badge{left:0}.hero-inner,.projects-inner,.services-inner,.about-inner,.contact-inner{padding-left:24px;padding-right:24px}}
 </style>
 </head>
 <body>
@@ -189,8 +182,11 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
       </div>
     </div>
     <div class="hero-image-col">
-      <div class="hero-image-frame">
-        <img src="images/hero.jpg" alt="Husni Marikkar Architect" onerror="this.style.display='none'"/>
+      <div class="hero-image-frame" id="heroFrame">
+        <!-- Try real photo first, fallback to SVG placeholder -->
+        <img id="heroImg" src="images/hero.jpg" alt="Husni Marikkar Architect"
+          onerror="this.style.display='none';document.getElementById('heroSvg').style.display='block'"/>
+        <img id="heroSvg" src="images/hero.svg" alt="Husni Marikkar Architect" style="display:none"/>
       </div>
       <div class="hero-badge">
         <div class="hero-badge-num">6+</div>
@@ -210,7 +206,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
 <section id="about" style="background:var(--white);padding:100px 0">
   <div class="about-inner">
     <div class="about-text reveal">
-      <p class="eyebrow">About Me</p>
+      <span class="eyebrow">About Me</span>
       <h2>Designing with <em>purpose</em> &amp; precision.</h2>
       <p>I'm Husni — a London-based architect and project manager. BSc Architecture and currently completing my Masters in Project Management at the University of Westminster. Over four years and 6+ high-budget projects, I've learned that good architecture is equal parts care, clarity and craft.</p>
       <p>I work closely with homeowners across Greater London and the Home Counties — translating how you actually live into refined, beautifully detailed spaces, delivered on time and on budget.</p>
@@ -224,7 +220,9 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
     </div>
     <div class="reveal">
       <div class="about-image-frame">
-        <img src="images/about.jpg" alt="Husni Marikkar" onerror="this.style.display='none'"/>
+        <img src="images/about.jpg" alt="Husni Marikkar"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <img src="images/about.svg" alt="Husni Marikkar" style="display:none"/>
         <div class="about-image-bar"><p>Husni Marikkar &nbsp;·&nbsp; Architect &amp; Project Manager &nbsp;·&nbsp; London</p></div>
       </div>
     </div>
@@ -241,7 +239,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
   <div class="projects-inner">
     <div class="section-header reveal">
       <div class="section-header-left">
-        <p class="eyebrow" style="color:var(--gold)">Selected Works</p>
+        <span class="eyebrow" style="color:var(--gold)">Selected Works</span>
         <h2>2020 — 2025</h2>
       </div>
       <a href="projects.html" class="section-link-white">View all projects →</a>
@@ -285,36 +283,18 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
   <div class="services-inner">
     <div class="services-header reveal">
       <div class="services-header-left">
-        <p class="eyebrow">What I Offer</p>
+        <span class="eyebrow">What I Offer</span>
         <h2>Services designed<br>for real homes.</h2>
       </div>
       <a href="services.html" class="section-link-navy">All services →</a>
     </div>
     <div class="services-grid reveal">
-      <div class="service-tile">
-        <svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="3" y="8" width="22" height="17" rx="1"/><path d="M8 8V5a6 6 0 0 1 12 0v3"/><path d="M3 13h22"/></svg>
-        <div class="service-name">Home Renovation</div><div class="service-desc">Bespoke refurbishment of period and contemporary homes — seamlessly blending commission and full fit-out.</div>
-      </div>
-      <div class="service-tile">
-        <svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M4 24L14 4l10 20"/><path d="M8 18h12"/></svg>
-        <div class="service-name">New Build Design</div><div class="service-desc">Bespoke architectural design for new homes, from initial sketch through planning to detailed construction drawings.</div>
-      </div>
-      <div class="service-tile">
-        <svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="4" y="4" width="20" height="16" rx="1"/><path d="M10 20v4M18 20v4M7 24h14"/></svg>
-        <div class="service-name">3D BIM Visualisation</div><div class="service-desc">Photorealistic BIM models so you can walk through your home before a single brick is laid.</div>
-      </div>
-      <div class="service-tile">
-        <svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="3" y="3" width="22" height="22" rx="1"/><path d="M3 10h22M10 10v15"/></svg>
-        <div class="service-name">Space Planning</div><div class="service-desc">Layout strategy that makes every room feel larger, lighter and more aligned with how you actually live.</div>
-      </div>
-      <div class="service-tile">
-        <svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M5 22V10l9-7 9 7v12"/><path d="M10 22v-6h8v6"/></svg>
-        <div class="service-name">Interior Design</div><div class="service-desc">Material palettes, furniture specification and lighting design — crafted to your taste and budget.</div>
-      </div>
-      <div class="service-tile">
-        <svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M14 3l11 9H3z"/><path d="M6 12v10M22 12v10M3 22h22"/></svg>
-        <div class="service-name">Planning &amp; Approvals</div><div class="service-desc">Full planning application management — from pre-app advice through to decision and beyond.</div>
-      </div>
+      <div class="service-tile"><svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="3" y="8" width="22" height="17" rx="1"/><path d="M8 8V5a6 6 0 0 1 12 0v3"/><path d="M3 13h22"/></svg><div class="service-name">Home Renovation</div><div class="service-desc">Bespoke refurbishment of period and contemporary homes — seamlessly blending commission and full fit-out.</div></div>
+      <div class="service-tile"><svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M4 24L14 4l10 20"/><path d="M8 18h12"/></svg><div class="service-name">New Build Design</div><div class="service-desc">Bespoke architectural design for new homes, from initial sketch through planning to detailed construction drawings.</div></div>
+      <div class="service-tile"><svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="4" y="4" width="20" height="16" rx="1"/><path d="M10 20v4M18 20v4M7 24h14"/></svg><div class="service-name">3D BIM Visualisation</div><div class="service-desc">Photorealistic BIM models so you can walk through your home before a single brick is laid.</div></div>
+      <div class="service-tile"><svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="3" y="3" width="22" height="22" rx="1"/><path d="M3 10h22M10 10v15"/></svg><div class="service-name">Space Planning</div><div class="service-desc">Layout strategy that makes every room feel larger, lighter and more aligned with how you actually live.</div></div>
+      <div class="service-tile"><svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M5 22V10l9-7 9 7v12"/><path d="M10 22v-6h8v6"/></svg><div class="service-name">Interior Design</div><div class="service-desc">Material palettes, furniture specification and lighting design — crafted to your taste and budget.</div></div>
+      <div class="service-tile"><svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M14 3l11 9H3z"/><path d="M6 12v10M22 12v10M3 22h22"/></svg><div class="service-name">Planning &amp; Approvals</div><div class="service-desc">Full planning application management — from pre-app advice through to decision and beyond.</div></div>
     </div>
   </div>
 </section>
@@ -328,15 +308,20 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
 <section id="contact">
   <div class="contact-inner">
     <div class="reveal">
-      <p class="eyebrow" style="color:var(--gold)">Get in Touch</p>
+      <span class="eyebrow" style="color:var(--gold)">Get in Touch</span>
       <h2>Let's create something <em>exceptional.</em></h2>
       <p class="body">Tell me a little about your home and what you're trying to achieve. Initial consultations are always free and unhurried.</p>
-      <div style="margin-top:32px">
+      <div style="margin-top:24px">
         <div class="contact-row"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:husni@husnimarikkar.co.uk">husni@husnimarikkar.co.uk</a></span></div>
         <div class="contact-row"><span class="contact-label">Mobile</span><span class="contact-value">+44 7466 554153</span></div>
         <div class="contact-row"><span class="contact-label">Based in</span><span class="contact-value">London, United Kingdom</span></div>
         <div class="contact-row"><span class="contact-label">Serving</span><span class="contact-value">Greater London &amp; Home Counties</span></div>
       </div>
+      <!-- WhatsApp CTA in contact section -->
+      <a class="wa-contact-btn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#25D366"/></svg>
+        Message on WhatsApp
+      </a>
     </div>
     <div class="reveal">
       <form class="contact-form" id="contactForm">
@@ -345,6 +330,11 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
         <select class="form-select" id="cf-type"><option value="" disabled selected>Project Type</option><option>Home Renovation</option><option>New Build Design</option><option>Interior Design</option><option>Space Planning</option><option>3D BIM Visualisation</option><option>Planning &amp; Approvals</option><option>Other</option></select>
         <textarea class="form-textarea" id="cf-msg" placeholder="Tell me about your project…"></textarea>
         <button type="submit" class="btn-gold">Send Enquiry →</button>
+        <div class="form-divider">or</div>
+        <a class="wa-contact-btn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener" style="justify-content:center">
+          <svg width="20" height="20" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#25D366"/></svg>
+          Send via WhatsApp instead
+        </a>
         <div class="form-success" id="formSuccess">✓ Thank you! I'll be in touch within 24 hours.</div>
       </form>
     </div>
@@ -357,22 +347,24 @@ footer{background:#111C30;padding:40px 48px;display:flex;align-items:center;just
   <div class="footer-links"><a href="#">LinkedIn</a><a href="#">Behance</a><a href="#">Privacy</a></div>
 </footer>
 
-<a class="wa-btn" id="waBtn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
+<!-- Floating WhatsApp -->
+<div class="wa-float">
+  <a class="wa-float-btn" id="waBtn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#1B2A4A"/></svg>
+  </a>
   <div class="wa-tooltip">Let's talk</div>
-  <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#1B2A4A"/></svg>
-</a>
+</div>
 
 <script>
 const STORAGE_KEY='husni_site_data';
-function getSiteData(){try{const r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
-function saveEnquiry(fd){const data=getSiteData()||{};if(!data.enquiries)data.enquiries=[];data.enquiries.unshift({id:Date.now(),date:new Date().toISOString(),...fd,read:false});localStorage.setItem(STORAGE_KEY,JSON.stringify(data));}
+function getSiteData(){try{const r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):{};}catch(e){return {};}}
+function saveEnquiry(fd){const d=getSiteData();if(!d.enquiries)d.enquiries=[];d.enquiries.unshift({id:Date.now(),date:new Date().toISOString(),...fd,read:false});localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}
 window.HusniSite={getSiteData,saveEnquiry,STORAGE_KEY};
-
 const navbar=document.getElementById('navbar');
 const waBtn=document.getElementById('waBtn');
 window.addEventListener('scroll',()=>{
   navbar.classList.toggle('scrolled',window.scrollY>20);
-  waBtn.classList.toggle('visible',window.scrollY>window.innerHeight*0.8);
+  waBtn.classList.toggle('visible',window.scrollY>window.innerHeight*0.6);
   const secs=['about','projects','services','contact'];
   let cur='';
   secs.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)cur=id;});
@@ -385,7 +377,7 @@ document.getElementById('contactForm').addEventListener('submit',function(e){
   const name=document.getElementById('cf-name').value;
   const email=document.getElementById('cf-email').value;
   if(!name||!email)return;
-  saveEnquiry({name,email,projectType:document.getElementById('cf-type').value,message:document.getElementById('cf-msg').value});
+  saveEnquiry({name,email,projectType:document.getElementById('cf-type').value,message:document.getElementById('cf-msg').value,source:'homepage'});
   document.getElementById('formSuccess').style.display='block';
   this.reset();
   setTimeout(()=>document.getElementById('formSuccess').style.display='none',5000);
