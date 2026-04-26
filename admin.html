@@ -467,14 +467,18 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--navy);min
       <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="pm-visible" checked/> Visible on site</label>
     </div>
     <div class="f"><label>Project Image</label>
-      <div class="iu">
+      <div class="iu" id="projImgDrop">
         <input type="file" accept="image/*" onchange="uploadProjImg(this)"/>
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="#999" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
         <p style="font-size:13px;margin-top:6px">Click to upload project image</p>
         <img id="pmImgPreview" class="ip"/>
       </div>
-      <input type="hidden" id="pm-image_url"/>
       <div id="pmImgStatus" style="font-size:12px;color:var(--mu);margin-top:6px"></div>
+      <div class="f" style="margin-top:10px">
+        <label>Or paste image URL directly</label>
+        <input type="text" id="pm-image_url" placeholder="https://... or images/p1_ansell.jpg" oninput="previewUrlImg(this.value)"/>
+        <div class="fhint">You can also use relative paths like <code>images/p1_ansell.jpg</code> for images already in the repo</div>
+      </div>
     </div>
     <div class="mf">
       <button class="btn" onclick="closeProjModal()">Cancel</button>
@@ -744,22 +748,38 @@ async function saveProject(){
   else { ok=await db.insert('projects',data); }
   btn.textContent='Save Project'; btn.disabled=false;
   if(ok){ closeProjModal(); loadProjects(); }
-  else { alert('Save failed. Check console for details.'); }
+  else { 
+    alert('Save failed!\n\nMost likely cause: Supabase permissions.\n\nPlease:\n1. Go to Supabase → SQL Editor\n2. Run the fix_all.sql file\n3. Click "Test DB" button to verify\n4. Try saving again');
+  }
 }
 
 async function uploadProjImg(input){
   const file=input.files[0]; if(!file) return;
   const status=document.getElementById('pmImgStatus');
   const prev=document.getElementById('pmImgPreview');
-  // Show preview immediately
+  const urlInput=document.getElementById('pm-image_url');
+  // Show local preview immediately
   const reader=new FileReader();
   reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
   reader.readAsDataURL(file);
-  status.textContent='Uploading…';
-  const path=`projects/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g,'-')}`;
+  status.textContent='Uploading to Supabase Storage…';
+  const path='projects/'+Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'-');
   const url=await db.uploadImage('site-images',path,file);
-  if(url){ document.getElementById('pm-image_url').value=url; status.textContent='✓ Uploaded'; }
-  else { status.textContent='⚠️ Upload failed — image URL from external source or paste URL below manually'; }
+  if(url){
+    urlInput.value=url;
+    status.textContent='✓ Image uploaded successfully!';
+    status.style.color='#22c55e';
+  } else {
+    // Upload failed - keep local preview but note the issue
+    status.textContent='⚠️ Storage upload failed. The image preview is shown above but will not persist. Please run fix_all.sql in Supabase to enable storage, then try again. OR paste an external image URL in the field below.';
+    status.style.color='#ef4444';
+  }
+}
+
+function previewUrlImg(url){
+  const prev=document.getElementById('pmImgPreview');
+  if(url){prev.src=url;prev.style.display='block';}
+  else{prev.style.display='none';}
 }
 
 async function delProject(id){if(confirm('Delete this project permanently?')){await db.delete('projects',id);loadProjects();}}
@@ -825,29 +845,20 @@ async function uploadImg(input,type){
   const reader=new FileReader();
   reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
   reader.readAsDataURL(file);
-  status.textContent='Uploading to Supabase…';
-  const path=`${type}/${type}-${Date.now()}.${file.name.split('.').pop()}`;
+  status.textContent='Uploading…'; status.style.color='var(--mu)';
+  const ext=file.name.split('.').pop().toLowerCase();
+  const path=type+'/'+type+'-'+Date.now()+'.'+ext;
   const url=await db.uploadImage('site-images',path,file);
   if(url){
-    await db.upsertBatch('site_content',[{key:type+'_image',value:url}],'key');
-    status.textContent='✓ Uploaded and saved! Reload the website to see the change.';
+    const ok=await db.upsertBatch('site_content',[{key:type+'_image',value:url}],'key');
+    status.textContent=ok?'✓ Uploaded and saved! Reload site to see.':'Image uploaded but URL save failed - run fix_all.sql';
+    status.style.color=ok?'#22c55e':'orange';
   } else {
-    status.textContent='⚠️ Upload failed. Place image file as images/'+type+'.jpg in GitHub manually.';
+    status.textContent='⚠️ Upload failed. Run fix_all.sql in Supabase, or add '+type+'.jpg to images/ folder in GitHub.';
+    status.style.color='#ef4444';
   }
 }
 
-// SEO
-function updateSEO(){
-  const t=document.getElementById('c-seo_title')?.value||'';
-  const d=document.getElementById('c-seo_description')?.value||'';
-  document.getElementById('seoT').textContent=t||'Husni Marikkar Architects';
-  document.getElementById('seoD').textContent=d||'London-based architect…';
-  const tc=document.getElementById('tc'); const dc=document.getElementById('dc');
-  if(tc){tc.textContent=t.length+' chars';tc.className='cc'+(t.length>60?' o':t.length>50?'':' w');}
-  if(dc){dc.textContent=d.length+' chars';dc.className='cc'+(d.length>160?' o':d.length>150?'':' w');}
-}
-
-// TEST DB
 async function testDB(){
   const btn=document.getElementById('testBtn'); btn.textContent='Testing…';
   const r=await db.get('site_content','select=key&limit=1');
