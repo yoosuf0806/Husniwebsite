@@ -4,801 +4,865 @@
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Admin — Husni Marikkar Architects</title>
 <meta name="robots" content="noindex,nofollow"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#1B2A4A;--gold:#C9A96E;--white:#fff;--offwhite:#FAFAF8;--muted:#6B6B6B;--border:#E8E8E4;--sidebar:240px;--green:#22c55e;--red:#ef4444;--bg:#F4F5F7}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh}
+:root{--navy:#1B2A4A;--gold:#C9A96E;--w:#fff;--ob:#FAFAF8;--mu:#6B6B6B;--bd:#E8E8E4;--sw:240px;--gr:#22c55e;--rd:#ef4444;--bg:#F4F5F7}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--navy);min-height:100vh}
 /* LOGIN */
-#loginScreen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:999}
-.login-box{background:var(--white);padding:48px 40px;width:380px;text-align:center}
-.login-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:6px}
-.login-logo span{color:var(--gold)}
-.login-sub{font-size:12px;color:var(--muted);margin-bottom:32px;letter-spacing:0.05em;text-transform:uppercase}
-.login-input{width:100%;padding:13px 16px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;margin-bottom:12px;transition:border-color 0.2s}
-.login-input:focus{border-color:var(--navy)}
-.login-btn{width:100%;padding:14px;background:var(--navy);color:var(--white);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;margin-top:4px}
-.login-btn:hover{opacity:0.88}
-.login-error{font-size:12px;color:var(--red);margin-top:10px;display:none}
+#ls{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:999}
+.lb{background:var(--w);padding:48px 40px;width:380px;text-align:center}
+.ll{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--navy);margin-bottom:6px}
+.ll span{color:var(--gold)}
+.ls2{font-size:12px;color:var(--mu);margin-bottom:32px;letter-spacing:.05em;text-transform:uppercase}
+.li{width:100%;padding:13px 16px;border:1px solid var(--bd);font-family:"DM Sans",sans-serif;font-size:14px;outline:none;margin-bottom:12px;transition:border-color .2s}
+.li:focus{border-color:var(--navy)}
+.lbtn{width:100%;padding:14px;background:var(--navy);color:var(--w);border:none;font-family:"DM Sans",sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.lbtn:hover{opacity:.88}
+.lerr{font-size:12px;color:var(--rd);margin-top:10px;display:none}
 /* LAYOUT */
-#adminApp{display:none}
-.admin-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--navy);display:flex;flex-direction:column;z-index:50;overflow-y:auto}
-.sidebar-brand{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.sidebar-brand .logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--white)}
-.sidebar-brand .logo span{color:var(--gold)}
-.sidebar-brand .sub{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
-.sidebar-nav{flex:1;padding:16px 0}
-.nav-section{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:12px 20px 6px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;transition:all 0.2s;border-left:2px solid transparent}
-.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.05)}
-.nav-item.active{color:var(--white);background:rgba(255,255,255,0.08);border-left-color:var(--gold)}
-.nav-item svg{width:15px;height:15px;flex-shrink:0}
-.badge-count{margin-left:auto;background:var(--gold);color:var(--navy);font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500}
-.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08)}
-.logout-btn{width:100%;padding:10px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif}
-.logout-btn:hover{border-color:rgba(255,255,255,0.5);color:var(--white)}
-.admin-main{margin-left:var(--sidebar);min-height:100vh}
-.admin-topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40}
-.topbar-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);font-weight:400}
-.topbar-right{display:flex;align-items:center;gap:12px}
-.save-btn{padding:10px 24px;background:var(--navy);color:var(--white);border:none;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.save-btn:hover{opacity:0.85}
-.save-btn.saved{background:var(--green)}
-.view-site{padding:10px 20px;border:1px solid var(--border);background:transparent;color:var(--navy);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.admin-content{padding:32px}
+#app{display:none;min-height:100vh}
+.sb{position:fixed;top:0;left:0;bottom:0;width:var(--sw);background:var(--navy);display:flex;flex-direction:column;z-index:50;overflow-y:auto}
+.sb-brand{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand .logo{font-family:"Cormorant Garamond",serif;font-size:16px;color:var(--w)}
+.sb-brand .logo span{color:var(--gold)}
+.sb-brand .sub{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.sb-nav{flex:1;padding:16px 0}
+.ns{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:12px 20px 6px}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;transition:all .2s;border-left:2px solid transparent}
+.ni:hover{color:var(--w);background:rgba(255,255,255,.05)}
+.ni.active{color:var(--w);background:rgba(255,255,255,.08);border-left-color:var(--gold)}
+.ni svg{width:15px;height:15px;flex-shrink:0}
+.bc{margin-left:auto;background:var(--gold);color:var(--navy);font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500}
+.sb-foot{padding:16px 20px;border-top:1px solid rgba(255,255,255,.08)}
+.lo-btn{width:100%;padding:10px;border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:"DM Sans",sans-serif}
+.lo-btn:hover{border-color:rgba(255,255,255,.5);color:var(--w)}
+.main{margin-left:var(--sw);min-height:100vh}
+.topbar{background:var(--w);border-bottom:1px solid var(--bd);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40}
+.tb-title{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--navy);font-weight:400}
+.tb-right{display:flex;align-items:center;gap:10px}
+.sb-btn{padding:10px 20px;background:var(--navy);color:var(--w);border:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;white-space:nowrap}
+.sb-btn:hover{opacity:.85}
+.sb-btn.ok{background:var(--gr)}
+.sb-btn.err{background:var(--rd)}
+.vs-btn{padding:10px 18px;border:1px solid var(--bd);background:transparent;color:var(--navy);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:"DM Sans",sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.ac{padding:28px 32px}
 /* PANELS */
-.panel{display:none}
-.panel.active{display:block}
+.panel{display:none}.panel.active{display:block}
 /* CARDS */
-.admin-card{background:var(--white);border:1px solid var(--border);margin-bottom:24px}
-.card-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.card-header h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--navy)}
-.card-body{padding:24px}
+.card{background:var(--w);border:1px solid var(--bd);margin-bottom:20px}
+.ch{padding:16px 24px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.ch h3{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:400;color:var(--navy)}
+.cb{padding:22px 24px}
 /* STATS */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.stat-box{background:var(--white);border:1px solid var(--border);padding:20px 24px}
-.stat-box .lb{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.stat-box .vl{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--navy);font-weight:400}
-.stat-box .dl{font-size:11px;color:var(--green);margin-top:4px}
-/* FORM FIELDS */
-.field{margin-bottom:20px}
-.field label{display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.field input,.field textarea,.field select{width:100%;padding:11px 14px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 0.2s;background:var(--white)}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--navy)}
-.field textarea{resize:vertical;min-height:80px}
-.field-hint{font-size:11px;color:var(--muted);margin-top:4px}
-.char-count{font-size:11px;text-align:right;margin-top:4px;color:var(--muted)}
-.char-count.warn{color:orange}.char-count.over{color:var(--red)}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat{background:var(--w);border:1px solid var(--bd);padding:18px 20px}
+.stat .lb2{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
+.stat .vl{font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--navy);font-weight:400}
+.stat .dl{font-size:11px;color:var(--gr);margin-top:3px}
+/* FIELDS */
+.f{margin-bottom:18px}
+.f label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:7px}
+.f input,.f textarea,.f select{width:100%;padding:11px 14px;border:1px solid var(--bd);font-family:"DM Sans",sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;background:var(--w);resize:vertical}
+.f input:focus,.f textarea:focus,.f select:focus{border-color:var(--navy)}
+.f textarea{min-height:80px}
+.fhint{font-size:11px;color:var(--mu);margin-top:4px}
+.cc{font-size:11px;text-align:right;margin-top:4px;color:var(--mu)}
+.cc.w{color:orange}.cc.o{color:var(--rd)}
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+/* SECTION TITLE */
+.st{font-family:"Cormorant Garamond",serif;font-size:17px;color:var(--navy);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bd);margin-top:24px}
+.st:first-child{margin-top:0}
 /* TOGGLES */
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
-.toggle-row:last-child{border-bottom:none}
-.toggle-info h4{font-size:14px;font-weight:500;color:var(--navy)}
-.toggle-info p{font-size:12px;color:var(--muted);margin-top:2px}
-.toggle{position:relative;width:44px;height:24px;flex-shrink:0}
-.toggle input{opacity:0;width:0;height:0}
-.toggle-sl{position:absolute;cursor:pointer;inset:0;background:#D1D5DB;transition:0.3s;border-radius:24px}
-.toggle-sl::before{position:absolute;content:'';height:18px;width:18px;left:3px;bottom:3px;background:white;transition:0.3s;border-radius:50%}
-.toggle input:checked+.toggle-sl{background:var(--navy)}
-.toggle input:checked+.toggle-sl::before{transform:translateX(20px)}
-/* CONTENT GRID */
-.content-section{margin-bottom:32px}
-.content-section h4{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--navy);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-/* PROJECTS */
-.projects-table{width:100%;border-collapse:collapse}
-.projects-table th{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:2px solid var(--border)}
-.projects-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
-.proj-thumb{width:60px;height:45px;object-fit:cover;background:var(--border)}
-.proj-thumb-placeholder{width:60px;height:45px;background:var(--offwhite);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted)}
-.btn-sm{padding:6px 14px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);background:transparent;color:var(--navy);transition:all 0.2s}
-.btn-sm:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
-.btn-sm.danger{border-color:var(--red);color:var(--red)}
-.btn-sm.danger:hover{background:var(--red);color:var(--white)}
-.btn-sm.primary{background:var(--navy);color:var(--white);border-color:var(--navy)}
-.btn-sm.gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap}
-/* ENQUIRIES */
-.enq-list{display:flex;flex-direction:column}
-.enq-item{display:flex;gap:14px;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s}
-.enq-item:hover{background:var(--offwhite);margin:0 -24px;padding:16px 24px}
-.enq-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:13px;font-weight:500;flex-shrink:0}
-.enq-name{font-size:14px;font-weight:500;color:var(--navy)}
-.enq-name .new-tag{font-size:9px;letter-spacing:0.1em;background:var(--gold);color:var(--navy);padding:2px 6px;margin-left:8px}
-.enq-meta{font-size:12px;color:var(--muted);margin-top:2px}
-.enq-preview{font-size:13px;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.enq-date{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap}
-.enq-detail{display:none;margin-top:12px;padding:20px;background:var(--offwhite);border:1px solid var(--border)}
-.enq-detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
-.enq-field label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
-.enq-field span{font-size:13px;color:var(--navy)}
-.enq-full-msg{background:var(--white);padding:14px;border:1px solid var(--border);font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
-/* SEO */
-.seo-preview{background:var(--offwhite);padding:20px;border:1px solid var(--border);margin-bottom:24px}
-.seo-preview-url{font-size:12px;color:#006621;margin-bottom:4px}
-.seo-preview-title{font-size:18px;color:#1a0dab;margin-bottom:4px}
-.seo-preview-desc{font-size:13px;color:#545454;line-height:1.5}
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:var(--white);width:700px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:32px}
-.modal h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:24px;font-weight:400}
-.modal-footer{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)}
-/* IMAGE UPLOAD */
-.img-upload-area{border:2px dashed var(--border);padding:32px;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative}
-.img-upload-area:hover{border-color:var(--navy)}
-.img-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.img-preview{width:100%;max-height:200px;object-fit:cover;margin-top:12px;display:none}
+.tr{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--bd)}
+.tr:last-child{border-bottom:none}
+.ti h4{font-size:14px;font-weight:500;color:var(--navy)}
+.ti p{font-size:12px;color:var(--mu);margin-top:2px}
+.tg{position:relative;width:44px;height:24px;flex-shrink:0}
+.tg input{opacity:0;width:0;height:0}
+.tsl{position:absolute;cursor:pointer;inset:0;background:#D1D5DB;transition:.3s;border-radius:24px}
+.tsl::before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:white;transition:.3s;border-radius:50%}
+.tg input:checked+.tsl{background:var(--navy)}
+.tg input:checked+.tsl::before{transform:translateX(20px)}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);padding:10px 14px;text-align:left;border-bottom:2px solid var(--bd)}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--bd);font-size:13px;vertical-align:middle}
+.pt{width:60px;height:45px;object-fit:cover}
+.ph{width:60px;height:45px;background:var(--ob);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--mu)}
+/* BUTTONS */
+.btn{padding:7px 14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:"DM Sans",sans-serif;border:1px solid var(--bd);background:transparent;color:var(--navy);transition:all .2s}
+.btn:hover{background:var(--navy);color:var(--w);border-color:var(--navy)}
+.btn.p{background:var(--navy);color:var(--w);border-color:var(--navy)}
+.btn.p:hover{opacity:.85}
+.btn.g{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn.d{border-color:var(--rd);color:var(--rd)}
+.btn.d:hover{background:var(--rd);color:var(--w)}
+.br{display:flex;gap:8px;flex-wrap:wrap}
 /* STATUS */
-.status-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px}
-.status-pill.live{background:#dcfce7;color:#166534}
-.status-pill.hidden{background:#fee2e2;color:#991b1b}
+.sp{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px}
+.sp.lv{background:#dcfce7;color:#166534}
+.sp.hd{background:#fee2e2;color:#991b1b}
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center}
+.mo.open{display:flex}
+.md{background:var(--w);width:720px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:32px}
+.md h3{font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--navy);margin-bottom:22px;font-weight:400}
+.mf{display:flex;gap:12px;justify-content:flex-end;margin-top:22px;padding-top:14px;border-top:1px solid var(--bd)}
+/* IMAGE UPLOAD */
+.iu{border:2px dashed var(--bd);padding:28px;text-align:center;cursor:pointer;transition:border-color .2s;position:relative;border-radius:2px}
+.iu:hover{border-color:var(--navy)}
+.iu input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.iu p{font-size:13px;color:var(--mu);margin-top:8px}
+.ip{width:100%;max-height:180px;object-fit:cover;margin-top:10px;display:none}
+/* ENQUIRIES */
+.el{display:flex;flex-direction:column}
+.ei{display:flex;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s}
+.ei:hover{background:var(--ob);margin:0 -24px;padding-left:24px;padding-right:24px}
+.av{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--w);font-size:13px;font-weight:500;flex-shrink:0}
+.en{font-size:14px;font-weight:500;color:var(--navy)}
+.nt{font-size:9px;letter-spacing:.1em;background:var(--gold);color:var(--navy);padding:2px 6px;margin-left:8px}
+.em{font-size:12px;color:var(--mu);margin-top:2px}
+.ep{font-size:13px;color:var(--mu);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ed{display:none;margin-top:10px;padding:18px;background:var(--ob);border:1px solid var(--bd)}
+.edg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.ef label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:3px}
+.ef span{font-size:13px;color:var(--navy)}
+.emsg{background:var(--w);padding:12px;border:1px solid var(--bd);font-size:14px;color:var(--mu);line-height:1.7;margin-bottom:12px}
+/* SEO PREVIEW */
+.sp2{background:var(--ob);padding:18px;border:1px solid var(--bd);margin-bottom:20px}
+.sp2 .u{font-size:12px;color:#006621;margin-bottom:4px}
+.sp2 .t{font-size:18px;color:#1a0dab;margin-bottom:4px}
+.sp2 .d{font-size:13px;color:#545454;line-height:1.5}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="loginScreen">
-  <div class="login-box">
-    <div class="login-logo">Husni Marikkar <span>Architects</span></div>
-    <div class="login-sub">Admin Dashboard</div>
-    <input class="login-input" id="lu" type="text" placeholder="Username" autocomplete="username"/>
-    <input class="login-input" id="lp" type="password" placeholder="Password" autocomplete="current-password"/>
-    <button class="login-btn" onclick="doLogin()">Sign In</button>
-    <div class="login-error" id="loginErr">Invalid credentials</div>
+<div id="ls">
+  <div class="lb">
+    <div class="ll">Husni Marikkar <span>Architects</span></div>
+    <div class="ls2">Admin Dashboard</div>
+    <input class="li" id="lu" type="text" placeholder="Username" autocomplete="username"/>
+    <input class="li" id="lp" type="password" placeholder="Password" autocomplete="current-password"/>
+    <button class="lbtn" onclick="doLogin()">Sign In</button>
+    <div class="lerr" id="lerr">Invalid username or password</div>
   </div>
 </div>
 
 <!-- APP -->
-<div id="adminApp">
-  <div class="admin-sidebar">
-    <div class="sidebar-brand">
+<div id="app">
+  <div class="sb">
+    <div class="sb-brand">
       <div class="logo">Husni Marikkar <span>Architects</span></div>
       <div class="sub">Content Management</div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">Overview</div>
-      <div class="nav-item active" onclick="showPanel('dashboard',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
-        Dashboard
-      </div>
-      <div class="nav-item" onclick="showPanel('enquiries',this)" id="navEnq">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 11a1 1 0 0 1-1 1H4l-3 3V3a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1z"/></svg>
-        Enquiries
-        <span class="badge-count" id="unreadBadge" style="display:none">0</span>
-      </div>
-      <div class="nav-section">Website</div>
-      <div class="nav-item" onclick="showPanel('visibility',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>
-        Section Visibility
-      </div>
-      <div class="nav-item" onclick="showPanel('content',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h12v12H2z"/><path d="M5 6h6M5 9h4"/></svg>
-        Page Content
-      </div>
-      <div class="nav-item" onclick="showPanel('projects',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="6" height="10"/><rect x="9" y="3" width="6" height="10"/></svg>
-        Projects
-      </div>
-      <div class="nav-item" onclick="showPanel('services',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l2 4h4l-3 3 1 4-4-2.5L4 12l1-4-3-3h4z"/></svg>
-        Services
-      </div>
-      <div class="nav-item" onclick="showPanel('images',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><circle cx="5" cy="6" r="1.5"/><path d="M1 11l4-4 3 3 2-2 5 5"/></svg>
-        Images
-      </div>
-      <div class="nav-section">Settings</div>
-      <div class="nav-item" onclick="showPanel('seo',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M14 14l-3-3"/></svg>
-        SEO & Analytics
-      </div>
-      <div class="nav-item" onclick="showPanel('contact_info',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10.5a1 1 0 0 1-1 1h-1l-3 3-3-3H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1z"/></svg>
-        Contact Details
-      </div>
+    <nav class="sb-nav">
+      <div class="ns">Overview</div>
+      <div class="ni active" onclick="goPanel('dashboard',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>Dashboard</div>
+      <div class="ni" onclick="goPanel('enquiries',this)" id="navEnq"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 11a1 1 0 0 1-1 1H4l-3 3V3a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1z"/></svg>Enquiries<span class="bc" id="unreadBadge" style="display:none">0</span></div>
+      <div class="ns">Website</div>
+      <div class="ni" onclick="goPanel('visibility',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>Section Visibility</div>
+      <div class="ni" onclick="goPanel('content',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h12v12H2z"/><path d="M5 6h6M5 9h4"/></svg>Page Content</div>
+      <div class="ni" onclick="goPanel('projects',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="6" height="10"/><rect x="9" y="3" width="6" height="10"/></svg>Projects</div>
+      <div class="ni" onclick="goPanel('services',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l2 4h4l-3 3 1 4-4-2.5L4 12l1-4-3-3h4z"/></svg>Services</div>
+      <div class="ni" onclick="goPanel('images',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><circle cx="5" cy="6" r="1.5"/><path d="M1 11l4-4 3 3 2-2 5 5"/></svg>Images</div>
+      <div class="ns">Settings</div>
+      <div class="ni" onclick="goPanel('seo',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M14 14l-3-3"/></svg>SEO & Analytics</div>
+      <div class="ni" onclick="goPanel('contact',this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10.5a1 1 0 0 1-1 1h-1l-3 3-3-3H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1z"/></svg>Contact Details</div>
     </nav>
-    <div class="sidebar-footer">
-      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    <div class="sb-foot">
+      <button class="lo-btn" onclick="doLogout()">Sign Out</button>
     </div>
   </div>
 
-  <div class="admin-main">
-    <div class="admin-topbar">
-      <div class="topbar-title" id="panelTitle">Dashboard</div>
-      <div class="topbar-right">
-        <a href="index.html" target="_blank" class="view-site">View Site ↗</a>
-        <button class="view-site" onclick="testConnection()" id="testBtn">Test DB</button>
-        <button class="save-btn" id="saveBtn" onclick="saveCurrentPanel()">Save Changes</button>
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-title" id="ptitle">Dashboard</div>
+      <div class="tb-right">
+        <a href="index.html" target="_blank" class="vs-btn">View Site ↗</a>
+        <button class="vs-btn" onclick="testDB()" id="testBtn">Test DB</button>
+        <button class="sb-btn" id="saveBtn" onclick="doSave()">Save Changes</button>
       </div>
     </div>
 
-    <div class="admin-content">
+    <div class="ac">
 
       <!-- DASHBOARD -->
       <div class="panel active" id="panel-dashboard">
-        <div class="stats-row">
-          <div class="stat-box"><div class="lb">Total Enquiries</div><div class="vl" id="st-total">—</div><div class="dl">All time</div></div>
-          <div class="stat-box"><div class="lb">Unread</div><div class="vl" id="st-unread">—</div><div class="dl" style="color:var(--gold)">Needs attention</div></div>
-          <div class="stat-box"><div class="lb">Projects Live</div><div class="vl" id="st-projects">—</div><div class="dl">Visible on site</div></div>
-          <div class="stat-box"><div class="lb">Last Enquiry</div><div class="vl" id="st-last" style="font-size:18px;margin-top:6px">—</div></div>
+        <div class="sr">
+          <div class="stat"><div class="lb2">Total Enquiries</div><div class="vl" id="st-total">—</div><div class="dl">All time</div></div>
+          <div class="stat"><div class="lb2">Unread</div><div class="vl" id="st-unread">—</div><div class="dl" style="color:var(--gold)">Pending</div></div>
+          <div class="stat"><div class="lb2">Projects Live</div><div class="vl" id="st-proj">—</div><div class="dl">Visible</div></div>
+          <div class="stat"><div class="lb2">Services Live</div><div class="vl" id="st-svc">—</div><div class="dl">Visible</div></div>
         </div>
-        <div class="admin-card">
-          <div class="card-header"><h3>Recent Enquiries</h3><span style="font-size:12px;color:var(--muted);cursor:pointer" onclick="showPanel('enquiries',document.getElementById('navEnq'))">View all →</span></div>
-          <div class="card-body" id="dashEnquiries"><div style="color:var(--muted);font-size:14px">Loading…</div></div>
+        <div class="card">
+          <div class="ch"><h3>Recent Enquiries</h3><span style="font-size:12px;color:var(--mu);cursor:pointer" onclick="goPanel('enquiries',document.getElementById('navEnq'))">View all →</span></div>
+          <div class="cb" id="dashEnq"><div style="color:var(--mu);font-size:14px">Loading…</div></div>
         </div>
-        <div class="admin-card">
-          <div class="card-header"><h3>Quick Actions</h3></div>
-          <div class="card-body" style="display:flex;gap:12px;flex-wrap:wrap">
-            <button class="save-btn" onclick="showPanel('content',document.querySelectorAll('.nav-item')[3])">Edit Content</button>
-            <button class="save-btn" onclick="showPanel('projects',document.querySelectorAll('.nav-item')[4])">Manage Projects</button>
-            <button class="save-btn" onclick="showPanel('enquiries',document.getElementById('navEnq'))">View Enquiries</button>
-            <button class="save-btn" onclick="showPanel('seo',document.querySelectorAll('.nav-item')[6])">SEO Settings</button>
+        <div class="card">
+          <div class="ch"><h3>Quick Actions</h3></div>
+          <div class="cb" style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="sb-btn" onclick="goPanel('content',document.querySelectorAll('.ni')[4])">Edit Content</button>
+            <button class="sb-btn" onclick="goPanel('projects',document.querySelectorAll('.ni')[5])">Manage Projects</button>
+            <button class="sb-btn" onclick="goPanel('services',document.querySelectorAll('.ni')[6])">Manage Services</button>
+            <button class="sb-btn" onclick="goPanel('enquiries',document.getElementById('navEnq'))">View Enquiries</button>
           </div>
         </div>
       </div>
 
       <!-- ENQUIRIES -->
       <div class="panel" id="panel-enquiries">
-        <div class="admin-card">
-          <div class="card-header">
-            <h3>Enquiries</h3>
-            <div style="display:flex;gap:10px;align-items:center">
-              <span style="font-size:12px;color:var(--muted)" id="enqCount">Loading…</span>
-              <button class="btn-sm" onclick="markAllRead()">Mark all read</button>
-              <button class="btn-sm danger" onclick="if(confirm('Export all as CSV?'))exportCSV()">Export CSV</button>
-            </div>
-          </div>
-          <div class="card-body" style="padding:0 24px">
-            <div id="enqList"><div style="padding:32px;text-align:center;color:var(--muted)">Loading enquiries…</div></div>
-          </div>
+        <div class="card">
+          <div class="ch"><h3>Enquiries</h3><div style="display:flex;gap:8px"><span style="font-size:12px;color:var(--mu)" id="enqCount">—</span><button class="btn" onclick="markAllRead()">Mark read</button><button class="btn d" onclick="exportCSV()">Export CSV</button></div></div>
+          <div class="cb" style="padding:0 24px"><div id="enqList"><div style="padding:32px;text-align:center;color:var(--mu)">Loading…</div></div></div>
         </div>
       </div>
 
       <!-- VISIBILITY -->
       <div class="panel" id="panel-visibility">
-        <div class="admin-card">
-          <div class="card-header"><h3>Section Visibility</h3><span style="font-size:12px;color:var(--muted)">Toggle what visitors see on the homepage</span></div>
-          <div class="card-body">
-            <div class="toggle-row"><div class="toggle-info"><h4>Hero Section</h4><p>Main landing area — always visible</p></div><label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-sl"></span></label></div>
-            <div class="toggle-row"><div class="toggle-info"><h4>About Me</h4><p>Bio, stats and photo</p></div><label class="toggle"><input type="checkbox" id="vis-about"/><span class="toggle-sl"></span></label></div>
-            <div class="toggle-row"><div class="toggle-info"><h4>Projects</h4><p>Selected works grid</p></div><label class="toggle"><input type="checkbox" id="vis-projects"/><span class="toggle-sl"></span></label></div>
-            <div class="toggle-row"><div class="toggle-info"><h4>Services</h4><p>Services tile grid</p></div><label class="toggle"><input type="checkbox" id="vis-services"/><span class="toggle-sl"></span></label></div>
-            <div class="toggle-row"><div class="toggle-info"><h4>Contact</h4><p>Enquiry form and details</p></div><label class="toggle"><input type="checkbox" id="vis-contact"/><span class="toggle-sl"></span></label></div>
+        <div class="card">
+          <div class="ch"><h3>Section Visibility</h3></div>
+          <div class="cb">
+            <div class="tr"><div class="ti"><h4>Hero Section</h4><p>Always visible</p></div><label class="tg"><input type="checkbox" checked disabled/><span class="tsl"></span></label></div>
+            <div class="tr"><div class="ti"><h4>About Me</h4><p>Bio, stats and photo</p></div><label class="tg"><input type="checkbox" id="vis-about"/><span class="tsl"></span></label></div>
+            <div class="tr"><div class="ti"><h4>Projects</h4><p>Selected works grid</p></div><label class="tg"><input type="checkbox" id="vis-projects"/><span class="tsl"></span></label></div>
+            <div class="tr"><div class="ti"><h4>Services</h4><p>What I offer tiles</p></div><label class="tg"><input type="checkbox" id="vis-services"/><span class="tsl"></span></label></div>
+            <div class="tr"><div class="ti"><h4>Contact</h4><p>Enquiry form</p></div><label class="tg"><input type="checkbox" id="vis-contact"/><span class="tsl"></span></label></div>
           </div>
         </div>
       </div>
 
-      <!-- CONTENT EDITOR -->
+      <!-- PAGE CONTENT -->
       <div class="panel" id="panel-content">
-        <div class="admin-card">
-          <div class="card-header"><h3>Hero Section</h3></div>
-          <div class="card-body">
-            <div class="two-col">
-              <div class="field"><label>Eyebrow Text</label><input type="text" id="c-hero_eyebrow" placeholder="Architecture & Interior Design"/></div>
-              <div class="field"><label>Badge Number</label><input type="text" id="c-hero_badge_num" placeholder="6+"/></div>
-            </div>
-            <div class="two-col">
-              <div class="field"><label>Headline Line 1</label><input type="text" id="c-hero_line1" placeholder="Your home,"/></div>
-              <div class="field"><label>Headline Line 2 (italic gold)</label><input type="text" id="c-hero_line2" placeholder="reimagined"/></div>
-            </div>
-            <div class="field"><label>Headline Line 3</label><input type="text" id="c-hero_line3" placeholder="beautifully."/></div>
-            <div class="field"><label>Body Copy</label><textarea id="c-hero_body" placeholder="Let's redesign your home together…"></textarea></div>
+        <div class="card"><div class="ch"><h3>Hero Section</h3></div><div class="cb">
+          <div class="g2">
+            <div class="f"><label>Eyebrow Text</label><input type="text" id="c-hero_eyebrow"/></div>
+            <div class="f"><label>Badge Number</label><input type="text" id="c-hero_badge_num"/></div>
+            <div class="f"><label>Badge Label</label><input type="text" id="c-hero_badge_label"/></div>
           </div>
-        </div>
-        <div class="admin-card">
-          <div class="card-header"><h3>About Section</h3></div>
-          <div class="card-body">
-            <div class="field"><label>Section Heading</label><input type="text" id="c-about_heading" placeholder="Designing with purpose & precision."/></div>
-            <div class="field"><label>Paragraph 1</label><textarea id="c-about_p1"></textarea></div>
-            <div class="field"><label>Paragraph 2</label><textarea id="c-about_p2"></textarea></div>
+          <div class="g3">
+            <div class="f"><label>Headline Line 1</label><input type="text" id="c-hero_line1"/></div>
+            <div class="f"><label>Headline Line 2 (italic gold)</label><input type="text" id="c-hero_line2"/></div>
+            <div class="f"><label>Headline Line 3</label><input type="text" id="c-hero_line3"/></div>
           </div>
-        </div>
-        <div class="admin-card">
-          <div class="card-header"><h3>Stats Grid</h3></div>
-          <div class="card-body">
-            <div class="two-col">
-              <div class="field"><label>Stat 1 Number</label><input type="text" id="c-stat1_num" placeholder="6+"/></div>
-              <div class="field"><label>Stat 1 Label</label><input type="text" id="c-stat1_label" placeholder="Projects"/></div>
-              <div class="field"><label>Stat 2 Number</label><input type="text" id="c-stat2_num" placeholder="4 Years"/></div>
-              <div class="field"><label>Stat 2 Label</label><input type="text" id="c-stat2_label" placeholder="Experience"/></div>
-              <div class="field"><label>Stat 3 Number</label><input type="text" id="c-stat3_num" placeholder="MSc"/></div>
-              <div class="field"><label>Stat 3 Label</label><input type="text" id="c-stat3_label" placeholder="Westminster"/></div>
-              <div class="field"><label>Stat 4 Number</label><input type="text" id="c-stat4_num" placeholder="BIM/Revit"/></div>
-              <div class="field"><label>Stat 4 Label</label><input type="text" id="c-stat4_label" placeholder="Certified"/></div>
-            </div>
+          <div class="f"><label>Body Copy</label><textarea id="c-hero_body"></textarea></div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>About Me Overview (Homepage)</h3></div><div class="cb">
+          <div class="f"><label>Section Heading</label><input type="text" id="c-about_heading"/></div>
+          <div class="f"><label>Paragraph 1</label><textarea id="c-about_p1"></textarea></div>
+          <div class="f"><label>Paragraph 2</label><textarea id="c-about_p2"></textarea></div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>Stats Grid</h3></div><div class="cb">
+          <div class="g2">
+            <div class="f"><label>Stat 1 — Number</label><input type="text" id="c-stat1_num"/></div>
+            <div class="f"><label>Stat 1 — Label</label><input type="text" id="c-stat1_label"/></div>
+            <div class="f"><label>Stat 2 — Number</label><input type="text" id="c-stat2_num"/></div>
+            <div class="f"><label>Stat 2 — Label</label><input type="text" id="c-stat2_label"/></div>
+            <div class="f"><label>Stat 3 — Number</label><input type="text" id="c-stat3_num"/></div>
+            <div class="f"><label>Stat 3 — Label</label><input type="text" id="c-stat3_label"/></div>
+            <div class="f"><label>Stat 4 — Number</label><input type="text" id="c-stat4_num"/></div>
+            <div class="f"><label>Stat 4 — Label</label><input type="text" id="c-stat4_label"/></div>
           </div>
-        </div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>About Page — My Story</h3></div><div class="cb">
+          <div class="f"><label>Section Heading</label><input type="text" id="c-about_story_heading" placeholder="My story"/></div>
+          <div class="f"><label>Paragraph 1</label><textarea id="c-about_story_p1" style="min-height:100px"></textarea></div>
+          <div class="f"><label>Paragraph 2</label><textarea id="c-about_story_p2" style="min-height:100px"></textarea></div>
+          <div class="f"><label>Paragraph 3</label><textarea id="c-about_story_p3" style="min-height:100px"></textarea></div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>About Page — How I Work</h3></div><div class="cb">
+          <div class="f"><label>Section Heading</label><input type="text" id="c-about_work_heading" placeholder="How I work"/></div>
+          <div class="f"><label>Paragraph 1</label><textarea id="c-about_work_p1" style="min-height:100px"></textarea></div>
+          <div class="f"><label>Paragraph 2</label><textarea id="c-about_work_p2"></textarea></div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>About Page — Timeline</h3></div><div class="cb">
+          <div class="f"><label>Timeline Section Heading</label><input type="text" id="c-about_timeline_heading" placeholder="Timeline"/></div>
+          <div class="g2">
+            <div class="f"><label>Entry 1 — Year</label><input type="text" id="c-tl1_year" placeholder="2024"/></div>
+            <div class="f"><label>Entry 1 — Title</label><input type="text" id="c-tl1_title"/></div>
+            <div class="f"><label>Entry 1 — Description</label><textarea id="c-tl1_desc"></textarea></div>
+            <div class="f"><label>Entry 2 — Year</label><input type="text" id="c-tl2_year" placeholder="2023"/></div>
+            <div class="f"><label>Entry 2 — Title</label><input type="text" id="c-tl2_title"/></div>
+            <div class="f"><label>Entry 2 — Description</label><textarea id="c-tl2_desc"></textarea></div>
+            <div class="f"><label>Entry 3 — Year</label><input type="text" id="c-tl3_year" placeholder="2022"/></div>
+            <div class="f"><label>Entry 3 — Title</label><input type="text" id="c-tl3_title"/></div>
+            <div class="f"><label>Entry 3 — Description</label><textarea id="c-tl3_desc"></textarea></div>
+            <div class="f"><label>Entry 4 — Year</label><input type="text" id="c-tl4_year" placeholder="2020"/></div>
+            <div class="f"><label>Entry 4 — Title</label><input type="text" id="c-tl4_title"/></div>
+            <div class="f"><label>Entry 4 — Description</label><textarea id="c-tl4_desc"></textarea></div>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>About Page — What I Believe</h3></div><div class="cb">
+          <div class="f"><label>Section Heading</label><input type="text" id="c-about_believe_heading" placeholder="What I believe"/></div>
+          <div class="g3">
+            <div class="f"><label>Value 1 — Title</label><input type="text" id="c-val1_title" placeholder="Clarity first"/></div>
+            <div class="f"><label>Value 2 — Title</label><input type="text" id="c-val2_title" placeholder="Craft matters"/></div>
+            <div class="f"><label>Value 3 — Title</label><input type="text" id="c-val3_title" placeholder="Budget is real"/></div>
+            <div class="f"><label>Value 1 — Description</label><textarea id="c-val1_desc"></textarea></div>
+            <div class="f"><label>Value 2 — Description</label><textarea id="c-val2_desc"></textarea></div>
+            <div class="f"><label>Value 3 — Description</label><textarea id="c-val3_desc"></textarea></div>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>About Page — Education / Credentials</h3></div><div class="cb">
+          <div class="g2">
+            <div class="f"><label>Credential 1 — Label</label><input type="text" id="c-cred1_label" placeholder="Education"/></div>
+            <div class="f"><label>Credential 1 — Value</label><input type="text" id="c-cred1_val" placeholder="MSc Project Management"/></div>
+            <div class="f"><label>Credential 1 — Sub</label><input type="text" id="c-cred1_sub" placeholder="University of Westminster"/></div>
+            <div class="f"><label>Credential 2 — Label</label><input type="text" id="c-cred2_label" placeholder="Education"/></div>
+            <div class="f"><label>Credential 2 — Value</label><input type="text" id="c-cred2_val" placeholder="BSc Architecture"/></div>
+            <div class="f"><label>Credential 2 — Sub</label><input type="text" id="c-cred2_sub" placeholder="University of Westminster"/></div>
+            <div class="f"><label>Software / Skills</label><input type="text" id="c-cred3_val" placeholder="Revit / BIM"/></div>
+            <div class="f"><label>Software Detail</label><input type="text" id="c-cred3_sub" placeholder="AutoCAD · SketchUp · Lumion"/></div>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>CTA Strip — Ready to Reimagine</h3></div><div class="cb">
+          <div class="f"><label>Heading Line 1</label><input type="text" id="c-cta_heading1" placeholder="Ready to reimagine"/></div>
+          <div class="f"><label>Heading Line 2 (italic gold)</label><input type="text" id="c-cta_heading2" placeholder="your home?"/></div>
+          <div class="f"><label>Subtext</label><input type="text" id="c-cta_subtext" placeholder="Initial consultations are always free and completely unhurried."/></div>
+          <div class="g2">
+            <div class="f"><label>Button 1 Text</label><input type="text" id="c-cta_btn1" placeholder="Start a Conversation"/></div>
+            <div class="f"><label>Button 2 Text</label><input type="text" id="c-cta_btn2" placeholder="See My Work"/></div>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="ch"><h3>Projects & Services Section Labels</h3></div><div class="cb">
+          <div class="g2">
+            <div class="f"><label>Projects Eyebrow</label><input type="text" id="c-projects_eyebrow"/></div>
+            <div class="f"><label>Projects Heading</label><input type="text" id="c-projects_heading"/></div>
+            <div class="f"><label>Services Eyebrow</label><input type="text" id="c-services_eyebrow"/></div>
+            <div class="f"><label>Services Heading</label><input type="text" id="c-services_heading"/></div>
+            <div class="f"><label>Contact Heading</label><input type="text" id="c-contact_heading"/></div>
+            <div class="f"><label>Contact Subheading</label><textarea id="c-contact_subheading"></textarea></div>
+          </div>
+        </div></div>
       </div>
 
       <!-- PROJECTS -->
       <div class="panel" id="panel-projects">
-        <div class="admin-card">
-          <div class="card-header"><h3>Projects</h3><button class="btn-sm primary" onclick="openProjectModal(null)">+ Add Project</button></div>
-          <div class="card-body" style="padding:0">
-            <table class="projects-table">
+        <div class="card">
+          <div class="ch"><h3>Projects</h3><button class="btn p" onclick="openProjModal(null)">+ Add Project</button></div>
+          <div class="cb" style="padding:0">
+            <table class="tbl">
               <thead><tr><th>Image</th><th>Title</th><th>Type</th><th>Year</th><th>Status</th><th>Actions</th></tr></thead>
-              <tbody id="projectsTableBody"><tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">Loading…</td></tr></tbody>
+              <tbody id="projBody"><tr><td colspan="6" style="text-align:center;padding:32px;color:var(--mu)">Loading…</td></tr></tbody>
             </table>
           </div>
         </div>
       </div>
-
 
       <!-- SERVICES -->
       <div class="panel" id="panel-services">
-        <div class="admin-card">
-          <div class="card-header"><h3>Services — What I Offer</h3><button class="btn-sm primary" onclick="openServiceModal(null)">+ Add Service</button></div>
-          <div class="card-body" style="padding:0">
-            <table class="projects-table">
-              <thead><tr><th style="width:40px">#</th><th>Service Name</th><th>Description</th><th>Icon</th><th>Status</th><th>Actions</th></tr></thead>
-              <tbody id="servicesTableBody"><tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">Loading…</td></tr></tbody>
+        <div class="card">
+          <div class="ch"><h3>Services — What I Offer</h3><button class="btn p" onclick="openSvcModal(null)">+ Add Service</button></div>
+          <div class="cb" style="padding:0">
+            <table class="tbl">
+              <thead><tr><th>#</th><th>Service Name</th><th>Description</th><th>Icon</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="svcBody"><tr><td colspan="6" style="text-align:center;padding:32px;color:var(--mu)">Loading…</td></tr></tbody>
             </table>
           </div>
         </div>
       </div>
+
       <!-- IMAGES -->
       <div class="panel" id="panel-images">
-        <div class="admin-card">
-          <div class="card-header"><h3>Hero &amp; About Images</h3><span style="font-size:12px;color:var(--muted)">These appear in the main sections</span></div>
-          <div class="card-body">
-            <div class="two-col">
-              <div>
-                <div class="field"><label>Hero Photo (portrait, 3:4 ratio)</label></div>
-                <div class="img-upload-area" id="heroUploadArea">
-                  <input type="file" accept="image/*" onchange="handleImageUpload(this,'hero')"/>
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#9E9E9E" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/><path d="M2 10l6-4h16l6 4"/></svg>
-                  <p style="margin-top:8px;font-size:13px;color:var(--muted)">Click or drag hero photo here</p>
-                  <p style="font-size:11px;color:var(--muted);margin-top:4px">JPG, PNG · Max 5MB · Recommended 600×800px</p>
-                  <img id="heroPreview" class="img-preview" alt="Hero preview"/>
-                </div>
+        <div class="card"><div class="ch"><h3>Hero &amp; About Photos</h3></div><div class="cb">
+          <div class="g2">
+            <div>
+              <div class="f"><label>Hero Photo (portrait 3:4)</label></div>
+              <div class="iu" id="heroUpload">
+                <input type="file" accept="image/*" onchange="uploadImg(this,'hero')"/>
+                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#999" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
+                <p>Click or drag hero photo here<br><span style="font-size:11px">Recommended 600×800px</span></p>
+                <img id="heroPreview" class="ip"/>
               </div>
-              <div>
-                <div class="field"><label>About Photo (4:5 ratio)</label></div>
-                <div class="img-upload-area" id="aboutUploadArea">
-                  <input type="file" accept="image/*" onchange="handleImageUpload(this,'about')"/>
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#9E9E9E" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/><path d="M2 10l6-4h16l6 4"/></svg>
-                  <p style="margin-top:8px;font-size:13px;color:var(--muted)">Click or drag about photo here</p>
-                  <p style="font-size:11px;color:var(--muted);margin-top:4px">JPG, PNG · Max 5MB · Recommended 500×625px</p>
-                  <img id="aboutPreview" class="img-preview" alt="About preview"/>
-                </div>
-              </div>
+              <div id="heroStatus" style="font-size:12px;color:var(--mu);margin-top:8px"></div>
             </div>
-            <div style="margin-top:16px;padding:14px;background:var(--offwhite);border:1px solid var(--border);font-size:13px;color:var(--muted)">
-              ℹ️ Images are uploaded to Supabase Storage and served via CDN. After uploading, the site updates automatically.
+            <div>
+              <div class="f"><label>About Photo (4:5 ratio)</label></div>
+              <div class="iu" id="aboutUpload">
+                <input type="file" accept="image/*" onchange="uploadImg(this,'about')"/>
+                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#999" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
+                <p>Click or drag about photo here<br><span style="font-size:11px">Recommended 500×625px</span></p>
+                <img id="aboutPreview" class="ip"/>
+              </div>
+              <div id="aboutStatus" style="font-size:12px;color:var(--mu);margin-top:8px"></div>
             </div>
           </div>
-        </div>
+          <div style="margin-top:14px;padding:12px;background:var(--ob);border:1px solid var(--bd);font-size:13px;color:var(--mu)">
+            ℹ️ Images upload to Supabase Storage. If upload fails, images can also be placed directly in the <code>images/</code> folder in GitHub as <code>hero.jpg</code> and <code>about.jpg</code>.
+          </div>
+        </div></div>
       </div>
 
-      <!-- SEO & ANALYTICS -->
+      <!-- SEO -->
       <div class="panel" id="panel-seo">
-        <div class="admin-card">
-          <div class="card-header"><h3>Google Search Preview</h3></div>
-          <div class="card-body">
-            <div class="seo-preview">
-              <div class="seo-preview-url">husnimarikkar.co.uk</div>
-              <div class="seo-preview-title" id="seoPreviewTitle">Husni Marikkar Architects | Residential Architecture & Interior Design London</div>
-              <div class="seo-preview-desc" id="seoPreviewDesc">London-based architect offering bespoke home renovation, interior design and new build architecture.</div>
-            </div>
-            <div class="field"><label>Page Title <span style="font-weight:400;text-transform:none">(50–60 chars ideal)</span></label><input type="text" id="c-seo_title" oninput="updateSeoPreview()" placeholder="Husni Marikkar Architects | Residential Architecture & Interior Design London"/><div class="char-count" id="title-count">0 characters</div></div>
-            <div class="field"><label>Meta Description <span style="font-weight:400;text-transform:none">(150–160 chars ideal)</span></label><textarea id="c-seo_description" oninput="updateSeoPreview()" placeholder="London-based architect offering bespoke home renovation…"></textarea><div class="char-count" id="desc-count">0 characters</div></div>
-            <div class="field"><label>Keywords</label><input type="text" id="c-seo_keywords" placeholder="architect London, residential interior design UK…"/><div class="field-hint">Separate with commas</div></div>
+        <div class="card"><div class="ch"><h3>Search Preview</h3></div><div class="cb">
+          <div class="sp2">
+            <div class="u">husnimarikkar.co.uk</div>
+            <div class="t" id="seoT">Husni Marikkar Architects | Residential Architecture London</div>
+            <div class="d" id="seoD">London-based architect offering bespoke home renovation…</div>
           </div>
-        </div>
-        <div class="admin-card">
-          <div class="card-header"><h3>Google Analytics</h3></div>
-          <div class="card-body">
-            <div class="field"><label>Measurement ID</label><input type="text" id="c-ga_tracking_id" placeholder="G-XXXXXXXXXX"/><div class="field-hint">Find this in Google Analytics → Admin → Data Streams → your stream → Measurement ID. Starts with G-</div></div>
-            <div style="margin-top:4px;padding:14px;background:var(--offwhite);border:1px solid var(--border);font-size:13px;color:var(--muted)">
-              After saving, Google Analytics tracking will be added to all pages automatically. Allow 24–48 hours for data to appear in your GA dashboard.
-            </div>
-          </div>
-        </div>
+          <div class="f"><label>Page Title (50–60 chars)</label><input type="text" id="c-seo_title" oninput="updateSEO()"/><div class="cc" id="tc">0 chars</div></div>
+          <div class="f"><label>Meta Description (150–160 chars)</label><textarea id="c-seo_description" oninput="updateSEO()"></textarea><div class="cc" id="dc">0 chars</div></div>
+          <div class="f"><label>Keywords</label><input type="text" id="c-seo_keywords"/></div>
+        </div></div>
+        <div class="card"><div class="ch"><h3>Google Analytics</h3></div><div class="cb">
+          <div class="f"><label>Measurement ID</label><input type="text" id="c-ga_tracking_id" placeholder="G-XXXXXXXXXX"/><div class="fhint">Find in GA → Admin → Data Streams → Measurement ID</div></div>
+        </div></div>
       </div>
 
       <!-- CONTACT DETAILS -->
-      <div class="panel" id="panel-contact_info">
-        <div class="admin-card">
-          <div class="card-header"><h3>Contact Details</h3><span style="font-size:12px;color:var(--muted)">These appear in the Contact section and footer</span></div>
-          <div class="card-body">
-            <div class="two-col">
-              <div class="field"><label>Email Address</label><input type="email" id="c-contact_email" placeholder="husni@husnimarikkar.co.uk"/></div>
-              <div class="field"><label>Phone Number</label><input type="tel" id="c-contact_phone" placeholder="+44 7466 554153"/></div>
-              <div class="field"><label>WhatsApp Number <span style="font-weight:400;text-transform:none">(digits only)</span></label><input type="text" id="c-whatsapp_number" placeholder="447466554153"/><div class="field-hint">Include country code, no spaces or + (e.g. 447466554153)</div></div>
-              <div class="field"><label>Based In</label><input type="text" id="c-contact_based" placeholder="London, United Kingdom"/></div>
-              <div class="field"><label>Serving Area</label><input type="text" id="c-contact_serving" placeholder="Greater London & Home Counties"/></div>
-              <div class="field"><label>LinkedIn URL</label><input type="url" id="c-linkedin_url" placeholder="https://linkedin.com/in/husnimarikkar"/></div>
-              <div class="field"><label>Behance URL</label><input type="url" id="c-behance_url" placeholder="https://behance.net/husnimarikkar"/></div>
-            </div>
+      <div class="panel" id="panel-contact">
+        <div class="card"><div class="ch"><h3>Contact Details</h3></div><div class="cb">
+          <div class="g2">
+            <div class="f"><label>Email Address</label><input type="email" id="c-contact_email"/></div>
+            <div class="f"><label>Phone Number</label><input type="tel" id="c-contact_phone"/></div>
+            <div class="f"><label>WhatsApp Number (digits only, e.g. 447466554153)</label><input type="text" id="c-whatsapp_number"/></div>
+            <div class="f"><label>Based In</label><input type="text" id="c-contact_based"/></div>
+            <div class="f"><label>Serving Area</label><input type="text" id="c-contact_serving"/></div>
+            <div class="f"><label>Availability Message</label><input type="text" id="c-contact_availability"/></div>
+            <div class="f"><label>LinkedIn URL</label><input type="url" id="c-linkedin_url"/></div>
+            <div class="f"><label>Behance URL</label><input type="url" id="c-behance_url"/></div>
           </div>
-        </div>
+        </div></div>
       </div>
 
-    </div><!-- admin-content -->
-  </div><!-- admin-main -->
-</div><!-- adminApp -->
+    </div>
+  </div>
+</div>
 
 <!-- PROJECT MODAL -->
-<div class="modal-overlay" id="projectModal">
-  <div class="modal">
-    <h3 id="modalTitle">Add Project</h3>
-    <input type="hidden" id="proj-id"/>
-    <div class="two-col">
-      <div class="field"><label>Title</label><input type="text" id="proj-title" placeholder="Project name"/></div>
-      <div class="field"><label>Type / Category Tag</label><input type="text" id="proj-type" placeholder="Residential Interior"/></div>
-      <div class="field"><label>Year</label><input type="text" id="proj-year" placeholder="2024"/></div>
-      <div class="field"><label>Location</label><input type="text" id="proj-location" placeholder="London, UK"/></div>
-      <div class="field"><label>Client</label><input type="text" id="proj-client" placeholder="Client name"/></div>
-      <div class="field"><label>Consultant / Architect</label><input type="text" id="proj-consultant" placeholder="Firm name"/></div>
-      <div class="field"><label>Role</label><input type="text" id="proj-role" placeholder="Lead Architect"/></div>
-      <div class="field"><label>Area / Size</label><input type="text" id="proj-area" placeholder="15,000 sq ft"/></div>
+<div class="mo" id="projModal">
+  <div class="md">
+    <h3 id="pmTitle">Add Project</h3>
+    <input type="hidden" id="pm-id"/>
+    <div class="g2">
+      <div class="f"><label>Title *</label><input type="text" id="pm-title" placeholder="Project name"/></div>
+      <div class="f"><label>Type</label><input type="text" id="pm-type" placeholder="Residential Interior"/></div>
+      <div class="f"><label>Year</label><input type="text" id="pm-year" placeholder="2024"/></div>
+      <div class="f"><label>Location</label><input type="text" id="pm-location" placeholder="London, UK"/></div>
+      <div class="f"><label>Client</label><input type="text" id="pm-client"/></div>
+      <div class="f"><label>Consultant</label><input type="text" id="pm-consultant"/></div>
+      <div class="f"><label>Role</label><input type="text" id="pm-role" placeholder="Lead Architect"/></div>
+      <div class="f"><label>Area / Size</label><input type="text" id="pm-area" placeholder="15,000 sq ft"/></div>
     </div>
-    <div class="field"><label>Description</label><textarea id="proj-description" style="min-height:100px" placeholder="Project description…"></textarea></div>
-    <div class="field"><label>Category <span style="font-weight:400;text-transform:none">(for filter)</span></label>
-      <select id="proj-category"><option value="residential">Residential</option><option value="commercial">Commercial</option><option value="interior">Interior</option><option value="civic">Civic</option><option value="institutional">Institutional</option></select>
+    <div class="f"><label>Description</label><textarea id="pm-description" style="min-height:100px"></textarea></div>
+    <div class="g2">
+      <div class="f"><label>Category</label><select id="pm-category"><option value="residential">Residential</option><option value="commercial">Commercial</option><option value="interior">Interior</option><option value="civic">Civic</option><option value="institutional">Institutional</option></select></div>
+      <div class="f"><label>Sort Order</label><input type="number" id="pm-sort" value="1" min="1"/></div>
     </div>
-    <div class="field"><label>Sort Order</label><input type="number" id="proj-sort" value="1" min="1"/></div>
-    <div style="display:flex;gap:12px;margin-bottom:16px">
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="proj-featured"/> Featured project</label>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="proj-visible" checked/> Visible on site</label>
+    <div style="display:flex;gap:20px;margin-bottom:16px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="pm-featured"/> Featured</label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="pm-visible" checked/> Visible on site</label>
     </div>
-    <div class="field"><label>Project Image</label>
-      <div class="img-upload-area">
-        <input type="file" accept="image/*" onchange="handleProjectImageUpload(this)"/>
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#9E9E9E" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
-        <p style="margin-top:6px;font-size:13px;color:var(--muted)">Click to upload project image</p>
-        <img id="projImgPreview" class="img-preview" alt=""/>
+    <div class="f"><label>Project Image</label>
+      <div class="iu">
+        <input type="file" accept="image/*" onchange="uploadProjImg(this)"/>
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="#999" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
+        <p style="font-size:13px;margin-top:6px">Click to upload project image</p>
+        <img id="pmImgPreview" class="ip"/>
       </div>
-      <input type="hidden" id="proj-image_url"/>
+      <input type="hidden" id="pm-image_url"/>
+      <div id="pmImgStatus" style="font-size:12px;color:var(--mu);margin-top:6px"></div>
     </div>
-    <div class="modal-footer">
-      <button class="btn-sm" onclick="closeProjectModal()">Cancel</button>
-      <button class="btn-sm primary" onclick="saveProject()">Save Project</button>
+    <div class="mf">
+      <button class="btn" onclick="closeProjModal()">Cancel</button>
+      <button class="btn p" onclick="saveProject()">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE MODAL -->
+<div class="mo" id="svcModal">
+  <div class="md" style="width:500px">
+    <h3 id="smTitle">Add Service</h3>
+    <input type="hidden" id="sm-id"/>
+    <div class="f"><label>Service Name *</label><input type="text" id="sm-name" placeholder="e.g. Home Renovation"/></div>
+    <div class="f"><label>Description</label><textarea id="sm-description" style="min-height:120px" placeholder="Describe what this service includes…"></textarea></div>
+    <div class="g2">
+      <div class="f"><label>Icon</label>
+        <select id="sm-icon">
+          <option value="home">🏠 Home — Home Renovation</option>
+          <option value="building">🏗 Building — New Build</option>
+          <option value="screen">🖥 Screen — 3D BIM</option>
+          <option value="grid">⊞ Grid — Space Planning</option>
+          <option value="interior">🪑 Interior — Interior Design</option>
+          <option value="document">📋 Document — Planning</option>
+          <option value="default">⭕ Default</option>
+        </select>
+      </div>
+      <div class="f"><label>Sort Order</label><input type="number" id="sm-sort" value="1" min="1"/></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:16px"><input type="checkbox" id="sm-visible" checked/> Visible on site</label>
+    <div class="mf">
+      <button class="btn" onclick="closeSvcModal()">Cancel</button>
+      <button class="btn p" onclick="saveService()">Save Service</button>
     </div>
   </div>
 </div>
 
 <script src="supabase.js"></script>
 <script>
-// AUTH
 const ADMIN_USER='husni', ADMIN_PASS='admin2025';
-let currentPanel='dashboard';
+let curPanel='dashboard';
 
+// AUTH
 function doLogin(){
   const u=document.getElementById('lu').value.trim();
   const p=document.getElementById('lp').value;
-  if(u===ADMIN_USER&&p===ADMIN_PASS){
+  if(u===ADMIN_USER && p===ADMIN_PASS){
     sessionStorage.setItem('husni_admin','1');
     localStorage.setItem('husni_admin','1');
-    showAdmin();
+    showApp();
   } else {
-    document.getElementById('loginErr').style.display='block';
-    setTimeout(()=>document.getElementById('loginErr').style.display='none',3000);
+    const e=document.getElementById('lerr'); e.style.display='block';
+    setTimeout(()=>e.style.display='none',3000);
   }
 }
-function showAdmin(){
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('adminApp').style.display='block';
+function showApp(){
+  document.getElementById('ls').style.display='none';
+  document.getElementById('app').style.display='block';
   initAdmin();
 }
 function doLogout(){
-  sessionStorage.removeItem('husni_admin');
-  localStorage.removeItem('husni_admin');
-  document.getElementById('adminApp').style.display='none';
-  document.getElementById('loginScreen').style.display='flex';
+  sessionStorage.removeItem('husni_admin'); localStorage.removeItem('husni_admin');
+  document.getElementById('app').style.display='none';
+  document.getElementById('ls').style.display='flex';
 }
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-// Auto-restore session on page load/refresh
 window.addEventListener('load',()=>{
-  if(sessionStorage.getItem('husni_admin')||localStorage.getItem('husni_admin')){
-    showAdmin();
-  }
+  if(sessionStorage.getItem('husni_admin')||localStorage.getItem('husni_admin')) showApp();
 });
 
 // PANELS
-function showPanel(name, el){
+const TITLES={dashboard:'Dashboard',enquiries:'Enquiries',visibility:'Section Visibility',content:'Page Content',projects:'Projects',services:'Services',images:'Images',seo:'SEO & Analytics',contact:'Contact Details'};
+function goPanel(name,el){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
-  if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',enquiries:'Enquiries',visibility:'Section Visibility',content:'Page Content',projects:'Projects',images:'Images',seo:'SEO & Analytics',contact_info:'Contact Details'};
-  document.getElementById('panelTitle').textContent=titles[name]||name;
-  currentPanel=name;
-  if(name==='enquiries')renderEnquiries();
-  if(name==='dashboard')renderDashboard();
-  if(name==='projects')renderProjects();
-  if(name==='services')renderServices();
+  if(el) el.classList.add('active');
+  document.getElementById('ptitle').textContent=TITLES[name]||name;
+  curPanel=name;
+  if(name==='enquiries') loadEnquiries();
+  if(name==='dashboard') loadDashboard();
+  if(name==='projects') loadProjects();
+  if(name==='services') loadServices();
 }
 
 // SAVE
-async function saveCurrentPanel(){
+async function doSave(){
   const btn=document.getElementById('saveBtn');
-  btn.textContent='Saving…';btn.disabled=true;
+  btn.textContent='Saving…'; btn.disabled=true;
   let ok=true;
-
-  if(currentPanel==='content'||currentPanel==='seo'||currentPanel==='contact_info'){
-    ok=await saveContentFields();
-  } else if(currentPanel==='visibility'){
-    ok=await saveVisibility();
-  } else {
-    // No save needed for this panel
-    btn.textContent='Save Changes';btn.disabled=false;
-    return;
-  }
-
-  if(ok){
-    btn.textContent='✓ Saved!';btn.classList.add('saved');
-    setTimeout(()=>{btn.textContent='Save Changes';btn.classList.remove('saved');btn.disabled=false;},2500);
-  } else {
-    btn.textContent='❌ Error — check console';btn.style.background='#ef4444';
-    setTimeout(()=>{btn.textContent='Save Changes';btn.style.background='';btn.disabled=false;},4000);
-  }
+  if(curPanel==='visibility') ok=await saveVisibility();
+  else if(curPanel==='images') { btn.textContent='Save Changes'; btn.disabled=false; return; }
+  else ok=await saveContent();
+  btn.textContent=ok?'✓ Saved!':'❌ Save Failed'; btn.className='sb-btn'+(ok?' ok':' err');
+  setTimeout(()=>{btn.textContent='Save Changes';btn.className='sb-btn';btn.disabled=false;},3000);
 }
 
-async function saveContentFields(){
-  // Collect ALL fields from current panel
-  const inputs=document.querySelectorAll('#panel-'+currentPanel+' [id^="c-"]');
+async function saveContent(){
+  const els=document.querySelectorAll('#panel-'+curPanel+' [id^="c-"]');
   const rows=[];
-  inputs.forEach(el=>{
-    const key=el.id.replace('c-','');
-    const val=el.value.trim();
-    if(key && val!==undefined) rows.push({key, value:val});
-  });
+  els.forEach(el=>{ if(el.id) rows.push({key:el.id.replace('c-',''), value:el.value}); });
   if(!rows.length) return true;
-  console.log('Saving',rows.length,'content fields:', rows.map(r=>r.key));
-  // Send as ONE batch request
-  const ok = await db.upsertBatch('site_content', rows, 'key');
-  console.log('Save result:', ok);
-  return ok;
+  console.log('Saving',rows.length,'rows:', rows.map(r=>r.key));
+  return await db.upsertBatch('site_content', rows, 'key');
 }
 
 async function saveVisibility(){
-  const sections=['about','projects','services','contact'];
-  const rows=sections.map(s=>({
-    key:'section_'+s,
-    value:String(document.getElementById('vis-'+s)?.checked??true)
+  const rows=['about','projects','services','contact'].map(s=>({
+    key:'section_'+s, value:String(document.getElementById('vis-'+s)?.checked??true)
   }));
   return await db.upsertBatch('site_settings', rows, 'key');
 }
 
 // INIT
 async function initAdmin(){
-  await loadContentFields();
-  await loadVisibility();
-  await renderDashboard();
-  await renderProjects();
-  await renderServices();
+  await Promise.all([loadContentFields(), loadVisibilityFields(), loadDashboard(), loadProjects(), loadServices()]);
 }
 
 async function loadContentFields(){
   const rows=await db.get('site_content','select=key,value');
   rows.forEach(r=>{
     const el=document.getElementById('c-'+r.key);
-    if(el)el.value=r.value;
+    if(el) el.value=r.value;
   });
-  updateSeoPreview();
+  updateSEO();
 }
 
-async function loadVisibility(){
+async function loadVisibilityFields(){
   const rows=await db.get('site_settings','select=key,value');
   rows.forEach(r=>{
-    const key=r.key.replace('section_','');
-    const el=document.getElementById('vis-'+key);
-    if(el)el.checked=r.value==='true';
+    const k=r.key.replace('section_','');
+    const el=document.getElementById('vis-'+k);
+    if(el) el.checked=r.value!=='false';
   });
 }
 
 // DASHBOARD
-async function renderDashboard(){
-  const [enqs,projs]=await Promise.all([
-    db.get('enquiries','select=id,name,email,created_at,read,project_type&order=created_at.desc&limit=5'),
-    db.get('projects','select=id,visible')
+async function loadDashboard(){
+  const [enqs,projs,svcs]=await Promise.all([
+    db.get('enquiries','select=id,read,name,email,project_type,created_at&order=created_at.desc&limit=5'),
+    db.get('projects','select=id,visible'),
+    db.get('services','select=id,visible')
   ]);
-  const allEnqs=await db.get('enquiries','select=id,read');
-  const unread=allEnqs.filter(e=>!e.read).length;
-
-  document.getElementById('st-total').textContent=allEnqs.length;
+  const allE=await db.get('enquiries','select=id,read');
+  const unread=allE.filter(e=>!e.read).length;
+  document.getElementById('st-total').textContent=allE.length;
   document.getElementById('st-unread').textContent=unread;
-  document.getElementById('st-projects').textContent=projs.filter(p=>p.visible).length;
-  if(enqs.length>0){
-    const d=new Date(enqs[0].created_at);
-    document.getElementById('st-last').textContent=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-  }
+  document.getElementById('st-proj').textContent=projs.filter(p=>p.visible).length;
+  document.getElementById('st-svc').textContent=svcs.filter(s=>s.visible).length;
   const badge=document.getElementById('unreadBadge');
-  badge.style.display=unread>0?'inline-flex':'none';
-  badge.textContent=unread;
-
-  const dash=document.getElementById('dashEnquiries');
-  if(enqs.length===0){dash.innerHTML='<div style="color:var(--muted);font-size:14px;padding:16px 0">No enquiries yet.</div>';return;}
-  dash.innerHTML=enqs.map(e=>`
-    <div style="display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+  badge.style.display=unread>0?'inline-flex':'none'; badge.textContent=unread;
+  const d=document.getElementById('dashEnq');
+  if(!enqs.length){d.innerHTML='<div style="color:var(--mu);font-size:14px">No enquiries yet.</div>';return;}
+  d.innerHTML=enqs.slice(0,5).map(e=>`
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd)">
       <div style="width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:white;font-size:12px;flex-shrink:0">${(e.name||'?')[0].toUpperCase()}</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--navy)">${e.name||'Unknown'}${!e.read?'<span style="font-size:9px;background:var(--gold);color:var(--navy);padding:2px 6px;margin-left:8px">NEW</span>':''}</div><div style="font-size:12px;color:var(--muted)">${e.project_type||'Enquiry'} · ${e.email||''}</div></div>
-      <div style="font-size:11px;color:var(--muted)">${new Date(e.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:500">${e.name||'Unknown'}${!e.read?'<span class="nt">NEW</span>':''}</div><div style="font-size:12px;color:var(--mu)">${e.project_type||'Enquiry'}</div></div>
+      <div style="font-size:11px;color:var(--mu)">${new Date(e.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</div>
     </div>`).join('');
 }
 
 // ENQUIRIES
-async function renderEnquiries(){
+async function loadEnquiries(){
   const enqs=await db.get('enquiries','select=*&order=created_at.desc');
   const unread=enqs.filter(e=>!e.read).length;
-  document.getElementById('enqCount').textContent=enqs.length+' enquir'+(enqs.length===1?'y':'ies');
+  document.getElementById('enqCount').textContent=`${enqs.length} enquiries · ${unread} unread`;
   const badge=document.getElementById('unreadBadge');
-  badge.style.display=unread>0?'inline-flex':'none';
-  badge.textContent=unread;
-
+  badge.style.display=unread>0?'inline-flex':'none'; badge.textContent=unread;
   const list=document.getElementById('enqList');
-  if(enqs.length===0){list.innerHTML='<div style="padding:48px;text-align:center;color:var(--muted);font-size:14px">No enquiries yet. When someone submits the contact form, they\'ll appear here.</div>';return;}
-
-  list.innerHTML='<div class="enq-list">'+enqs.map((e,i)=>`
-    <div class="enq-item" onclick="toggleEnq(${i},${e.id})">
-      <div class="enq-avatar">${(e.name||'?')[0].toUpperCase()}</div>
+  if(!enqs.length){list.innerHTML='<div style="padding:32px;text-align:center;color:var(--mu)">No enquiries yet.</div>';return;}
+  list.innerHTML='<div class="el">'+enqs.map((e,i)=>`
+    <div class="ei" onclick="toggleEnq(${i},${e.id})">
+      <div class="av">${(e.name||'?')[0].toUpperCase()}</div>
       <div style="flex:1">
-        <div class="enq-name">${e.name||'Unknown'}${!e.read?'<span class="new-tag">NEW</span>':''}</div>
-        <div class="enq-meta">${e.email||''} · ${e.project_type||'General enquiry'}</div>
-        <div class="enq-preview">${e.message||''}</div>
-        <div id="enq-detail-${i}" class="enq-detail">
-          <div class="enq-detail-grid">
-            <div class="enq-field"><label>Email</label><span><a href="mailto:${e.email}" style="color:var(--gold)">${e.email||'—'}</a></span></div>
-            <div class="enq-field"><label>Phone</label><span>${e.phone||'—'}</span></div>
-            <div class="enq-field"><label>Project Type</label><span>${e.project_type||'—'}</span></div>
-            <div class="enq-field"><label>Budget</label><span>${e.budget||'—'}</span></div>
-            <div class="enq-field"><label>Location</label><span>${e.location||'—'}</span></div>
-            <div class="enq-field"><label>Date</label><span>${new Date(e.created_at).toLocaleString('en-GB')}</span></div>
+        <div class="en">${e.name||'Unknown'}${!e.read?'<span class="nt">NEW</span>':''}</div>
+        <div class="em">${e.email||''} · ${e.project_type||'General'}</div>
+        <div class="ep">${e.message||''}</div>
+        <div id="ed-${i}" class="ed">
+          <div class="edg">
+            <div class="ef"><label>Email</label><span><a href="mailto:${e.email}" style="color:var(--gold)">${e.email||'—'}</a></span></div>
+            <div class="ef"><label>Phone</label><span>${e.phone||'—'}</span></div>
+            <div class="ef"><label>Project Type</label><span>${e.project_type||'—'}</span></div>
+            <div class="ef"><label>Budget</label><span>${e.budget||'—'}</span></div>
+            <div class="ef"><label>Location</label><span>${e.location||'—'}</span></div>
+            <div class="ef"><label>Date</label><span>${new Date(e.created_at).toLocaleString('en-GB')}</span></div>
           </div>
-          <div class="enq-full-msg">${e.message||'No message.'}</div>
-          <div class="btn-row">
-            <a class="btn-sm primary" href="mailto:${e.email}?subject=Re: Your Enquiry — Husni Marikkar Architects">Reply by Email</a>
-            <a class="btn-sm" href="https://wa.me/${e.phone?.replace(/\D/g,'')||''}" target="_blank">WhatsApp</a>
-            <button class="btn-sm danger" onclick="deleteEnq(event,${e.id})">Delete</button>
+          <div class="emsg">${e.message||'No message.'}</div>
+          <div class="br">
+            <a class="btn p" href="mailto:${e.email}?subject=Re: Your Enquiry — Husni Marikkar Architects">Reply by Email</a>
+            ${e.phone?`<a class="btn" href="https://wa.me/${(e.phone||'').replace(/\D/g,'')}" target="_blank">WhatsApp</a>`:''}
+            <button class="btn d" onclick="delEnq(event,${e.id})">Delete</button>
           </div>
         </div>
       </div>
-      <div class="enq-date">${new Date(e.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+      <div style="font-size:11px;color:var(--mu);white-space:nowrap">${new Date(e.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
     </div>`).join('')+'</div>';
 }
 
-let openEnqId=null;
-async function toggleEnq(i,dbId){
-  const d=document.getElementById('enq-detail-'+i);
-  const isOpen=d.style.display==='block';
-  document.querySelectorAll('.enq-detail').forEach(el=>el.style.display='none');
-  if(!isOpen){d.style.display='block';await db.update('enquiries',dbId,{read:true});renderDashboard();}
+async function toggleEnq(i,id){
+  const d=document.getElementById('ed-'+i);
+  const open=d.style.display==='block';
+  document.querySelectorAll('.ed').forEach(el=>el.style.display='none');
+  if(!open){d.style.display='block'; await db.update('enquiries',id,{read:true}); loadDashboard();}
 }
-async function deleteEnq(ev,id){ev.stopPropagation();if(confirm('Delete this enquiry?')){await db.delete('enquiries',id);renderEnquiries();renderDashboard();}}
-async function markAllRead(){await db.update('enquiries','true',{read:true},'read=neq');renderEnquiries();renderDashboard();}
-
-function exportCSV(){
-  db.get('enquiries','select=*&order=created_at.desc').then(rows=>{
-    if(!rows.length)return;
-    const headers=Object.keys(rows[0]);
-    const csv=[headers.join(','),...rows.map(r=>headers.map(h=>`"${String(r[h]||'').replace(/"/g,'""')}"`).join(','))].join('\n');
-    const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-    a.download='enquiries-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
-  });
-}
+async function delEnq(ev,id){ev.stopPropagation();if(confirm('Delete this enquiry?')){await db.delete('enquiries',id);loadEnquiries();loadDashboard();}}
+async function markAllRead(){const all=await db.get('enquiries','select=id&read=eq.false');for(const e of all)await db.update('enquiries',e.id,{read:true});loadEnquiries();loadDashboard();}
+function exportCSV(){db.get('enquiries','select=*&order=created_at.desc').then(rows=>{if(!rows.length)return;const h=Object.keys(rows[0]);const csv=[h.join(','),...rows.map(r=>h.map(k=>`"${String(r[k]||'').replace(/"/g,'""')}"`).join(','))].join('\n');const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='enquiries-'+new Date().toISOString().slice(0,10)+'.csv';a.click();});}
 
 // PROJECTS
-async function renderProjects(){
-  const projs=await db.get('projects','select=*&order=sort_order.asc');
-  const tbody=document.getElementById('projectsTableBody');
-  if(!projs.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">No projects yet. Add one above.</td></tr>';return;}
-  tbody.innerHTML=projs.map(p=>`
+async function loadProjects(){
+  const p=await db.get('projects','select=*&order=sort_order.asc');
+  const b=document.getElementById('projBody');
+  if(!p.length){b.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--mu)">No projects yet. Click + Add Project.</td></tr>';return;}
+  b.innerHTML=p.map(r=>`
     <tr>
-      <td>${p.image_url?`<img class="proj-thumb" src="${p.image_url}" alt=""/>`:'<div class="proj-thumb-placeholder">No img</div>'}</td>
-      <td style="font-weight:500">${p.title}</td>
-      <td style="font-size:12px;color:var(--muted)">${p.type||'—'}</td>
-      <td>${p.year||'—'}</td>
-      <td><span class="status-pill ${p.visible?'live':'hidden'}">${p.visible?'● Live':'● Hidden'}</span></td>
-      <td><div class="btn-row">
-        <button class="btn-sm" onclick='openProjectModal(${JSON.stringify(p)})'>Edit</button>
-        <button class="btn-sm danger" onclick="deleteProject(${p.id})">Delete</button>
+      <td>${r.image_url?`<img class="pt" src="${r.image_url}" onerror="this.style.display='none'" alt=""/>`:'<div class="ph">No img</div>'}</td>
+      <td style="font-weight:500">${r.title}</td>
+      <td style="font-size:12px;color:var(--mu)">${r.type||'—'}</td>
+      <td>${r.year||'—'}</td>
+      <td><span class="sp ${r.visible?'lv':'hd'}">${r.visible?'● Live':'● Hidden'}</span></td>
+      <td><div class="br">
+        <button class="btn" onclick='openProjModal(${JSON.stringify(r).replace(/'/g,"\'")})'>Edit</button>
+        <button class="btn d" onclick="delProject(${r.id})">Delete</button>
       </div></td>
     </tr>`).join('');
 }
 
-function openProjectModal(p){
-  document.getElementById('modalTitle').textContent=p?'Edit Project':'Add Project';
-  const fields=['id','title','type','year','location','client','consultant','role','area','description','category','sort_order','image_url'];
-  fields.forEach(f=>{const el=document.getElementById('proj-'+f);if(el)el.value=p?p[f]||'':''});
-  document.getElementById('proj-featured').checked=p?p.featured:false;
-  document.getElementById('proj-visible').checked=p?p.visible:true;
-  const prev=document.getElementById('projImgPreview');
-  if(p&&p.image_url){prev.src=p.image_url;prev.style.display='block';}
-  else{prev.style.display='none';}
-  document.getElementById('projectModal').classList.add('open');
+function openProjModal(p){
+  document.getElementById('pmTitle').textContent=p?'Edit Project':'Add Project';
+  ['id','title','type','year','location','client','consultant','role','area','description','image_url'].forEach(f=>{
+    const el=document.getElementById('pm-'+f); if(el) el.value=p?p[f]||'':'';
+  });
+  document.getElementById('pm-category').value=p?.category||'residential';
+  document.getElementById('pm-sort').value=p?.sort_order||1;
+  document.getElementById('pm-featured').checked=p?.featured||false;
+  document.getElementById('pm-visible').checked=p?.visible!==false;
+  const prev=document.getElementById('pmImgPreview');
+  prev.src=p?.image_url||''; prev.style.display=p?.image_url?'block':'none';
+  document.getElementById('pmImgStatus').textContent='';
+  document.getElementById('projModal').classList.add('open');
 }
-function closeProjectModal(){document.getElementById('projectModal').classList.remove('open');}
+function closeProjModal(){document.getElementById('projModal').classList.remove('open');}
 
 async function saveProject(){
-  const id=document.getElementById('proj-id').value;
+  const title=document.getElementById('pm-title').value.trim();
+  if(!title){alert('Project title is required!');return;}
+  const id=document.getElementById('pm-id').value;
   const data={
-    title:document.getElementById('proj-title').value,
-    type:document.getElementById('proj-type').value,
-    year:document.getElementById('proj-year').value,
-    location:document.getElementById('proj-location').value,
-    client:document.getElementById('proj-client').value,
-    consultant:document.getElementById('proj-consultant').value,
-    role:document.getElementById('proj-role').value,
-    area:document.getElementById('proj-area').value,
-    description:document.getElementById('proj-description').value,
-    category:document.getElementById('proj-category').value,
-    sort_order:parseInt(document.getElementById('proj-sort').value)||1,
-    featured:document.getElementById('proj-featured').checked,
-    visible:document.getElementById('proj-visible').checked,
-    image_url:document.getElementById('proj-image_url').value||null,
+    title, type:document.getElementById('pm-type').value,
+    year:document.getElementById('pm-year').value,
+    location:document.getElementById('pm-location').value,
+    client:document.getElementById('pm-client').value,
+    consultant:document.getElementById('pm-consultant').value,
+    role:document.getElementById('pm-role').value,
+    area:document.getElementById('pm-area').value,
+    description:document.getElementById('pm-description').value,
+    category:document.getElementById('pm-category').value,
+    sort_order:parseInt(document.getElementById('pm-sort').value)||1,
+    featured:document.getElementById('pm-featured').checked,
+    visible:document.getElementById('pm-visible').checked,
+    image_url:document.getElementById('pm-image_url').value||null,
   };
-  if(id){await db.update('projects',id,data);}
-  else{await db.insert('projects',data);}
-  closeProjectModal();
-  renderProjects();
+  const btn=document.querySelector('#projModal .btn.p');
+  btn.textContent='Saving…'; btn.disabled=true;
+  let ok;
+  if(id){ ok=await db.update('projects',id,data); }
+  else { ok=await db.insert('projects',data); }
+  btn.textContent='Save Project'; btn.disabled=false;
+  if(ok){ closeProjModal(); loadProjects(); }
+  else { alert('Save failed. Check console for details.'); }
 }
 
-async function deleteProject(id){if(confirm('Delete this project? This cannot be undone.')){await db.delete('projects',id);renderProjects();}}
-
-async function handleProjectImageUpload(input){
-  const file=input.files[0];if(!file)return;
-  const prev=document.getElementById('projImgPreview');
+async function uploadProjImg(input){
+  const file=input.files[0]; if(!file) return;
+  const status=document.getElementById('pmImgStatus');
+  const prev=document.getElementById('pmImgPreview');
+  // Show preview immediately
   const reader=new FileReader();
   reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
   reader.readAsDataURL(file);
-  const path='projects/'+Date.now()+'-'+file.name.replace(/\s/g,'-');
+  status.textContent='Uploading…';
+  const path=`projects/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g,'-')}`;
   const url=await db.uploadImage('site-images',path,file);
-  if(url)document.getElementById('proj-image_url').value=url;
-  else{const local=URL.createObjectURL(file);document.getElementById('proj-image_url').value=local;}
+  if(url){ document.getElementById('pm-image_url').value=url; status.textContent='✓ Uploaded'; }
+  else { status.textContent='⚠️ Upload failed — image URL from external source or paste URL below manually'; }
 }
 
-async function handleImageUpload(input,type){
-  const file=input.files[0];if(!file)return;
+async function delProject(id){if(confirm('Delete this project permanently?')){await db.delete('projects',id);loadProjects();}}
+
+// SERVICES
+async function loadServices(){
+  const s=await db.get('services','select=*&order=sort_order.asc');
+  const b=document.getElementById('svcBody');
+  if(!s.length){b.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--mu)">No services. Click + Add Service.</td></tr>';return;}
+  b.innerHTML=s.map(r=>`
+    <tr>
+      <td style="color:var(--mu);font-size:12px">${r.sort_order}</td>
+      <td style="font-weight:500">${r.name}</td>
+      <td style="font-size:12px;color:var(--mu);max-width:280px">${(r.description||'').slice(0,70)}${(r.description||'').length>70?'…':''}</td>
+      <td style="font-size:12px;color:var(--mu)">${r.icon||'default'}</td>
+      <td><span class="sp ${r.visible?'lv':'hd'}">${r.visible?'● Live':'● Hidden'}</span></td>
+      <td><div class="br">
+        <button class="btn" onclick='openSvcModal(${JSON.stringify(r).replace(/'/g,"\'")})'>Edit</button>
+        <button class="btn d" onclick="delService(${r.id})">Delete</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function openSvcModal(s){
+  document.getElementById('smTitle').textContent=s?'Edit Service':'Add Service';
+  document.getElementById('sm-id').value=s?.id||'';
+  document.getElementById('sm-name').value=s?.name||'';
+  document.getElementById('sm-description').value=s?.description||'';
+  document.getElementById('sm-icon').value=s?.icon||'default';
+  document.getElementById('sm-sort').value=s?.sort_order||1;
+  document.getElementById('sm-visible').checked=s?.visible!==false;
+  document.getElementById('svcModal').classList.add('open');
+}
+function closeSvcModal(){document.getElementById('svcModal').classList.remove('open');}
+
+async function saveService(){
+  const name=document.getElementById('sm-name').value.trim();
+  if(!name){alert('Service name is required!');return;}
+  const id=document.getElementById('sm-id').value;
+  const data={
+    name, description:document.getElementById('sm-description').value,
+    icon:document.getElementById('sm-icon').value,
+    sort_order:parseInt(document.getElementById('sm-sort').value)||1,
+    visible:document.getElementById('sm-visible').checked
+  };
+  const btn=document.querySelector('#svcModal .btn.p');
+  btn.textContent='Saving…'; btn.disabled=true;
+  let ok;
+  if(id){ ok=await db.update('services',id,data); }
+  else { ok=await db.insert('services',data); }
+  btn.textContent='Save Service'; btn.disabled=false;
+  if(ok){ closeSvcModal(); loadServices(); }
+  else { alert('Save failed! Please click "Test DB" in the top bar to check your Supabase connection.'); }
+}
+
+async function delService(id){if(confirm('Delete this service?')){await db.delete('services',id);loadServices();}}
+
+// IMAGE UPLOAD
+async function uploadImg(input,type){
+  const file=input.files[0]; if(!file) return;
+  const status=document.getElementById(type+'Status');
   const prev=document.getElementById(type+'Preview');
   const reader=new FileReader();
   reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
   reader.readAsDataURL(file);
-  const path=type+'/'+type+'-'+Date.now()+'.'+file.name.split('.').pop();
+  status.textContent='Uploading to Supabase…';
+  const path=`${type}/${type}-${Date.now()}.${file.name.split('.').pop()}`;
   const url=await db.uploadImage('site-images',path,file);
-  if(url){await db.upsert('site_content',{key:type+'_image',value:url},'key');}
+  if(url){
+    await db.upsertBatch('site_content',[{key:type+'_image',value:url}],'key');
+    status.textContent='✓ Uploaded and saved! Reload the website to see the change.';
+  } else {
+    status.textContent='⚠️ Upload failed. Place image file as images/'+type+'.jpg in GitHub manually.';
+  }
 }
 
 // SEO
-function updateSeoPreview(){
+function updateSEO(){
   const t=document.getElementById('c-seo_title')?.value||'';
   const d=document.getElementById('c-seo_description')?.value||'';
-  document.getElementById('seoPreviewTitle').textContent=t||'Husni Marikkar Architects | Residential Architecture & Interior Design London';
-  document.getElementById('seoPreviewDesc').textContent=d||'London-based architect offering bespoke home renovation…';
-  const tc=document.getElementById('title-count');const dc=document.getElementById('desc-count');
-  if(tc){tc.textContent=t.length+' characters';tc.className='char-count'+(t.length>60?' over':t.length>50?'':' warn');}
-  if(dc){dc.textContent=d.length+' characters';dc.className='char-count'+(d.length>160?' over':d.length>150?'':' warn');}
+  document.getElementById('seoT').textContent=t||'Husni Marikkar Architects';
+  document.getElementById('seoD').textContent=d||'London-based architect…';
+  const tc=document.getElementById('tc'); const dc=document.getElementById('dc');
+  if(tc){tc.textContent=t.length+' chars';tc.className='cc'+(t.length>60?' o':t.length>50?'':' w');}
+  if(dc){dc.textContent=d.length+' chars';dc.className='cc'+(d.length>160?' o':d.length>150?'':' w');}
 }
+
+// TEST DB
+async function testDB(){
+  const btn=document.getElementById('testBtn'); btn.textContent='Testing…';
+  const r=await db.get('site_content','select=key&limit=1');
+  if(r.length){
+    const w=await db.upsertBatch('site_content',[{key:'_ping',value:new Date().toISOString()}],'key');
+    if(w){btn.textContent='✅ DB OK';setTimeout(()=>btn.textContent='Test DB',3000);}
+    else{btn.textContent='⚠️ Read OK, Write FAIL';alert('Supabase write is blocked.\n\nPlease run fix_rls.sql in Supabase SQL Editor to fix permissions.');setTimeout(()=>btn.textContent='Test DB',4000);}
+  } else {
+    btn.textContent='❌ No Data';alert('Connected but no data. Run full_setup.sql in Supabase SQL Editor.');setTimeout(()=>btn.textContent='Test DB',4000);
+  }
+}
+
+// Close modals on overlay click
+document.getElementById('projModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeProjModal();});
+document.getElementById('svcModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSvcModal();});
 </script>
-
-<!-- SERVICE MODAL -->
-<div class="modal-overlay" id="serviceModal">
-  <div class="modal">
-    <h3 id="svcModalTitle">Add Service</h3>
-    <input type="hidden" id="svc-id"/>
-    <div class="field"><label>Service Name</label><input type="text" id="svc-name" placeholder="e.g. Home Renovation"/></div>
-    <div class="field"><label>Description</label><textarea id="svc-description" style="min-height:100px" placeholder="Describe what this service includes…"></textarea></div>
-    <div class="field"><label>Icon</label>
-      <select id="svc-icon">
-        <option value="home">🏠 Home (for Home Renovation)</option>
-        <option value="building">🏗️ Building (for New Build)</option>
-        <option value="screen">🖥️ Screen (for 3D BIM)</option>
-        <option value="grid">⊞ Grid (for Space Planning)</option>
-        <option value="interior">🪑 Interior (for Interior Design)</option>
-        <option value="document">📋 Document (for Planning)</option>
-        <option value="default">⭕ Default (circle)</option>
-      </select>
-    </div>
-    <div class="field"><label>Sort Order</label><input type="number" id="svc-sort" value="1" min="1"/></div>
-    <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:16px"><input type="checkbox" id="svc-visible" checked/> Visible on site</label>
-    <div class="modal-footer">
-      <button class="btn-sm" onclick="closeServiceModal()">Cancel</button>
-      <button class="btn-sm primary" onclick="saveService()">Save Service</button>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>

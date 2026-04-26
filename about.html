@@ -96,10 +96,33 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 .btn-ghost-white{padding:14px 32px;border:1px solid rgba(255,255,255,0.4);color:var(--white);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;display:inline-block}
 .btn-ghost-white:hover{background:rgba(255,255,255,0.1)}
 @media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.about-two-col{grid-template-columns:1fr}.about-sidebar{position:static}.about-hero,.about-content,.cta-strip{padding-left:24px;padding-right:24px}.values-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:16px;text-align:center}}
+
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;width:36px;height:36px;gap:5px;background:transparent;border:none;cursor:pointer}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--navy);transition:all .3s;transform-origin:center}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:var(--navy);z-index:99;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu-inner{display:flex;flex-direction:column;align-items:center;gap:32px}
+.mobile-menu-inner a{font-family:"Cormorant Garamond",serif;font-size:36px;color:rgba(255,255,255,.8);text-decoration:none;transition:color .2s}
+.mobile-menu-inner a:hover{color:var(--gold)}
+.mobile-enquire{font-family:"DM Sans",sans-serif!important;font-size:14px!important;letter-spacing:.15em;text-transform:uppercase;padding:14px 40px;border:1px solid rgba(255,255,255,.4);margin-top:8px}
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .nav-hamburger{display:flex}
+  .nav-links{display:none!important}
+  .nav-enquire{display:none}
+  .about-two-col{grid-template-columns:1fr!important}
+  .about-sidebar{position:static!important}
+  .about-hero,.about-content,.cta-strip{padding-left:24px!important;padding-right:24px!important}
+  .values-grid{grid-template-columns:1fr!important}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:32px 24px}
+}
 </style>
 </head>
 <body>
-<nav>
+<nav id="navbar" class="scrolled">
   <a href="index.html" class="nav-logo">Husni Marikkar <span>Architects</span></a>
   <ul class="nav-links">
     <li><a href="about.html" class="active">About</a></li>
@@ -107,8 +130,20 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
     <li><a href="services.html">Services</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="nav-enquire" onclick="location.href='contact.html'">Enquire</button>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="nav-enquire" onclick="location.href='contact.html'">Enquire</button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="about.html" onclick="closeMobileMenu()">About</a>
+    <a href="projects.html" onclick="closeMobileMenu()">Projects</a>
+    <a href="services.html" onclick="closeMobileMenu()">Services</a>
+    <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+    <a href="contact.html" class="mobile-enquire">Enquire</a>
+  </div>
+</div>
 
 <div class="about-hero">
   <div class="about-hero-dot"></div>
@@ -127,12 +162,12 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
   <div class="about-two-col">
     <div class="about-body reveal">
       <h2>My <em>story</em></h2>
-      <p>I grew up fascinated by the way buildings shape experience — how a well-considered room can make you feel calm, energised, or at home in a way you can't quite articulate. That curiosity led me to study Architecture at undergraduate level, and eventually to specialise in Project Management at the University of Westminster.</p>
-      <p>Over the past four years I've worked on a range of projects across Greater London and beyond — from full residential renovations to institutional extensions and major civic infrastructure. Each project has deepened my belief that the best architecture is invisible: it simply works, looks beautiful, and makes life better.</p>
-      <p>I work with homeowners who care about quality, who want their space to reflect who they are, and who want a single trusted professional managing the entire process — from first sketch to final snag.</p>
+      <p data-content="about_story_p1">I grew up fascinated by the way buildings shape experience — how a well-considered room can make you feel calm, energised, or at home in a way you can't quite articulate. That curiosity led me to study Architecture at undergraduate level, and eventually to specialise in Project Management at the University of Westminster.</p>
+      <p data-content="about_story_p2">Over the past four years I've worked on a range of projects across Greater London and beyond — from full residential renovations to institutional extensions and major civic infrastructure. Each project has deepened my belief that the best architecture is invisible: it simply works, looks beautiful, and makes life better.</p>
+      <p data-content="about_story_p3">I work with homeowners who care about quality, who want their space to reflect who they are, and who want a single trusted professional managing the entire process — from first sketch to final snag.</p>
       <h2>How I <em>work</em></h2>
-      <p>Every project begins with listening. Before I pick up a pen or open Revit, I want to understand how you actually use your home. Architecture that doesn't respond to those realities is just decoration.</p>
-      <p>I use BIM software (Revit + 3D visualisation) throughout the process so you can see exactly what you're getting before anything is built. I keep my practice deliberately small — I take a limited number of projects at a time so every client receives my full attention.</p>
+      <p data-content="about_work_p1">Every project begins with listening. Before I pick up a pen or open Revit, I want to understand how you actually use your home. Architecture that doesn't respond to those realities is just decoration.</p>
+      <p data-content="about_work_p2">I use BIM software (Revit + 3D visualisation) throughout the process so you can see exactly what you're getting before anything is built. I keep my practice deliberately small — I take a limited number of projects at a time so every client receives my full attention.</p>
       <h2>Timeline</h2>
       <div>
         <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-content"><h3>MSc Project Management — University of Westminster</h3><p>Currently completing Masters programme specialising in construction project delivery.</p></div></div>
@@ -165,7 +200,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 </div>
 
 <div class="cta-strip">
-  <h2>Ready to reimagine<br>your <em>home?</em></h2>
+  <h2><span data-content="cta_heading1">Ready to reimagine</span><br>your <em data-content="cta_heading2">home?</em></h2>
   <p>Initial consultations are always free and completely unhurried.</p>
   <div class="cta-btns">
     <a href="contact.html" class="btn-gold-solid">Start a Conversation</a>
@@ -187,6 +222,17 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 loadSiteContent();
+
+function toggleMobileMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('mobileMenu').classList.contains('open')?'hidden':'';
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
 </script>
 </body>
 </html>
