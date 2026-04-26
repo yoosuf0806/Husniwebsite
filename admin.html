@@ -181,6 +181,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="6" height="10"/><rect x="9" y="3" width="6" height="10"/></svg>
         Projects
       </div>
+      <div class="nav-item" onclick="showPanel('services',this)">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l2 4h4l-3 3 1 4-4-2.5L4 12l1-4-3-3h4z"/></svg>
+        Services
+      </div>
       <div class="nav-item" onclick="showPanel('images',this)">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><circle cx="5" cy="6" r="1.5"/><path d="M1 11l4-4 3 3 2-2 5 5"/></svg>
         Images
@@ -320,6 +324,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min
         </div>
       </div>
 
+
+      <!-- SERVICES -->
+      <div class="panel" id="panel-services">
+        <div class="admin-card">
+          <div class="card-header"><h3>Services — What I Offer</h3><button class="btn-sm primary" onclick="openServiceModal(null)">+ Add Service</button></div>
+          <div class="card-body" style="padding:0">
+            <table class="projects-table">
+              <thead><tr><th style="width:40px">#</th><th>Service Name</th><th>Description</th><th>Icon</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="servicesTableBody"><tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
       <!-- IMAGES -->
       <div class="panel" id="panel-images">
         <div class="admin-card">
@@ -491,6 +508,7 @@ function showPanel(name, el){
   if(name==='enquiries')renderEnquiries();
   if(name==='dashboard')renderDashboard();
   if(name==='projects')renderProjects();
+  if(name==='services')renderServices();
 }
 
 // SAVE
@@ -534,6 +552,7 @@ async function initAdmin(){
   await loadVisibility();
   await renderDashboard();
   await renderProjects();
+  await renderServices();
 }
 
 async function loadContentFields(){
@@ -736,5 +755,33 @@ function updateSeoPreview(){
   if(dc){dc.textContent=d.length+' characters';dc.className='char-count'+(d.length>160?' over':d.length>150?'':' warn');}
 }
 </script>
+
+<!-- SERVICE MODAL -->
+<div class="modal-overlay" id="serviceModal">
+  <div class="modal">
+    <h3 id="svcModalTitle">Add Service</h3>
+    <input type="hidden" id="svc-id"/>
+    <div class="field"><label>Service Name</label><input type="text" id="svc-name" placeholder="e.g. Home Renovation"/></div>
+    <div class="field"><label>Description</label><textarea id="svc-description" style="min-height:100px" placeholder="Describe what this service includes…"></textarea></div>
+    <div class="field"><label>Icon</label>
+      <select id="svc-icon">
+        <option value="home">🏠 Home (for Home Renovation)</option>
+        <option value="building">🏗️ Building (for New Build)</option>
+        <option value="screen">🖥️ Screen (for 3D BIM)</option>
+        <option value="grid">⊞ Grid (for Space Planning)</option>
+        <option value="interior">🪑 Interior (for Interior Design)</option>
+        <option value="document">📋 Document (for Planning)</option>
+        <option value="default">⭕ Default (circle)</option>
+      </select>
+    </div>
+    <div class="field"><label>Sort Order</label><input type="number" id="svc-sort" value="1" min="1"/></div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:16px"><input type="checkbox" id="svc-visible" checked/> Visible on site</label>
+    <div class="modal-footer">
+      <button class="btn-sm" onclick="closeServiceModal()">Cancel</button>
+      <button class="btn-sm primary" onclick="saveService()">Save Service</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
