@@ -4,48 +4,75 @@
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Contact | Husni Marikkar Architects</title>
 <meta name="description" content="Get in touch with Husni Marikkar Architects. Free initial consultation for home renovation, new builds and interior design in London."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="shared.css"/>
 <style>
-.contact-page{background:var(--navy);min-height:100vh;padding:140px 48px 80px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1B2A4A;--gold:#C9A96E;--white:#FFFFFF;--offwhite:#FAFAF8;--muted:#6B6B6B;--border:#E8E8E4;}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(27,42,74,0.95);backdrop-filter:blur(12px);box-shadow:0 1px 24px rgba(0,0,0,0.2)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--white);text-decoration:none;white-space:nowrap}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;flex-direction:row;gap:36px;list-style:none;align-items:center;margin:0;padding:0}
+.nav-links li{display:inline-block}
+.nav-links a{font-size:12px;color:rgba(255,255,255,0.7);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-enquire{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 22px;border:1px solid rgba(255,255,255,0.4);color:var(--white);background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s}
+.nav-enquire:hover{background:rgba(255,255,255,0.1)}
+.eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--white)}
+.footer-logo span{color:var(--gold)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none}
+.footer-links a:hover{color:var(--gold)}
+.wa-btn{position:fixed;bottom:32px;right:32px;z-index:200;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);text-decoration:none;transition:transform 0.2s}
+.wa-btn:hover{transform:scale(1.08)}
+/* PAGE */
+.contact-page{min-height:100vh;padding:140px 48px 80px}
 .contact-page-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.contact-page-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,64px);font-weight:400;color:var(--white);line-height:1.08;margin-bottom:20px}
+.contact-page-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:400;color:var(--white);line-height:1.08;margin-bottom:16px}
 .contact-page-left h1 em{font-style:italic;color:var(--gold)}
-.contact-page-left .intro{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.55);margin-bottom:48px;max-width:420px}
-.contact-details-list{display:flex;flex-direction:column}
-.contact-detail-row{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.contact-page-left .intro{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.55);margin-bottom:40px;max-width:420px}
+.contact-detail-row{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.08)}
 .contact-detail-row:first-child{border-top:1px solid rgba(255,255,255,0.08)}
-.cd-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:2px}
-.cd-value{font-size:14px;color:rgba(255,255,255,0.85);text-align:right}
+.cd-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+.cd-value{font-size:14px;color:rgba(255,255,255,0.85)}
 .cd-value a{color:var(--gold);text-decoration:none}
-.social-row{display:flex;gap:16px;margin-top:40px}
-.social-btn{padding:10px 20px;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.social-row{display:flex;gap:12px;margin-top:32px}
+.social-btn{padding:10px 20px;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;font-family:'DM Sans',sans-serif}
 .social-btn:hover{border-color:var(--gold);color:var(--gold)}
 .contact-form-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:40px}
-.contact-form-card h2{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);font-weight:400;margin-bottom:8px}
-.contact-form-card .sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:32px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-input,.form-select,.form-textarea{width:100%;padding:14px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
+.contact-form-card h2{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--white);font-weight:400;margin-bottom:6px}
+.contact-form-card .sub{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:28px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-input,.form-select,.form-textarea{width:100%;padding:13px 15px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s}
 .form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.3)}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold)}
 .form-select{color:rgba(255,255,255,0.6);cursor:pointer}
-.form-select option{background:#1B2A4A;color:var(--white)}
+.form-select option{background:var(--navy);color:var(--white)}
 .form-textarea{resize:vertical;min-height:130px}
 .btn-gold{padding:16px 32px;background:var(--gold);color:var(--navy);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-weight:500;width:100%;transition:opacity 0.25s}
 .btn-gold:hover{opacity:0.88}
-.form-success{display:none;margin-top:16px;padding:16px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.4);color:var(--gold);font-size:14px;text-align:center}
-.notice{font-size:12px;color:rgba(255,255,255,0.3);text-align:center;margin-top:16px}
-.map-section{max-width:1200px;margin:60px auto 0;padding:0 48px}
-.map-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.map-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);font-weight:400}
-.map-box p{font-size:14px;color:rgba(255,255,255,0.5);margin-top:6px}
-.map-pill{background:var(--gold);color:var(--navy);padding:10px 24px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;font-weight:500}
-@media(max-width:900px){.contact-page{padding:120px 24px 60px}.contact-page-inner{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.map-section{padding:0 24px}}
+.form-success{display:none;margin-top:12px;padding:14px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.4);color:var(--gold);font-size:14px;text-align:center}
+.notice{font-size:11px;color:rgba(255,255,255,0.25);text-align:center;margin-top:12px}
+.map-strip{max-width:1200px;margin:40px auto 0;padding:0 48px}
+.map-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.map-box h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);font-weight:400}
+.map-box p{font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px}
+.map-pill{background:var(--gold);color:var(--navy);padding:10px 24px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;font-weight:500;transition:opacity 0.2s}
+.map-pill:hover{opacity:0.88}
+@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.contact-page{padding-left:24px;padding-right:24px}.contact-page-inner{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.map-strip{padding:0 24px}footer{flex-direction:column;gap:16px;text-align:center}}
 </style>
 </head>
 <body>
-<nav id="navbar" class="scrolled">
+<nav>
   <a href="index.html" class="nav-logo">Husni Marikkar <span>Architects</span></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -53,16 +80,16 @@
     <li><a href="services.html">Services</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
-  <button class="nav-enquire" style="border-color:rgba(255,255,255,0.4);color:var(--white)" onclick="document.getElementById('cf-name').focus()">Enquire</button>
+  <button class="nav-enquire">Enquire</button>
 </nav>
 
 <div class="contact-page">
   <div class="contact-page-inner">
     <div class="contact-page-left reveal">
-      <p class="eyebrow">Get in Touch</p>
+      <span class="eyebrow">Get in Touch</span>
       <h1>Let's create something <em>exceptional</em> together.</h1>
       <p class="intro">Initial consultations are always free and completely unhurried. Tell me a little about what you're trying to achieve and we'll take it from there.</p>
-      <div class="contact-details-list">
+      <div>
         <div class="contact-detail-row"><div class="cd-label">Email</div><div class="cd-value"><a href="mailto:husni@husnimarikkar.co.uk">husni@husnimarikkar.co.uk</a></div></div>
         <div class="contact-detail-row"><div class="cd-label">Mobile</div><div class="cd-value">+44 7466 554153</div></div>
         <div class="contact-detail-row"><div class="cd-label">WhatsApp</div><div class="cd-value"><a href="https://wa.me/447466554153" target="_blank">+44 7466 554153</a></div></div>
@@ -78,26 +105,22 @@
     <div class="contact-form-card reveal">
       <h2>Send an Enquiry</h2>
       <p class="sub">I respond to all enquiries within 24 hours.</p>
-      <form id="contactPageForm" style="display:flex;flex-direction:column;gap:16px">
+      <form class="contact-form" id="contactPageForm">
         <div class="form-row">
           <input class="form-input" id="cpf-name" type="text" placeholder="Full Name" required/>
           <input class="form-input" id="cpf-email" type="email" placeholder="Email Address" required/>
         </div>
         <input class="form-input" id="cpf-phone" type="tel" placeholder="Phone Number (optional)"/>
-        <select class="form-select" id="cpf-type">
-          <option value="" disabled selected>Project Type</option>
-          <option>Home Renovation</option><option>New Build Design</option><option>Interior Design</option>
-          <option>Space Planning</option><option>3D BIM Visualisation</option><option>Planning &amp; Approvals</option><option>Other</option>
-        </select>
+        <select class="form-select" id="cpf-type"><option value="" disabled selected>Project Type</option><option>Home Renovation</option><option>New Build Design</option><option>Interior Design</option><option>Space Planning</option><option>3D BIM Visualisation</option><option>Planning &amp; Approvals</option><option>Other</option></select>
         <input class="form-input" id="cpf-budget" type="text" placeholder="Approximate Budget (optional)"/>
         <textarea class="form-textarea" id="cpf-msg" placeholder="Tell me about your project — location, what you're trying to achieve, any constraints…" required></textarea>
         <button type="submit" class="btn-gold">Send Enquiry →</button>
         <div class="form-success" id="cpfSuccess">✓ Thank you! I'll be in touch within 24 hours.</div>
-        <p class="notice">Your details are stored securely and never shared with third parties.</p>
+        <p class="notice">Your details are stored securely and never shared.</p>
       </form>
     </div>
   </div>
-  <div class="map-section reveal">
+  <div class="map-strip reveal">
     <div class="map-box">
       <div><h3>London &amp; Home Counties</h3><p>Based in London · Available across Greater London, Surrey, Kent, Essex and beyond</p></div>
       <a href="https://maps.google.com/?q=London,UK" target="_blank" class="map-pill">View on Map →</a>
@@ -105,29 +128,24 @@
   </div>
 </div>
 
-<footer style="margin-top:0">
+<footer>
   <div class="footer-logo">Husni Marikkar <span>Architects</span></div>
   <div class="footer-copy">© 2025 Husni Marikkar Architects. All rights reserved.</div>
   <div class="footer-links"><a href="#">LinkedIn</a><a href="#">Behance</a><a href="#">Privacy</a></div>
 </footer>
-<a class="wa-btn visible" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
-  <div class="wa-tooltip">Let's talk</div>
+<a class="wa-btn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#1B2A4A"/></svg>
 </a>
-<script src="shared.js"></script>
 <script>
-const observer=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');observer.unobserve(x.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const STORAGE_KEY='husni_site_data';
 document.getElementById('contactPageForm').addEventListener('submit',function(e){
   e.preventDefault();
   const name=document.getElementById('cpf-name').value;
   const email=document.getElementById('cpf-email').value;
-  const phone=document.getElementById('cpf-phone').value;
-  const type=document.getElementById('cpf-type').value;
-  const budget=document.getElementById('cpf-budget').value;
-  const msg=document.getElementById('cpf-msg').value;
-  if(!name||!email||!msg)return;
-  HusniSite.saveEnquiry({name,email,phone,projectType:type,budget,message:msg,source:'contact-page'});
+  if(!name||!email)return;
+  try{const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');if(!data.enquiries)data.enquiries=[];data.enquiries.unshift({id:Date.now(),date:new Date().toISOString(),name,email,phone:document.getElementById('cpf-phone').value,projectType:document.getElementById('cpf-type').value,budget:document.getElementById('cpf-budget').value,message:document.getElementById('cpf-msg').value,read:false,source:'contact-page'});localStorage.setItem(STORAGE_KEY,JSON.stringify(data));}catch(err){}
   document.getElementById('cpfSuccess').style.display='block';
   this.reset();
   setTimeout(()=>document.getElementById('cpfSuccess').style.display='none',6000);
