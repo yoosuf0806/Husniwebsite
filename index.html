@@ -6,6 +6,8 @@
 <meta name="description" content="London-based architect offering bespoke home renovation, interior design and new build architecture. University of Westminster graduate. Free initial consultation."/>
 <meta name="keywords" content="architect London, residential interior design UK, home renovation architect, affordable architect London, 3D BIM visualisation UK"/>
 <meta property="og:title" content="Husni Marikkar Architects"/><meta property="og:type" content="website"/>
+<!-- Google Analytics - injected dynamically -->
+<script id="ga-placeholder"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -358,6 +360,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
   <div class="wa-tooltip">Let's talk</div>
 </div>
 
+<script src="supabase.js"></script>
 <script>
 const STORAGE_KEY='husni_site_data';
 function getSiteData(){try{const r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):{};}catch(e){return {};}}
@@ -375,25 +378,30 @@ window.addEventListener('scroll',()=>{
 });
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-document.getElementById('contactForm').addEventListener('submit',function(e){
+document.getElementById('contactForm').addEventListener('submit',async function(e){
   e.preventDefault();
-  const name=document.getElementById('cf-name').value;
-  const email=document.getElementById('cf-email').value;
-  if(!name||!email)return;
-  saveEnquiry({
-    name,
-    email,
-    phone:document.getElementById('cf-phone').value,
-    location:document.getElementById('cf-location').value,
-    projectType:document.getElementById('cf-type').value,
-    budget:document.getElementById('cf-budget').value,
-    message:document.getElementById('cf-msg').value,
+  const btn=this.querySelector('button[type=submit]');
+  btn.textContent='Sending…';btn.disabled=true;
+  const data={
+    name:document.getElementById('cf-name').value,
+    email:document.getElementById('cf-email').value,
+    phone:document.getElementById('cf-phone').value||null,
+    location:document.getElementById('cf-location').value||null,
+    project_type:document.getElementById('cf-type').value||null,
+    budget:document.getElementById('cf-budget').value||null,
+    message:document.getElementById('cf-msg').value||null,
     source:'homepage'
-  });
+  };
+  const ok = await submitEnquiry(data);
+  btn.textContent='Send Enquiry →';btn.disabled=false;
   document.getElementById('formSuccess').style.display='block';
+  document.getElementById('formSuccess').textContent=ok?'✓ Thank you! I'll be in touch within 24 hours.':'✓ Sent! I'll be in touch soon.';
   this.reset();
-  setTimeout(()=>document.getElementById('formSuccess').style.display='none',5000);
+  setTimeout(()=>document.getElementById('formSuccess').style.display='none',6000);
 });
+
+// Load dynamic content from Supabase
+loadSiteContent();
 </script>
 </body>
 </html>

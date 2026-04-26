@@ -4,6 +4,24 @@
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Services | Husni Marikkar Architects</title>
 <meta name="description" content="Architectural and interior design services for London homeowners — home renovation, new builds, 3D BIM visualisation, interior design and planning approvals."/>
+<!-- Google Analytics -->
+<script id="ga-placeholder"></script>
+<script>
+(async()=>{
+  try{
+    const rows=await db.get('site_content','select=key,value&key=in.(ga_tracking_id)');
+    const ga=rows.find(r=>r.key==='ga_tracking_id');
+    if(ga&&ga.value&&ga.value.startsWith('G-')){
+      const s=document.createElement('script');
+      s.src='https://www.googletagmanager.com/gtag/js?id='+ga.value;
+      s.async=true;document.head.appendChild(s);
+      window.dataLayer=window.dataLayer||[];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js',new Date());gtag('config',ga.value);
+    }
+  }catch(e){}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -149,9 +167,11 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 <a class="wa-btn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#1B2A4A"/></svg>
 </a>
+<script src="supabase.js"></script>
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+loadSiteContent();
 </script>
 </body>
 </html>

@@ -4,121 +4,136 @@
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Admin — Husni Marikkar Architects</title>
 <meta name="robots" content="noindex,nofollow"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#1B2A4A;--gold:#C9A96E;--white:#fff;--offwhite:#FAFAF8;--muted:#6B6B6B;--border:#E8E8E4;--sidebar:220px;--green:#22c55e;--red:#ef4444;}
-body{font-family:'DM Sans',sans-serif;background:#F4F5F7;color:var(--navy);min-height:100vh}
-
+:root{--navy:#1B2A4A;--gold:#C9A96E;--white:#fff;--offwhite:#FAFAF8;--muted:#6B6B6B;--border:#E8E8E4;--sidebar:240px;--green:#22c55e;--red:#ef4444;--bg:#F4F5F7}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh}
 /* LOGIN */
 #loginScreen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:999}
-.login-box{background:var(--white);padding:48px 40px;width:360px;text-align:center}
-.login-logo{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);margin-bottom:8px}
+.login-box{background:var(--white);padding:48px 40px;width:380px;text-align:center}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:6px}
 .login-logo span{color:var(--gold)}
-.login-sub{font-size:12px;color:var(--muted);margin-bottom:32px;letter-spacing:0.05em}
-.login-input{width:100%;padding:12px 16px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;margin-bottom:12px;transition:border-color 0.2s}
+.login-sub{font-size:12px;color:var(--muted);margin-bottom:32px;letter-spacing:0.05em;text-transform:uppercase}
+.login-input{width:100%;padding:13px 16px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;margin-bottom:12px;transition:border-color 0.2s}
 .login-input:focus{border-color:var(--navy)}
-.login-btn{width:100%;padding:14px;background:var(--navy);color:var(--white);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;margin-top:4px}
+.login-btn{width:100%;padding:14px;background:var(--navy);color:var(--white);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;margin-top:4px}
 .login-btn:hover{opacity:0.88}
-.login-error{font-size:12px;color:var(--red);margin-top:8px;display:none}
-
+.login-error{font-size:12px;color:var(--red);margin-top:10px;display:none}
 /* LAYOUT */
-#adminApp{display:none;min-height:100vh}
-.admin-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--navy);display:flex;flex-direction:column;z-index:50}
+#adminApp{display:none}
+.admin-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--navy);display:flex;flex-direction:column;z-index:50;overflow-y:auto}
 .sidebar-brand{padding:24px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.sidebar-brand .logo{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--white)}
+.sidebar-brand .logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--white)}
 .sidebar-brand .logo span{color:var(--gold)}
 .sidebar-brand .sub{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
-.sidebar-nav{flex:1;padding:20px 0}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;transition:all 0.2s;border-left:2px solid transparent}
+.sidebar-nav{flex:1;padding:16px 0}
+.nav-section{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:12px 20px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;transition:all 0.2s;border-left:2px solid transparent}
 .nav-item:hover{color:var(--white);background:rgba(255,255,255,0.05)}
 .nav-item.active{color:var(--white);background:rgba(255,255,255,0.08);border-left-color:var(--gold)}
-.nav-item svg{width:16px;height:16px;flex-shrink:0}
-.sidebar-footer{padding:20px;border-top:1px solid rgba(255,255,255,0.08)}
-.logout-btn{width:100%;padding:10px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.nav-item svg{width:15px;height:15px;flex-shrink:0}
+.badge-count{margin-left:auto;background:var(--gold);color:var(--navy);font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500}
+.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+.logout-btn{width:100%;padding:10px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif}
 .logout-btn:hover{border-color:rgba(255,255,255,0.5);color:var(--white)}
 .admin-main{margin-left:var(--sidebar);min-height:100vh}
 .admin-topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:40}
-.topbar-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);font-weight:400}
-.topbar-right{display:flex;align-items:center;gap:16px}
-.save-btn{padding:10px 24px;background:var(--navy);color:var(--white);border:none;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s}
+.topbar-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);font-weight:400}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.save-btn{padding:10px 24px;background:var(--navy);color:var(--white);border:none;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
 .save-btn:hover{opacity:0.85}
 .save-btn.saved{background:var(--green)}
-.view-site-btn{padding:10px 20px;border:1px solid var(--border);background:transparent;color:var(--navy);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.view-site{padding:10px 20px;border:1px solid var(--border);background:transparent;color:var(--navy);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
 .admin-content{padding:32px}
-
 /* PANELS */
 .panel{display:none}
 .panel.active{display:block}
-
 /* CARDS */
 .admin-card{background:var(--white);border:1px solid var(--border);margin-bottom:24px}
-.admin-card-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.admin-card-header h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--navy)}
-.admin-card-body{padding:24px}
-
-/* STATS ROW */
+.card-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-header h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--navy)}
+.card-body{padding:24px}
+/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
 .stat-box{background:var(--white);border:1px solid var(--border);padding:20px 24px}
-.stat-box .label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.stat-box .value{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--navy);font-weight:400}
-.stat-box .delta{font-size:11px;color:var(--green);margin-top:4px}
-
-/* SECTION TOGGLES */
-.section-toggles{display:flex;flex-direction:column;gap:0}
-.section-toggle-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)}
-.section-toggle-row:last-child{border-bottom:none}
-.stl{display:flex;flex-direction:column;gap:3px}
-.stl-name{font-size:14px;font-weight:500;color:var(--navy)}
-.stl-desc{font-size:12px;color:var(--muted)}
-.toggle{position:relative;display:inline-block;width:44px;height:24px}
+.stat-box .lb{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-box .vl{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--navy);font-weight:400}
+.stat-box .dl{font-size:11px;color:var(--green);margin-top:4px}
+/* FORM FIELDS */
+.field{margin-bottom:20px}
+.field label{display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.field input,.field textarea,.field select{width:100%;padding:11px 14px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 0.2s;background:var(--white)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--navy)}
+.field textarea{resize:vertical;min-height:80px}
+.field-hint{font-size:11px;color:var(--muted);margin-top:4px}
+.char-count{font-size:11px;text-align:right;margin-top:4px;color:var(--muted)}
+.char-count.warn{color:orange}.char-count.over{color:var(--red)}
+/* TOGGLES */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+.toggle-row:last-child{border-bottom:none}
+.toggle-info h4{font-size:14px;font-weight:500;color:var(--navy)}
+.toggle-info p{font-size:12px;color:var(--muted);margin-top:2px}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0}
 .toggle input{opacity:0;width:0;height:0}
-.toggle-slider{position:absolute;cursor:pointer;inset:0;background:#D1D5DB;transition:0.3s;border-radius:24px}
-.toggle-slider::before{position:absolute;content:'';height:18px;width:18px;left:3px;bottom:3px;background:white;transition:0.3s;border-radius:50%}
-.toggle input:checked+.toggle-slider{background:var(--navy)}
-.toggle input:checked+.toggle-slider::before{transform:translateX(20px)}
-
-/* CONTENT EDITOR */
-.content-field{margin-bottom:20px}
-.content-field label{display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.content-input{width:100%;padding:12px 14px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 0.2s;background:var(--white)}
-.content-input:focus{border-color:var(--navy)}
-.content-textarea{width:100%;padding:12px 14px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 0.2s;resize:vertical;min-height:80px;background:var(--white)}
-.content-textarea:focus{border-color:var(--navy)}
-
-/* SEO */
-.seo-preview{background:var(--offwhite);padding:20px;border:1px solid var(--border);margin-top:16px;margin-bottom:24px}
-.seo-preview-url{font-size:12px;color:var(--green);margin-bottom:4px}
-.seo-preview-title{font-size:17px;color:#1a0dab;margin-bottom:4px;font-weight:400}
-.seo-preview-desc{font-size:13px;color:#545454;line-height:1.5}
-.char-count{font-size:11px;text-align:right;margin-top:4px}
-.char-count.warn{color:orange}
-.char-count.over{color:var(--red)}
-
+.toggle-sl{position:absolute;cursor:pointer;inset:0;background:#D1D5DB;transition:0.3s;border-radius:24px}
+.toggle-sl::before{position:absolute;content:'';height:18px;width:18px;left:3px;bottom:3px;background:white;transition:0.3s;border-radius:50%}
+.toggle input:checked+.toggle-sl{background:var(--navy)}
+.toggle input:checked+.toggle-sl::before{transform:translateX(20px)}
+/* CONTENT GRID */
+.content-section{margin-bottom:32px}
+.content-section h4{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--navy);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+/* PROJECTS */
+.projects-table{width:100%;border-collapse:collapse}
+.projects-table th{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:2px solid var(--border)}
+.projects-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+.proj-thumb{width:60px;height:45px;object-fit:cover;background:var(--border)}
+.proj-thumb-placeholder{width:60px;height:45px;background:var(--offwhite);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted)}
+.btn-sm{padding:6px 14px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);background:transparent;color:var(--navy);transition:all 0.2s}
+.btn-sm:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.btn-sm.danger{border-color:var(--red);color:var(--red)}
+.btn-sm.danger:hover{background:var(--red);color:var(--white)}
+.btn-sm.primary{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.btn-sm.gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
 /* ENQUIRIES */
-.enquiry-list{display:flex;flex-direction:column;gap:0}
-.enquiry-item{padding:20px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:start;cursor:pointer;transition:background 0.15s}
-.enquiry-item:hover{background:var(--offwhite)}
-.enquiry-item.unread .enq-name::after{content:'NEW';font-size:9px;letter-spacing:0.1em;background:var(--gold);color:var(--navy);padding:2px 6px;margin-left:8px;font-weight:500}
+.enq-list{display:flex;flex-direction:column}
+.enq-item{display:flex;gap:14px;align-items:start;padding:16px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s}
+.enq-item:hover{background:var(--offwhite);margin:0 -24px;padding:16px 24px}
 .enq-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:13px;font-weight:500;flex-shrink:0}
 .enq-name{font-size:14px;font-weight:500;color:var(--navy)}
+.enq-name .new-tag{font-size:9px;letter-spacing:0.1em;background:var(--gold);color:var(--navy);padding:2px 6px;margin-left:8px}
 .enq-meta{font-size:12px;color:var(--muted);margin-top:2px}
-.enq-msg{font-size:13px;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.enq-date{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap;flex-shrink:0}
-.enq-empty{padding:48px;text-align:center;color:var(--muted);font-size:14px}
-.enq-detail{display:none;padding:24px;background:var(--offwhite);border:1px solid var(--border);margin-top:16px}
-.enq-detail h4{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);margin-bottom:16px}
-.enq-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.enq-preview{font-size:13px;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.enq-date{font-size:11px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.enq-detail{display:none;margin-top:12px;padding:20px;background:var(--offwhite);border:1px solid var(--border)}
+.enq-detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
 .enq-field label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
-.enq-field span{font-size:14px;color:var(--navy)}
-.enq-full-msg{background:var(--white);padding:16px;border:1px solid var(--border);font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px}
-.enq-actions{display:flex;gap:10px}
-.enq-btn{padding:8px 20px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);background:transparent;color:var(--navy);transition:all 0.2s}
-.enq-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
-.enq-btn.danger{border-color:var(--red);color:var(--red)}
-.enq-btn.danger:hover{background:var(--red);color:var(--white)}
-.badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:10px;font-weight:500;margin-left:6px}
+.enq-field span{font-size:13px;color:var(--navy)}
+.enq-full-msg{background:var(--white);padding:14px;border:1px solid var(--border);font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+/* SEO */
+.seo-preview{background:var(--offwhite);padding:20px;border:1px solid var(--border);margin-bottom:24px}
+.seo-preview-url{font-size:12px;color:#006621;margin-bottom:4px}
+.seo-preview-title{font-size:18px;color:#1a0dab;margin-bottom:4px}
+.seo-preview-desc{font-size:13px;color:#545454;line-height:1.5}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);width:700px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:32px}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:24px;font-weight:400}
+.modal-footer{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)}
+/* IMAGE UPLOAD */
+.img-upload-area{border:2px dashed var(--border);padding:32px;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative}
+.img-upload-area:hover{border-color:var(--navy)}
+.img-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-preview{width:100%;max-height:200px;object-fit:cover;margin-top:12px;display:none}
+/* STATUS */
+.status-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px}
+.status-pill.live{background:#dcfce7;color:#166534}
+.status-pill.hidden{background:#fee2e2;color:#991b1b}
 </style>
 </head>
 <body>
@@ -128,40 +143,56 @@ body{font-family:'DM Sans',sans-serif;background:#F4F5F7;color:var(--navy);min-h
   <div class="login-box">
     <div class="login-logo">Husni Marikkar <span>Architects</span></div>
     <div class="login-sub">Admin Dashboard</div>
-    <input class="login-input" id="loginUser" type="text" placeholder="Username" autocomplete="username"/>
-    <input class="login-input" id="loginPass" type="password" placeholder="Password" autocomplete="current-password"/>
+    <input class="login-input" id="lu" type="text" placeholder="Username" autocomplete="username"/>
+    <input class="login-input" id="lp" type="password" placeholder="Password" autocomplete="current-password"/>
     <button class="login-btn" onclick="doLogin()">Sign In</button>
-    <div class="login-error" id="loginError">Invalid username or password</div>
+    <div class="login-error" id="loginErr">Invalid credentials</div>
   </div>
 </div>
 
-<!-- ADMIN APP -->
+<!-- APP -->
 <div id="adminApp">
   <div class="admin-sidebar">
     <div class="sidebar-brand">
       <div class="logo">Husni Marikkar <span>Architects</span></div>
-      <div class="sub">Admin Panel</div>
+      <div class="sub">Content Management</div>
     </div>
     <nav class="sidebar-nav">
+      <div class="nav-section">Overview</div>
       <div class="nav-item active" onclick="showPanel('dashboard',this)">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
         Dashboard
       </div>
-      <div class="nav-item" onclick="showPanel('sections',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      <div class="nav-item" onclick="showPanel('enquiries',this)" id="navEnq">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 11a1 1 0 0 1-1 1H4l-3 3V3a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1z"/></svg>
+        Enquiries
+        <span class="badge-count" id="unreadBadge" style="display:none">0</span>
+      </div>
+      <div class="nav-section">Website</div>
+      <div class="nav-item" onclick="showPanel('visibility',this)">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>
         Section Visibility
       </div>
       <div class="nav-item" onclick="showPanel('content',this)">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h12v12H2z"/><path d="M5 6h6M5 9h4"/></svg>
-        Content Editor
+        Page Content
       </div>
+      <div class="nav-item" onclick="showPanel('projects',this)">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="6" height="10"/><rect x="9" y="3" width="6" height="10"/></svg>
+        Projects
+      </div>
+      <div class="nav-item" onclick="showPanel('images',this)">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><circle cx="5" cy="6" r="1.5"/><path d="M1 11l4-4 3 3 2-2 5 5"/></svg>
+        Images
+      </div>
+      <div class="nav-section">Settings</div>
       <div class="nav-item" onclick="showPanel('seo',this)">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M14 14l-3-3"/></svg>
-        SEO Settings
+        SEO & Analytics
       </div>
-      <div class="nav-item" onclick="showPanel('enquiries',this)" id="navEnquiries">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 11a1 1 0 0 1-1 1H4l-3 3V3a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1z"/></svg>
-        Enquiries <span class="badge" id="unreadBadge" style="display:none"></span>
+      <div class="nav-item" onclick="showPanel('contact_info',this)">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10.5a1 1 0 0 1-1 1h-1l-3 3-3-3H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1z"/></svg>
+        Contact Details
       </div>
     </nav>
     <div class="sidebar-footer">
@@ -173,8 +204,8 @@ body{font-family:'DM Sans',sans-serif;background:#F4F5F7;color:var(--navy);min-h
     <div class="admin-topbar">
       <div class="topbar-title" id="panelTitle">Dashboard</div>
       <div class="topbar-right">
-        <a href="index.html" target="_blank" class="view-site-btn">View Site ↗</a>
-        <button class="save-btn" id="saveBtn" onclick="saveAll()">Save Changes</button>
+        <a href="index.html" target="_blank" class="view-site">View Site ↗</a>
+        <button class="save-btn" id="saveBtn" onclick="saveCurrentPanel()">Save Changes</button>
       </div>
     </div>
 
@@ -183,105 +214,22 @@ body{font-family:'DM Sans',sans-serif;background:#F4F5F7;color:var(--navy);min-h
       <!-- DASHBOARD -->
       <div class="panel active" id="panel-dashboard">
         <div class="stats-row">
-          <div class="stat-box"><div class="label">Total Enquiries</div><div class="value" id="stat-total">0</div><div class="delta">All time</div></div>
-          <div class="stat-box"><div class="label">Unread</div><div class="value" id="stat-unread">0</div><div class="delta" style="color:var(--gold)">Needs attention</div></div>
-          <div class="stat-box"><div class="label">Sections Visible</div><div class="value" id="stat-sections">4</div><div class="delta">of 4 total</div></div>
-          <div class="stat-box"><div class="label">Last Enquiry</div><div class="value" id="stat-last" style="font-size:18px;margin-top:6px">—</div></div>
+          <div class="stat-box"><div class="lb">Total Enquiries</div><div class="vl" id="st-total">—</div><div class="dl">All time</div></div>
+          <div class="stat-box"><div class="lb">Unread</div><div class="vl" id="st-unread">—</div><div class="dl" style="color:var(--gold)">Needs attention</div></div>
+          <div class="stat-box"><div class="lb">Projects Live</div><div class="vl" id="st-projects">—</div><div class="dl">Visible on site</div></div>
+          <div class="stat-box"><div class="lb">Last Enquiry</div><div class="vl" id="st-last" style="font-size:18px;margin-top:6px">—</div></div>
         </div>
         <div class="admin-card">
-          <div class="admin-card-header"><h3>Recent Enquiries</h3><span style="font-size:12px;color:var(--muted);cursor:pointer" onclick="showPanel('enquiries',document.querySelector('[onclick*=enquiries]'))">View all →</span></div>
-          <div class="admin-card-body" id="dashEnquiries"><div style="color:var(--muted);font-size:14px">No enquiries yet.</div></div>
+          <div class="card-header"><h3>Recent Enquiries</h3><span style="font-size:12px;color:var(--muted);cursor:pointer" onclick="showPanel('enquiries',document.getElementById('navEnq'))">View all →</span></div>
+          <div class="card-body" id="dashEnquiries"><div style="color:var(--muted);font-size:14px">Loading…</div></div>
         </div>
         <div class="admin-card">
-          <div class="admin-card-header"><h3>Quick Actions</h3></div>
-          <div class="admin-card-body" style="display:flex;gap:12px;flex-wrap:wrap">
-            <button class="save-btn" onclick="showPanel('sections',document.querySelectorAll('.nav-item')[1])">Manage Sections</button>
-            <button class="save-btn" onclick="showPanel('content',document.querySelectorAll('.nav-item')[2])">Edit Content</button>
-            <button class="save-btn" onclick="showPanel('seo',document.querySelectorAll('.nav-item')[3])">Update SEO</button>
-            <a href="index.html" target="_blank" class="view-site-btn">View Live Site ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION VISIBILITY -->
-      <div class="panel" id="panel-sections">
-        <div class="admin-card">
-          <div class="admin-card-header"><h3>Section Visibility</h3><span style="font-size:12px;color:var(--muted)">Toggle sections on/off for site visitors</span></div>
-          <div class="admin-card-body">
-            <div class="section-toggles" id="sectionToggles">
-              <div class="section-toggle-row"><div class="stl"><div class="stl-name">Hero Section</div><div class="stl-desc">Main landing area — always visible</div></div><label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-slider"></span></label></div>
-              <div class="section-toggle-row"><div class="stl"><div class="stl-name">About Me</div><div class="stl-desc">Bio, stats and photo</div></div><label class="toggle"><input type="checkbox" id="toggle-about" onchange="updateToggle('about',this.checked)"/><span class="toggle-slider"></span></label></div>
-              <div class="section-toggle-row"><div class="stl"><div class="stl-name">Projects</div><div class="stl-desc">Selected works grid</div></div><label class="toggle"><input type="checkbox" id="toggle-projects" onchange="updateToggle('projects',this.checked)"/><span class="toggle-slider"></span></label></div>
-              <div class="section-toggle-row"><div class="stl"><div class="stl-name">Services</div><div class="stl-desc">Services tile grid</div></div><label class="toggle"><input type="checkbox" id="toggle-services" onchange="updateToggle('services',this.checked)"/><span class="toggle-slider"></span></label></div>
-              <div class="section-toggle-row"><div class="stl"><div class="stl-name">Contact</div><div class="stl-desc">Enquiry form and details</div></div><label class="toggle"><input type="checkbox" id="toggle-contact" onchange="updateToggle('contact',this.checked)"/><span class="toggle-slider"></span></label></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTENT EDITOR -->
-      <div class="panel" id="panel-content">
-        <div class="admin-card">
-          <div class="admin-card-header"><h3>Hero Section</h3></div>
-          <div class="admin-card-body">
-            <div class="content-field"><label>Eyebrow Text</label><input class="content-input" id="c-hero_eyebrow" type="text" placeholder="Architecture & Interior Design"/></div>
-            <div class="content-field"><label>Headline Line 1</label><input class="content-input" id="c-hero_line1" type="text" placeholder="Your home,"/></div>
-            <div class="content-field"><label>Headline Line 2 (italic gold)</label><input class="content-input" id="c-hero_line2" type="text" placeholder="reimagined"/></div>
-            <div class="content-field"><label>Headline Line 3</label><input class="content-input" id="c-hero_line3" type="text" placeholder="beautifully."/></div>
-            <div class="content-field"><label>Body Copy</label><textarea class="content-textarea" id="c-hero_body" placeholder="Let's redesign your home together…"></textarea></div>
-            <div class="content-field"><label>Badge Number</label><input class="content-input" id="c-hero_badge_num" type="text" placeholder="6+"/></div>
-          </div>
-        </div>
-        <div class="admin-card">
-          <div class="admin-card-header"><h3>About Section</h3></div>
-          <div class="admin-card-body">
-            <div class="content-field"><label>Paragraph 1</label><textarea class="content-textarea" id="c-about_p1"></textarea></div>
-            <div class="content-field"><label>Paragraph 2</label><textarea class="content-textarea" id="c-about_p2"></textarea></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEO -->
-      <div class="panel" id="panel-seo">
-        <div class="admin-card">
-          <div class="admin-card-header"><h3>Google Search Preview</h3></div>
-          <div class="admin-card-body">
-            <div class="seo-preview">
-              <div class="seo-preview-url">husnimarikkar.co.uk</div>
-              <div class="seo-preview-title" id="seoPreviewTitle">Husni Marikkar Architects | Residential Architecture & Interior Design London</div>
-              <div class="seo-preview-desc" id="seoPreviewDesc">London-based architect offering bespoke home renovation, interior design and new build architecture.</div>
-            </div>
-          </div>
-        </div>
-        <div class="admin-card">
-          <div class="admin-card-header"><h3>SEO Settings</h3></div>
-          <div class="admin-card-body">
-            <div class="content-field">
-              <label>Page Title <span style="color:var(--muted);font-size:10px">(50–60 chars ideal)</span></label>
-              <input class="content-input" id="seo-title" type="text" oninput="updateSeoPreview()" placeholder="Husni Marikkar Architects | Residential Architecture & Interior Design London"/>
-              <div class="char-count" id="seo-title-count">0 characters</div>
-            </div>
-            <div class="content-field">
-              <label>Meta Description <span style="color:var(--muted);font-size:10px">(150–160 chars ideal)</span></label>
-              <textarea class="content-textarea" id="seo-description" oninput="updateSeoPreview()" placeholder="London-based architect offering bespoke home renovation, interior design and new build architecture. University of Westminster graduate. Free initial consultation."></textarea>
-              <div class="char-count" id="seo-desc-count">0 characters</div>
-            </div>
-            <div class="content-field">
-              <label>Keywords <span style="color:var(--muted);font-size:10px">(comma separated)</span></label>
-              <input class="content-input" id="seo-keywords" type="text" placeholder="architect London, residential interior design UK, home renovation architect"/>
-            </div>
-            <div class="content-field">
-              <label>OG / Social Share Image URL</label>
-              <input class="content-input" id="seo-og" type="text" placeholder="https://husnimarikkar.co.uk/images/og-image.jpg"/>
-            </div>
-            <div class="admin-card" style="margin-top:8px;background:var(--offwhite)">
-              <div class="admin-card-header" style="border-bottom:none;padding-bottom:0"><h3 style="font-size:15px">Schema / Structured Data</h3></div>
-              <div class="admin-card-body" style="padding-top:12px">
-                <div class="content-field"><label>Schema: Person Name</label><input class="content-input" id="schema-name" type="text" placeholder="Husni Marikkar"/></div>
-                <div class="content-field"><label>Schema: Job Title</label><input class="content-input" id="schema-title" type="text" placeholder="Architect & Interior Designer"/></div>
-                <div class="content-field"><label>Schema: Business Address</label><input class="content-input" id="schema-address" type="text" placeholder="London, United Kingdom"/></div>
-              </div>
-            </div>
+          <div class="card-header"><h3>Quick Actions</h3></div>
+          <div class="card-body" style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="save-btn" onclick="showPanel('content',document.querySelectorAll('.nav-item')[3])">Edit Content</button>
+            <button class="save-btn" onclick="showPanel('projects',document.querySelectorAll('.nav-item')[4])">Manage Projects</button>
+            <button class="save-btn" onclick="showPanel('enquiries',document.getElementById('navEnq'))">View Enquiries</button>
+            <button class="save-btn" onclick="showPanel('seo',document.querySelectorAll('.nav-item')[6])">SEO Settings</button>
           </div>
         </div>
       </div>
@@ -289,247 +237,487 @@ body{font-family:'DM Sans',sans-serif;background:#F4F5F7;color:var(--navy);min-h
       <!-- ENQUIRIES -->
       <div class="panel" id="panel-enquiries">
         <div class="admin-card">
-          <div class="admin-card-header">
+          <div class="card-header">
             <h3>Enquiries</h3>
             <div style="display:flex;gap:10px;align-items:center">
-              <span style="font-size:12px;color:var(--muted)" id="enqCount">0 enquiries</span>
-              <button class="enq-btn" onclick="markAllRead()">Mark all read</button>
+              <span style="font-size:12px;color:var(--muted)" id="enqCount">Loading…</span>
+              <button class="btn-sm" onclick="markAllRead()">Mark all read</button>
+              <button class="btn-sm danger" onclick="if(confirm('Export all as CSV?'))exportCSV()">Export CSV</button>
             </div>
           </div>
-          <div class="admin-card-body" style="padding:0">
-            <div id="enquiryList"><div class="enq-empty">No enquiries yet. When someone submits the contact form, they'll appear here.</div></div>
+          <div class="card-body" style="padding:0 24px">
+            <div id="enqList"><div style="padding:32px;text-align:center;color:var(--muted)">Loading enquiries…</div></div>
           </div>
         </div>
       </div>
 
+      <!-- VISIBILITY -->
+      <div class="panel" id="panel-visibility">
+        <div class="admin-card">
+          <div class="card-header"><h3>Section Visibility</h3><span style="font-size:12px;color:var(--muted)">Toggle what visitors see on the homepage</span></div>
+          <div class="card-body">
+            <div class="toggle-row"><div class="toggle-info"><h4>Hero Section</h4><p>Main landing area — always visible</p></div><label class="toggle"><input type="checkbox" checked disabled/><span class="toggle-sl"></span></label></div>
+            <div class="toggle-row"><div class="toggle-info"><h4>About Me</h4><p>Bio, stats and photo</p></div><label class="toggle"><input type="checkbox" id="vis-about"/><span class="toggle-sl"></span></label></div>
+            <div class="toggle-row"><div class="toggle-info"><h4>Projects</h4><p>Selected works grid</p></div><label class="toggle"><input type="checkbox" id="vis-projects"/><span class="toggle-sl"></span></label></div>
+            <div class="toggle-row"><div class="toggle-info"><h4>Services</h4><p>Services tile grid</p></div><label class="toggle"><input type="checkbox" id="vis-services"/><span class="toggle-sl"></span></label></div>
+            <div class="toggle-row"><div class="toggle-info"><h4>Contact</h4><p>Enquiry form and details</p></div><label class="toggle"><input type="checkbox" id="vis-contact"/><span class="toggle-sl"></span></label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT EDITOR -->
+      <div class="panel" id="panel-content">
+        <div class="admin-card">
+          <div class="card-header"><h3>Hero Section</h3></div>
+          <div class="card-body">
+            <div class="two-col">
+              <div class="field"><label>Eyebrow Text</label><input type="text" id="c-hero_eyebrow" placeholder="Architecture & Interior Design"/></div>
+              <div class="field"><label>Badge Number</label><input type="text" id="c-hero_badge_num" placeholder="6+"/></div>
+            </div>
+            <div class="two-col">
+              <div class="field"><label>Headline Line 1</label><input type="text" id="c-hero_line1" placeholder="Your home,"/></div>
+              <div class="field"><label>Headline Line 2 (italic gold)</label><input type="text" id="c-hero_line2" placeholder="reimagined"/></div>
+            </div>
+            <div class="field"><label>Headline Line 3</label><input type="text" id="c-hero_line3" placeholder="beautifully."/></div>
+            <div class="field"><label>Body Copy</label><textarea id="c-hero_body" placeholder="Let's redesign your home together…"></textarea></div>
+          </div>
+        </div>
+        <div class="admin-card">
+          <div class="card-header"><h3>About Section</h3></div>
+          <div class="card-body">
+            <div class="field"><label>Section Heading</label><input type="text" id="c-about_heading" placeholder="Designing with purpose & precision."/></div>
+            <div class="field"><label>Paragraph 1</label><textarea id="c-about_p1"></textarea></div>
+            <div class="field"><label>Paragraph 2</label><textarea id="c-about_p2"></textarea></div>
+          </div>
+        </div>
+        <div class="admin-card">
+          <div class="card-header"><h3>Stats Grid</h3></div>
+          <div class="card-body">
+            <div class="two-col">
+              <div class="field"><label>Stat 1 Number</label><input type="text" id="c-stat1_num" placeholder="6+"/></div>
+              <div class="field"><label>Stat 1 Label</label><input type="text" id="c-stat1_label" placeholder="Projects"/></div>
+              <div class="field"><label>Stat 2 Number</label><input type="text" id="c-stat2_num" placeholder="4 Years"/></div>
+              <div class="field"><label>Stat 2 Label</label><input type="text" id="c-stat2_label" placeholder="Experience"/></div>
+              <div class="field"><label>Stat 3 Number</label><input type="text" id="c-stat3_num" placeholder="MSc"/></div>
+              <div class="field"><label>Stat 3 Label</label><input type="text" id="c-stat3_label" placeholder="Westminster"/></div>
+              <div class="field"><label>Stat 4 Number</label><input type="text" id="c-stat4_num" placeholder="BIM/Revit"/></div>
+              <div class="field"><label>Stat 4 Label</label><input type="text" id="c-stat4_label" placeholder="Certified"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="panel" id="panel-projects">
+        <div class="admin-card">
+          <div class="card-header"><h3>Projects</h3><button class="btn-sm primary" onclick="openProjectModal(null)">+ Add Project</button></div>
+          <div class="card-body" style="padding:0">
+            <table class="projects-table">
+              <thead><tr><th>Image</th><th>Title</th><th>Type</th><th>Year</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="projectsTableBody"><tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGES -->
+      <div class="panel" id="panel-images">
+        <div class="admin-card">
+          <div class="card-header"><h3>Hero &amp; About Images</h3><span style="font-size:12px;color:var(--muted)">These appear in the main sections</span></div>
+          <div class="card-body">
+            <div class="two-col">
+              <div>
+                <div class="field"><label>Hero Photo (portrait, 3:4 ratio)</label></div>
+                <div class="img-upload-area" id="heroUploadArea">
+                  <input type="file" accept="image/*" onchange="handleImageUpload(this,'hero')"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#9E9E9E" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/><path d="M2 10l6-4h16l6 4"/></svg>
+                  <p style="margin-top:8px;font-size:13px;color:var(--muted)">Click or drag hero photo here</p>
+                  <p style="font-size:11px;color:var(--muted);margin-top:4px">JPG, PNG · Max 5MB · Recommended 600×800px</p>
+                  <img id="heroPreview" class="img-preview" alt="Hero preview"/>
+                </div>
+              </div>
+              <div>
+                <div class="field"><label>About Photo (4:5 ratio)</label></div>
+                <div class="img-upload-area" id="aboutUploadArea">
+                  <input type="file" accept="image/*" onchange="handleImageUpload(this,'about')"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#9E9E9E" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/><path d="M2 10l6-4h16l6 4"/></svg>
+                  <p style="margin-top:8px;font-size:13px;color:var(--muted)">Click or drag about photo here</p>
+                  <p style="font-size:11px;color:var(--muted);margin-top:4px">JPG, PNG · Max 5MB · Recommended 500×625px</p>
+                  <img id="aboutPreview" class="img-preview" alt="About preview"/>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:16px;padding:14px;background:var(--offwhite);border:1px solid var(--border);font-size:13px;color:var(--muted)">
+              ℹ️ Images are uploaded to Supabase Storage and served via CDN. After uploading, the site updates automatically.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO & ANALYTICS -->
+      <div class="panel" id="panel-seo">
+        <div class="admin-card">
+          <div class="card-header"><h3>Google Search Preview</h3></div>
+          <div class="card-body">
+            <div class="seo-preview">
+              <div class="seo-preview-url">husnimarikkar.co.uk</div>
+              <div class="seo-preview-title" id="seoPreviewTitle">Husni Marikkar Architects | Residential Architecture & Interior Design London</div>
+              <div class="seo-preview-desc" id="seoPreviewDesc">London-based architect offering bespoke home renovation, interior design and new build architecture.</div>
+            </div>
+            <div class="field"><label>Page Title <span style="font-weight:400;text-transform:none">(50–60 chars ideal)</span></label><input type="text" id="c-seo_title" oninput="updateSeoPreview()" placeholder="Husni Marikkar Architects | Residential Architecture & Interior Design London"/><div class="char-count" id="title-count">0 characters</div></div>
+            <div class="field"><label>Meta Description <span style="font-weight:400;text-transform:none">(150–160 chars ideal)</span></label><textarea id="c-seo_description" oninput="updateSeoPreview()" placeholder="London-based architect offering bespoke home renovation…"></textarea><div class="char-count" id="desc-count">0 characters</div></div>
+            <div class="field"><label>Keywords</label><input type="text" id="c-seo_keywords" placeholder="architect London, residential interior design UK…"/><div class="field-hint">Separate with commas</div></div>
+          </div>
+        </div>
+        <div class="admin-card">
+          <div class="card-header"><h3>Google Analytics</h3></div>
+          <div class="card-body">
+            <div class="field"><label>Measurement ID</label><input type="text" id="c-ga_tracking_id" placeholder="G-XXXXXXXXXX"/><div class="field-hint">Find this in Google Analytics → Admin → Data Streams → your stream → Measurement ID. Starts with G-</div></div>
+            <div style="margin-top:4px;padding:14px;background:var(--offwhite);border:1px solid var(--border);font-size:13px;color:var(--muted)">
+              After saving, Google Analytics tracking will be added to all pages automatically. Allow 24–48 hours for data to appear in your GA dashboard.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT DETAILS -->
+      <div class="panel" id="panel-contact_info">
+        <div class="admin-card">
+          <div class="card-header"><h3>Contact Details</h3><span style="font-size:12px;color:var(--muted)">These appear in the Contact section and footer</span></div>
+          <div class="card-body">
+            <div class="two-col">
+              <div class="field"><label>Email Address</label><input type="email" id="c-contact_email" placeholder="husni@husnimarikkar.co.uk"/></div>
+              <div class="field"><label>Phone Number</label><input type="tel" id="c-contact_phone" placeholder="+44 7466 554153"/></div>
+              <div class="field"><label>WhatsApp Number <span style="font-weight:400;text-transform:none">(digits only)</span></label><input type="text" id="c-whatsapp_number" placeholder="447466554153"/><div class="field-hint">Include country code, no spaces or + (e.g. 447466554153)</div></div>
+              <div class="field"><label>Based In</label><input type="text" id="c-contact_based" placeholder="London, United Kingdom"/></div>
+              <div class="field"><label>Serving Area</label><input type="text" id="c-contact_serving" placeholder="Greater London & Home Counties"/></div>
+              <div class="field"><label>LinkedIn URL</label><input type="url" id="c-linkedin_url" placeholder="https://linkedin.com/in/husnimarikkar"/></div>
+              <div class="field"><label>Behance URL</label><input type="url" id="c-behance_url" placeholder="https://behance.net/husnimarikkar"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- admin-content -->
+  </div><!-- admin-main -->
+</div><!-- adminApp -->
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <h3 id="modalTitle">Add Project</h3>
+    <input type="hidden" id="proj-id"/>
+    <div class="two-col">
+      <div class="field"><label>Title</label><input type="text" id="proj-title" placeholder="Project name"/></div>
+      <div class="field"><label>Type / Category Tag</label><input type="text" id="proj-type" placeholder="Residential Interior"/></div>
+      <div class="field"><label>Year</label><input type="text" id="proj-year" placeholder="2024"/></div>
+      <div class="field"><label>Location</label><input type="text" id="proj-location" placeholder="London, UK"/></div>
+      <div class="field"><label>Client</label><input type="text" id="proj-client" placeholder="Client name"/></div>
+      <div class="field"><label>Consultant / Architect</label><input type="text" id="proj-consultant" placeholder="Firm name"/></div>
+      <div class="field"><label>Role</label><input type="text" id="proj-role" placeholder="Lead Architect"/></div>
+      <div class="field"><label>Area / Size</label><input type="text" id="proj-area" placeholder="15,000 sq ft"/></div>
+    </div>
+    <div class="field"><label>Description</label><textarea id="proj-description" style="min-height:100px" placeholder="Project description…"></textarea></div>
+    <div class="field"><label>Category <span style="font-weight:400;text-transform:none">(for filter)</span></label>
+      <select id="proj-category"><option value="residential">Residential</option><option value="commercial">Commercial</option><option value="interior">Interior</option><option value="civic">Civic</option><option value="institutional">Institutional</option></select>
+    </div>
+    <div class="field"><label>Sort Order</label><input type="number" id="proj-sort" value="1" min="1"/></div>
+    <div style="display:flex;gap:12px;margin-bottom:16px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="proj-featured"/> Featured project</label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="proj-visible" checked/> Visible on site</label>
+    </div>
+    <div class="field"><label>Project Image</label>
+      <div class="img-upload-area">
+        <input type="file" accept="image/*" onchange="handleProjectImageUpload(this)"/>
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#9E9E9E" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
+        <p style="margin-top:6px;font-size:13px;color:var(--muted)">Click to upload project image</p>
+        <img id="projImgPreview" class="img-preview" alt=""/>
+      </div>
+      <input type="hidden" id="proj-image_url"/>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm" onclick="closeProjectModal()">Cancel</button>
+      <button class="btn-sm primary" onclick="saveProject()">Save Project</button>
     </div>
   </div>
 </div>
 
-<script src="shared.js"></script>
+<script src="supabase.js"></script>
 <script>
-// AUTH — change these credentials as needed
-const ADMIN_USER = 'husni';
-const ADMIN_PASS = 'admin2025';
-
-let currentData = {};
+// AUTH
+const ADMIN_USER='husni', ADMIN_PASS='admin2025';
+let currentPanel='dashboard';
 
 function doLogin(){
-  const u=document.getElementById('loginUser').value;
-  const p=document.getElementById('loginPass').value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){
+  const u=document.getElementById('lu').value.trim();
+  const p=document.getElementById('lp').value;
+  if(u===ADMIN_USER&&p===ADMIN_PASS){
     document.getElementById('loginScreen').style.display='none';
     document.getElementById('adminApp').style.display='block';
-    loadAdmin();
+    initAdmin();
   } else {
-    document.getElementById('loginError').style.display='block';
-    setTimeout(()=>document.getElementById('loginError').style.display='none',3000);
+    document.getElementById('loginErr').style.display='block';
+    setTimeout(()=>document.getElementById('loginErr').style.display='none',3000);
   }
 }
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+function doLogout(){document.getElementById('adminApp').style.display='none';document.getElementById('loginScreen').style.display='flex';}
 
-function doLogout(){
-  document.getElementById('adminApp').style.display='none';
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('loginUser').value='';
-  document.getElementById('loginPass').value='';
-}
-
-function loadAdmin(){
-  currentData = HusniSite.getSiteData();
-  if(!currentData.sections) currentData.sections={about:true,projects:true,services:true,contact:true};
-  if(!currentData.content) currentData.content={};
-  if(!currentData.seo) currentData.seo={title:'',description:'',keywords:''};
-  if(!currentData.enquiries) currentData.enquiries=[];
-
-  // Sections
-  ['about','projects','services','contact'].forEach(id=>{
-    const t=document.getElementById('toggle-'+id);
-    if(t) t.checked = currentData.sections[id]!==false;
-  });
-
-  // Content
-  Object.entries(currentData.content).forEach(([k,v])=>{
-    const el=document.getElementById('c-'+k);
-    if(el) el.value=v;
-  });
-
-  // SEO
-  document.getElementById('seo-title').value=currentData.seo.title||'';
-  document.getElementById('seo-description').value=currentData.seo.description||'';
-  document.getElementById('seo-keywords').value=currentData.seo.keywords||'';
-  document.getElementById('seo-og').value=currentData.seo.og||'';
-  if(currentData.schema){
-    document.getElementById('schema-name').value=currentData.schema.name||'';
-    document.getElementById('schema-title').value=currentData.schema.jobTitle||'';
-    document.getElementById('schema-address').value=currentData.schema.address||'';
-  }
-  updateSeoPreview();
-  updateChars();
-  renderDashboard();
-  renderEnquiries();
-}
-
-function updateToggle(id, val){
-  if(!currentData.sections) currentData.sections={};
-  currentData.sections[id]=val;
-}
-
+// PANELS
 function showPanel(name, el){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
-  el.classList.add('active');
-  const titles={dashboard:'Dashboard',sections:'Section Visibility',content:'Content Editor',seo:'SEO Settings',enquiries:'Enquiries'};
+  if(el)el.classList.add('active');
+  const titles={dashboard:'Dashboard',enquiries:'Enquiries',visibility:'Section Visibility',content:'Page Content',projects:'Projects',images:'Images',seo:'SEO & Analytics',contact_info:'Contact Details'};
   document.getElementById('panelTitle').textContent=titles[name]||name;
-  if(name==='enquiries') renderEnquiries();
-  if(name==='dashboard') renderDashboard();
+  currentPanel=name;
+  if(name==='enquiries')renderEnquiries();
+  if(name==='dashboard')renderDashboard();
+  if(name==='projects')renderProjects();
 }
 
-function saveAll(){
-  // Read content fields
-  const contentIds=['hero_eyebrow','hero_line1','hero_line2','hero_line3','hero_body','hero_badge_num','about_p1','about_p2'];
-  contentIds.forEach(id=>{
-    const el=document.getElementById('c-'+id);
-    if(el && el.value.trim()) currentData.content[id]=el.value.trim();
-  });
-
-  // SEO
-  currentData.seo={
-    title:document.getElementById('seo-title').value,
-    description:document.getElementById('seo-description').value,
-    keywords:document.getElementById('seo-keywords').value,
-    og:document.getElementById('seo-og').value
-  };
-  currentData.schema={
-    name:document.getElementById('schema-name').value,
-    jobTitle:document.getElementById('schema-title').value,
-    address:document.getElementById('schema-address').value
-  };
-
-  HusniSite.saveSiteData(currentData);
+// SAVE
+async function saveCurrentPanel(){
   const btn=document.getElementById('saveBtn');
-  btn.textContent='✓ Saved';
-  btn.classList.add('saved');
-  setTimeout(()=>{btn.textContent='Save Changes';btn.classList.remove('saved');},2500);
+  btn.textContent='Saving…';btn.disabled=true;
+
+  if(currentPanel==='content'||currentPanel==='seo'||currentPanel==='contact_info'){
+    await saveContentFields();
+  } else if(currentPanel==='visibility'){
+    await saveVisibility();
+  }
+
+  btn.textContent='✓ Saved';btn.classList.add('saved');
+  setTimeout(()=>{btn.textContent='Save Changes';btn.classList.remove('saved');btn.disabled=false;},2500);
 }
 
-function updateSeoPreview(){
-  const t=document.getElementById('seo-title').value;
-  const d=document.getElementById('seo-description').value;
-  document.getElementById('seoPreviewTitle').textContent=t||'Husni Marikkar Architects | Residential Architecture & Interior Design London';
-  document.getElementById('seoPreviewDesc').textContent=d||'London-based architect offering bespoke home renovation, interior design and new build architecture.';
-  updateChars();
+async function saveContentFields(){
+  const inputs=document.querySelectorAll('#panel-'+currentPanel+' [id^="c-"]');
+  const rows=[];
+  inputs.forEach(el=>{
+    const key=el.id.replace('c-','');
+    rows.push({key,value:el.value});
+  });
+  for(const row of rows){
+    await db.upsert('site_content',row,'key');
+  }
 }
 
-function updateChars(){
-  const t=document.getElementById('seo-title').value.length;
-  const d=document.getElementById('seo-description').value.length;
-  const tc=document.getElementById('seo-title-count');
-  const dc=document.getElementById('seo-desc-count');
-  tc.textContent=t+' characters';
-  tc.className='char-count'+(t>60?' over':t>50?'':' warn');
-  dc.textContent=d+' characters';
-  dc.className='char-count'+(d>160?' over':d>150?'':' warn');
+async function saveVisibility(){
+  const sections=['about','projects','services','contact'];
+  for(const s of sections){
+    const checked=document.getElementById('vis-'+s).checked;
+    await db.upsert('site_settings',{key:'section_'+s,value:String(checked)},'key');
+  }
 }
 
-function renderDashboard(){
-  const enqs=currentData.enquiries||[];
-  const unread=enqs.filter(e=>!e.read).length;
-  document.getElementById('stat-total').textContent=enqs.length;
-  document.getElementById('stat-unread').textContent=unread;
-  const vis=Object.values(currentData.sections||{}).filter(Boolean).length;
-  document.getElementById('stat-sections').textContent=vis;
+// INIT
+async function initAdmin(){
+  await loadContentFields();
+  await loadVisibility();
+  await renderDashboard();
+  await renderProjects();
+}
+
+async function loadContentFields(){
+  const rows=await db.get('site_content','select=key,value');
+  rows.forEach(r=>{
+    const el=document.getElementById('c-'+r.key);
+    if(el)el.value=r.value;
+  });
+  updateSeoPreview();
+}
+
+async function loadVisibility(){
+  const rows=await db.get('site_settings','select=key,value');
+  rows.forEach(r=>{
+    const key=r.key.replace('section_','');
+    const el=document.getElementById('vis-'+key);
+    if(el)el.checked=r.value==='true';
+  });
+}
+
+// DASHBOARD
+async function renderDashboard(){
+  const [enqs,projs]=await Promise.all([
+    db.get('enquiries','select=id,name,email,created_at,read,project_type&order=created_at.desc&limit=5'),
+    db.get('projects','select=id,visible')
+  ]);
+  const allEnqs=await db.get('enquiries','select=id,read');
+  const unread=allEnqs.filter(e=>!e.read).length;
+
+  document.getElementById('st-total').textContent=allEnqs.length;
+  document.getElementById('st-unread').textContent=unread;
+  document.getElementById('st-projects').textContent=projs.filter(p=>p.visible).length;
   if(enqs.length>0){
-    const last=new Date(enqs[0].date);
-    document.getElementById('stat-last').textContent=last.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    const d=new Date(enqs[0].created_at);
+    document.getElementById('st-last').textContent=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
   }
   const badge=document.getElementById('unreadBadge');
   badge.style.display=unread>0?'inline-flex':'none';
   badge.textContent=unread;
 
   const dash=document.getElementById('dashEnquiries');
-  if(enqs.length===0){dash.innerHTML='<div style="color:var(--muted);font-size:14px">No enquiries yet.</div>';return;}
-  dash.innerHTML=enqs.slice(0,5).map(e=>`
+  if(enqs.length===0){dash.innerHTML='<div style="color:var(--muted);font-size:14px;padding:16px 0">No enquiries yet.</div>';return;}
+  dash.innerHTML=enqs.map(e=>`
     <div style="display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
       <div style="width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:white;font-size:12px;flex-shrink:0">${(e.name||'?')[0].toUpperCase()}</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--navy)">${e.name||'Unknown'}</div><div style="font-size:12px;color:var(--muted)">${e.projectType||'Enquiry'} · ${e.email||''}</div></div>
-      <div style="font-size:11px;color:var(--muted)">${new Date(e.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</div>
-    </div>
-  `).join('');
+      <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--navy)">${e.name||'Unknown'}${!e.read?'<span style="font-size:9px;background:var(--gold);color:var(--navy);padding:2px 6px;margin-left:8px">NEW</span>':''}</div><div style="font-size:12px;color:var(--muted)">${e.project_type||'Enquiry'} · ${e.email||''}</div></div>
+      <div style="font-size:11px;color:var(--muted)">${new Date(e.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</div>
+    </div>`).join('');
 }
 
-function renderEnquiries(){
-  const enqs=currentData.enquiries||[];
+// ENQUIRIES
+async function renderEnquiries(){
+  const enqs=await db.get('enquiries','select=*&order=created_at.desc');
   const unread=enqs.filter(e=>!e.read).length;
   document.getElementById('enqCount').textContent=enqs.length+' enquir'+(enqs.length===1?'y':'ies');
   const badge=document.getElementById('unreadBadge');
   badge.style.display=unread>0?'inline-flex':'none';
   badge.textContent=unread;
 
-  const list=document.getElementById('enquiryList');
-  if(enqs.length===0){list.innerHTML='<div class="enq-empty">No enquiries yet.</div>';return;}
+  const list=document.getElementById('enqList');
+  if(enqs.length===0){list.innerHTML='<div style="padding:48px;text-align:center;color:var(--muted);font-size:14px">No enquiries yet. When someone submits the contact form, they\'ll appear here.</div>';return;}
 
-  list.innerHTML=enqs.map((e,i)=>`
-    <div class="enquiry-item ${e.read?'':'unread'}" onclick="toggleEnquiry(${i})">
+  list.innerHTML='<div class="enq-list">'+enqs.map((e,i)=>`
+    <div class="enq-item" onclick="toggleEnq(${i},${e.id})">
       <div class="enq-avatar">${(e.name||'?')[0].toUpperCase()}</div>
       <div style="flex:1">
-        <div class="enq-name">${e.name||'Unknown'}</div>
-        <div class="enq-meta">${e.email||''} · ${e.projectType||'General enquiry'}</div>
-        <div class="enq-msg">${e.message||''}</div>
+        <div class="enq-name">${e.name||'Unknown'}${!e.read?'<span class="new-tag">NEW</span>':''}</div>
+        <div class="enq-meta">${e.email||''} · ${e.project_type||'General enquiry'}</div>
+        <div class="enq-preview">${e.message||''}</div>
         <div id="enq-detail-${i}" class="enq-detail">
-          <h4>${e.name||'Enquiry'}</h4>
           <div class="enq-detail-grid">
             <div class="enq-field"><label>Email</label><span><a href="mailto:${e.email}" style="color:var(--gold)">${e.email||'—'}</a></span></div>
             <div class="enq-field"><label>Phone</label><span>${e.phone||'—'}</span></div>
-            <div class="enq-field"><label>Project Type</label><span>${e.projectType||'—'}</span></div>
+            <div class="enq-field"><label>Project Type</label><span>${e.project_type||'—'}</span></div>
             <div class="enq-field"><label>Budget</label><span>${e.budget||'—'}</span></div>
             <div class="enq-field"><label>Location</label><span>${e.location||'—'}</span></div>
-            <div class="enq-field"><label>Date</label><span>${new Date(e.date).toLocaleString('en-GB')}</span></div>
-            <div class="enq-field"><label>Source</label><span>${e.source||'homepage'}</span></div>
+            <div class="enq-field"><label>Date</label><span>${new Date(e.created_at).toLocaleString('en-GB')}</span></div>
           </div>
-          <div class="enq-full-msg">${e.message||'No message provided.'}</div>
-          <div class="enq-actions">
-            <a class="enq-btn" href="mailto:${e.email}?subject=Re: Your Enquiry — Husni Marikkar Architects">Reply by Email</a>
-            <button class="enq-btn danger" onclick="deleteEnquiry(event,${i})">Delete</button>
+          <div class="enq-full-msg">${e.message||'No message.'}</div>
+          <div class="btn-row">
+            <a class="btn-sm primary" href="mailto:${e.email}?subject=Re: Your Enquiry — Husni Marikkar Architects">Reply by Email</a>
+            <a class="btn-sm" href="https://wa.me/${e.phone?.replace(/\D/g,'')||''}" target="_blank">WhatsApp</a>
+            <button class="btn-sm danger" onclick="deleteEnq(event,${e.id})">Delete</button>
           </div>
         </div>
       </div>
-      <div class="enq-date">${new Date(e.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
-    </div>
-  `).join('');
+      <div class="enq-date">${new Date(e.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+    </div>`).join('')+'</div>';
 }
 
-function toggleEnquiry(i){
+let openEnqId=null;
+async function toggleEnq(i,dbId){
   const d=document.getElementById('enq-detail-'+i);
   const isOpen=d.style.display==='block';
   document.querySelectorAll('.enq-detail').forEach(el=>el.style.display='none');
-  if(!isOpen){
-    d.style.display='block';
-    if(!currentData.enquiries[i].read){
-      currentData.enquiries[i].read=true;
-      HusniSite.saveSiteData(currentData);
-      renderEnquiries();
-      renderDashboard();
-    }
-  }
+  if(!isOpen){d.style.display='block';await db.update('enquiries',dbId,{read:true});renderDashboard();}
+}
+async function deleteEnq(ev,id){ev.stopPropagation();if(confirm('Delete this enquiry?')){await db.delete('enquiries',id);renderEnquiries();renderDashboard();}}
+async function markAllRead(){await db.update('enquiries','true',{read:true},'read=neq');renderEnquiries();renderDashboard();}
+
+function exportCSV(){
+  db.get('enquiries','select=*&order=created_at.desc').then(rows=>{
+    if(!rows.length)return;
+    const headers=Object.keys(rows[0]);
+    const csv=[headers.join(','),...rows.map(r=>headers.map(h=>`"${String(r[h]||'').replace(/"/g,'""')}"`).join(','))].join('\n');
+    const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+    a.download='enquiries-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  });
 }
 
-function deleteEnquiry(ev, i){
-  ev.stopPropagation();
-  if(confirm('Delete this enquiry?')){
-    currentData.enquiries.splice(i,1);
-    HusniSite.saveSiteData(currentData);
-    renderEnquiries();
-    renderDashboard();
-  }
+// PROJECTS
+async function renderProjects(){
+  const projs=await db.get('projects','select=*&order=sort_order.asc');
+  const tbody=document.getElementById('projectsTableBody');
+  if(!projs.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">No projects yet. Add one above.</td></tr>';return;}
+  tbody.innerHTML=projs.map(p=>`
+    <tr>
+      <td>${p.image_url?`<img class="proj-thumb" src="${p.image_url}" alt=""/>`:'<div class="proj-thumb-placeholder">No img</div>'}</td>
+      <td style="font-weight:500">${p.title}</td>
+      <td style="font-size:12px;color:var(--muted)">${p.type||'—'}</td>
+      <td>${p.year||'—'}</td>
+      <td><span class="status-pill ${p.visible?'live':'hidden'}">${p.visible?'● Live':'● Hidden'}</span></td>
+      <td><div class="btn-row">
+        <button class="btn-sm" onclick='openProjectModal(${JSON.stringify(p)})'>Edit</button>
+        <button class="btn-sm danger" onclick="deleteProject(${p.id})">Delete</button>
+      </div></td>
+    </tr>`).join('');
 }
 
-function markAllRead(){
-  currentData.enquiries.forEach(e=>e.read=true);
-  HusniSite.saveSiteData(currentData);
-  renderEnquiries();
-  renderDashboard();
+function openProjectModal(p){
+  document.getElementById('modalTitle').textContent=p?'Edit Project':'Add Project';
+  const fields=['id','title','type','year','location','client','consultant','role','area','description','category','sort_order','image_url'];
+  fields.forEach(f=>{const el=document.getElementById('proj-'+f);if(el)el.value=p?p[f]||'':''});
+  document.getElementById('proj-featured').checked=p?p.featured:false;
+  document.getElementById('proj-visible').checked=p?p.visible:true;
+  const prev=document.getElementById('projImgPreview');
+  if(p&&p.image_url){prev.src=p.image_url;prev.style.display='block';}
+  else{prev.style.display='none';}
+  document.getElementById('projectModal').classList.add('open');
+}
+function closeProjectModal(){document.getElementById('projectModal').classList.remove('open');}
+
+async function saveProject(){
+  const id=document.getElementById('proj-id').value;
+  const data={
+    title:document.getElementById('proj-title').value,
+    type:document.getElementById('proj-type').value,
+    year:document.getElementById('proj-year').value,
+    location:document.getElementById('proj-location').value,
+    client:document.getElementById('proj-client').value,
+    consultant:document.getElementById('proj-consultant').value,
+    role:document.getElementById('proj-role').value,
+    area:document.getElementById('proj-area').value,
+    description:document.getElementById('proj-description').value,
+    category:document.getElementById('proj-category').value,
+    sort_order:parseInt(document.getElementById('proj-sort').value)||1,
+    featured:document.getElementById('proj-featured').checked,
+    visible:document.getElementById('proj-visible').checked,
+    image_url:document.getElementById('proj-image_url').value||null,
+  };
+  if(id){await db.update('projects',id,data);}
+  else{await db.insert('projects',data);}
+  closeProjectModal();
+  renderProjects();
+}
+
+async function deleteProject(id){if(confirm('Delete this project? This cannot be undone.')){await db.delete('projects',id);renderProjects();}}
+
+async function handleProjectImageUpload(input){
+  const file=input.files[0];if(!file)return;
+  const prev=document.getElementById('projImgPreview');
+  const reader=new FileReader();
+  reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
+  reader.readAsDataURL(file);
+  const path='projects/'+Date.now()+'-'+file.name.replace(/\s/g,'-');
+  const url=await db.uploadImage('site-images',path,file);
+  if(url)document.getElementById('proj-image_url').value=url;
+  else{const local=URL.createObjectURL(file);document.getElementById('proj-image_url').value=local;}
+}
+
+async function handleImageUpload(input,type){
+  const file=input.files[0];if(!file)return;
+  const prev=document.getElementById(type+'Preview');
+  const reader=new FileReader();
+  reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
+  reader.readAsDataURL(file);
+  const path=type+'/'+type+'-'+Date.now()+'.'+file.name.split('.').pop();
+  const url=await db.uploadImage('site-images',path,file);
+  if(url){await db.upsert('site_content',{key:type+'_image',value:url},'key');}
+}
+
+// SEO
+function updateSeoPreview(){
+  const t=document.getElementById('c-seo_title')?.value||'';
+  const d=document.getElementById('c-seo_description')?.value||'';
+  document.getElementById('seoPreviewTitle').textContent=t||'Husni Marikkar Architects | Residential Architecture & Interior Design London';
+  document.getElementById('seoPreviewDesc').textContent=d||'London-based architect offering bespoke home renovation…';
+  const tc=document.getElementById('title-count');const dc=document.getElementById('desc-count');
+  if(tc){tc.textContent=t.length+' characters';tc.className='char-count'+(t.length>60?' over':t.length>50?'':' warn');}
+  if(dc){dc.textContent=d.length+' characters';dc.className='char-count'+(d.length>160?' over':d.length>150?'':' warn');}
 }
 </script>
 </body>
