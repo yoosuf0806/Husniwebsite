@@ -602,12 +602,30 @@ function goPanel(name,el){
 async function doSave(){
   const btn=document.getElementById('saveBtn');
   btn.textContent='Saving…'; btn.disabled=true;
-  let ok=true;
-  if(curPanel==='visibility') ok=await saveVisibility();
-  else if(curPanel==='images') { btn.textContent='Save Changes'; btn.disabled=false; return; }
-  else ok=await saveContent();
-  btn.textContent=ok?'✓ Saved!':'❌ Save Failed'; btn.className='sb-btn'+(ok?' ok':' err');
-  setTimeout(()=>{btn.textContent='Save Changes';btn.className='sb-btn';btn.disabled=false;},3000);
+  // Safety: never hang forever
+  const safetyTimer=setTimeout(()=>{
+    btn.textContent='⚠️ Timed out';
+    btn.className='sb-btn err';
+    btn.disabled=false;
+    setTimeout(()=>{btn.textContent='Save Changes';btn.className='sb-btn';},4000);
+  },12000);
+  try{
+    let ok=true;
+    if(curPanel==='visibility') ok=await saveVisibility();
+    else if(['images','dashboard','enquiries'].includes(curPanel)){
+      clearTimeout(safetyTimer);btn.textContent='Save Changes';btn.disabled=false;return;
+    }
+    else ok=await saveContent();
+    clearTimeout(safetyTimer);
+    btn.textContent=ok?'✓ Saved!':'❌ Save Failed';
+    btn.className='sb-btn'+(ok?' ok':' err');
+    setTimeout(()=>{btn.textContent='Save Changes';btn.className='sb-btn';btn.disabled=false;},3000);
+  }catch(e){
+    clearTimeout(safetyTimer);
+    console.error('Save error:',e);
+    btn.textContent='❌ Error';btn.className='sb-btn err';
+    setTimeout(()=>{btn.textContent='Save Changes';btn.className='sb-btn';btn.disabled=false;},4000);
+  }
 }
 
 async function saveContent(){
@@ -633,11 +651,23 @@ async function initAdmin(){
 
 async function loadContentFields(){
   const rows=await db.get('site_content','select=key,value');
+  const content={};
   rows.forEach(r=>{
+    content[r.key]=r.value;
     const el=document.getElementById('c-'+r.key);
     if(el) el.value=r.value;
   });
+  // Set placeholders showing current value for empty fields
+  document.querySelectorAll('[id^="c-"]').forEach(el=>{
+    const key=el.id.replace('c-','');
+    if(content[key]!==undefined && el.value===content[key]){
+      // field is populated correctly
+    } else if(content[key]!==undefined){
+      el.value=content[key];
+    }
+  });
   updateSEO();
+  console.log('Content loaded:',rows.length,'fields');
 }
 
 async function loadVisibilityFields(){
@@ -930,14 +960,29 @@ async function uploadImg(input,type){
 }
 
 async function testDB(){
-  const btn=document.getElementById('testBtn'); btn.textContent='Testing…';
-  const r=await db.get('site_content','select=key&limit=1');
-  if(r.length){
-    const w=await db.upsertBatch('site_content',[{key:'_ping',value:new Date().toISOString()}],'key');
-    if(w){btn.textContent='✅ DB OK';setTimeout(()=>btn.textContent='Test DB',3000);}
-    else{btn.textContent='⚠️ Read OK, Write FAIL';alert('Supabase write is blocked.\n\nPlease run fix_rls.sql in Supabase SQL Editor to fix permissions.');setTimeout(()=>btn.textContent='Test DB',4000);}
+  const btn=document.getElementById('testBtn');
+  btn.textContent='Testing…'; btn.disabled=true;
+  const startTime=Date.now();
+  // Test READ
+  const rows=await db.get('site_content','select=key&limit=1');
+  const readMs=Date.now()-startTime;
+  if(!rows.length){
+    btn.textContent='❌ No Data';btn.disabled=false;
+    alert('READ failed or no data.\n\nPlease run full_setup.sql in Supabase SQL Editor to create tables and insert default data.');
+    setTimeout(()=>btn.textContent='Test DB',4000); return;
+  }
+  // Test WRITE
+  const writeStart=Date.now();
+  const ok=await db.upsertBatch('site_content',[{key:'_ping',value:new Date().toISOString()}],'key');
+  const writeMs=Date.now()-writeStart;
+  btn.disabled=false;
+  if(ok){
+    btn.textContent=`✅ DB OK (${readMs}ms read, ${writeMs}ms write)`;
+    setTimeout(()=>btn.textContent='Test DB',4000);
   } else {
-    btn.textContent='❌ No Data';alert('Connected but no data. Run full_setup.sql in Supabase SQL Editor.');setTimeout(()=>btn.textContent='Test DB',4000);
+    btn.textContent='⚠️ Read OK, Write FAIL';
+    alert(`Database READ works but WRITE is failing.\n\nTime taken: ${writeMs}ms\n\nFix: Go to Supabase → SQL Editor and run fix_all.sql\n\nThis disables Row Level Security which is blocking writes.`);
+    setTimeout(()=>btn.textContent='Test DB',5000);
   }
 }
 
