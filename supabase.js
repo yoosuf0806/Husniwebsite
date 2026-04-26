@@ -73,11 +73,60 @@ async function loadSiteContent() {
   const rows = await db.get('site_content', 'select=key,value');
   const content = {};
   rows.forEach(r => content[r.key] = r.value);
+
   // Apply to all data-content elements
   document.querySelectorAll('[data-content]').forEach(el => {
     const key = el.getAttribute('data-content');
-    if (content[key] !== undefined) el.innerHTML = content[key];
+    if (content[key] !== undefined) {
+      // Don't overwrite links, just set text
+      if (el.tagName === 'A') el.textContent = content[key];
+      else el.innerHTML = content[key];
+    }
   });
+
+  // Apply hero image if set
+  if (content['hero_image']) {
+    const heroImg = document.getElementById('heroImg');
+    if (heroImg) heroImg.src = content['hero_image'];
+  }
+
+  // Apply about image if set
+  if (content['about_image']) {
+    const aboutImg = document.querySelector('.about-image-frame img');
+    if (aboutImg) aboutImg.src = content['about_image'];
+  }
+
+  // Apply Google Analytics if ID is set
+  if (content['ga_tracking_id'] && content['ga_tracking_id'].startsWith('G-')) {
+    const gaId = content['ga_tracking_id'];
+    if (!document.querySelector('script[src*="googletagmanager"]')) {
+      const s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+      s.async = true;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+    }
+  }
+
+  // Update WhatsApp links dynamically
+  if (content['whatsapp_number']) {
+    const waUrl = 'https://wa.me/' + content['whatsapp_number'] + '?text=Hi%20Husni%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20you.';
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => a.href = waUrl);
+  }
+
+  // Apply section visibility
+  const settingsRows = await db.get('site_settings', 'select=key,value');
+  settingsRows.forEach(r => {
+    const section = r.key.replace('section_', '');
+    const el = document.getElementById('section-' + section) || document.getElementById(section);
+    const wave = document.getElementById('wave-' + section);
+    if (el) el.style.display = r.value === 'false' ? 'none' : '';
+    if (wave) wave.style.display = r.value === 'false' ? 'none' : '';
+  });
+
   return content;
 }
 

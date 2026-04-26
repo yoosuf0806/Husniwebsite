@@ -175,9 +175,9 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
   <div class="hero-dot-grid"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-eyebrow">Architecture &amp; Interior Design</p>
-      <h1 class="hero-headline">Your home,<br><em>reimagined</em><br>beautifully.</h1>
-      <p class="hero-body">Let's redesign your home together — creating refined spaces that reflect your lifestyle, crafted to your budget.</p>
+      <p class="hero-eyebrow" data-content="hero_eyebrow">Architecture &amp; Interior Design</p>
+      <h1 class="hero-headline"><span data-content="hero_line1">Your home,</span><br><em data-content="hero_line2">reimagined</em><br><span data-content="hero_line3">beautifully.</span></h1>
+      <p class="hero-body" data-content="hero_body">Let's redesign your home together — creating refined spaces that reflect your lifestyle, crafted to your budget.</p>
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary">See My Work ↓</a>
         <a href="about.html" class="btn-ghost">Who I Am</a>
@@ -191,7 +191,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
         <img id="heroSvg" src="images/hero.svg" alt="Husni Marikkar Architect" style="display:none"/>
       </div>
       <div class="hero-badge">
-        <div class="hero-badge-num">6+</div>
+        <div class="hero-badge-num" data-content="hero_badge_num">6+</div>
         <div class="hero-badge-text">High-budget<br>projects delivered</div>
       </div>
     </div>
@@ -205,19 +205,19 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 </svg>
 
 <!-- ABOUT -->
-<section id="about" style="background:var(--white);padding:100px 0">
+<span id="about" style="position:absolute;margin-top:-72px"></span><section id="section-about" style="background:var(--white);padding:100px 0">
   <div class="about-inner">
     <div class="about-text reveal">
       <span class="eyebrow">About Me</span>
-      <h2>Designing with <em>purpose</em> &amp; precision.</h2>
-      <p>I'm Husni — a London-based architect and project manager. BSc Architecture and currently completing my Masters in Project Management at the University of Westminster. Over four years and 6+ high-budget projects, I've learned that good architecture is equal parts care, clarity and craft.</p>
-      <p>I work closely with homeowners across Greater London and the Home Counties — translating how you actually live into refined, beautifully detailed spaces, delivered on time and on budget.</p>
+      <h2 data-content="about_heading">Designing with <em>purpose</em> &amp; precision.</h2>
+      <p data-content="about_p1">I'm Husni — a London-based architect and project manager. BSc Architecture and currently completing my Masters in Project Management at the University of Westminster. Over four years and 6+ high-budget projects, I've learned that good architecture is equal parts care, clarity and craft.</p>
+      <p data-content="about_p2">I work closely with homeowners across Greater London and the Home Counties — translating how you actually live into refined, beautifully detailed spaces, delivered on time and on budget.</p>
       <a class="about-link" href="about.html">Read more about me →</a>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-num">6+</div><div class="stat-label">Projects</div></div>
-        <div class="stat-card"><div class="stat-num">4 Years</div><div class="stat-label">Experience</div></div>
-        <div class="stat-card"><div class="stat-num">MSc</div><div class="stat-label">Westminster</div></div>
-        <div class="stat-card"><div class="stat-num">BIM/Revit</div><div class="stat-label">Certified</div></div>
+        <div class="stat-card"><div class="stat-num" data-content="stat1_num">6+</div><div class="stat-label" data-content="stat1_label">Projects</div></div>
+        <div class="stat-card"><div class="stat-num" data-content="stat2_num">4 Years</div><div class="stat-label" data-content="stat2_label">Experience</div></div>
+        <div class="stat-card"><div class="stat-num" data-content="stat3_num">MSc</div><div class="stat-label" data-content="stat3_label">Westminster</div></div>
+        <div class="stat-card"><div class="stat-num" data-content="stat4_num">BIM/Revit</div><div class="stat-label" data-content="stat4_label">Certified</div></div>
       </div>
     </div>
     <div class="reveal">
@@ -237,7 +237,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 </svg>
 
 <!-- PROJECTS -->
-<section id="projects">
+<section id="section-projects">
   <div class="projects-inner">
     <div class="section-header reveal">
       <div class="section-header-left">
@@ -281,7 +281,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 </svg>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="section-services">
   <div class="services-inner">
     <div class="services-header reveal">
       <div class="services-header-left">
@@ -307,17 +307,17 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 </svg>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="section-contact">
   <div class="contact-inner">
     <div class="reveal">
       <span class="eyebrow" style="color:var(--gold)">Get in Touch</span>
       <h2>Let's create something <em>exceptional.</em></h2>
       <p class="body">Tell me a little about your home and what you're trying to achieve. Initial consultations are always free and unhurried.</p>
       <div style="margin-top:24px">
-        <div class="contact-row"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:husni@husnimarikkar.co.uk">husni@husnimarikkar.co.uk</a></span></div>
-        <div class="contact-row"><span class="contact-label">Mobile</span><span class="contact-value">+44 7466 554153</span></div>
-        <div class="contact-row"><span class="contact-label">Based in</span><span class="contact-value">London, United Kingdom</span></div>
-        <div class="contact-row"><span class="contact-label">Serving</span><span class="contact-value">Greater London &amp; Home Counties</span></div>
+        <div class="contact-row"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:husni@husnimarikkar.co.uk" data-content="contact_email">husni@husnimarikkar.co.uk</a></span></div>
+        <div class="contact-row"><span class="contact-label">Mobile</span><span class="contact-value" data-content="contact_phone">+44 7466 554153</span></div>
+        <div class="contact-row"><span class="contact-label">Based in</span><span class="contact-value" data-content="contact_based">London, United Kingdom</span></div>
+        <div class="contact-row"><span class="contact-label">Serving</span><span class="contact-value" data-content="contact_serving">Greater London &amp; Home Counties</span></div>
       </div>
       <!-- WhatsApp CTA in contact section -->
       <a class="wa-contact-btn" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">

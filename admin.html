@@ -452,16 +452,32 @@ function doLogin(){
   const u=document.getElementById('lu').value.trim();
   const p=document.getElementById('lp').value;
   if(u===ADMIN_USER&&p===ADMIN_PASS){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('adminApp').style.display='block';
-    initAdmin();
+    sessionStorage.setItem('husni_admin','1');
+    localStorage.setItem('husni_admin','1');
+    showAdmin();
   } else {
     document.getElementById('loginErr').style.display='block';
     setTimeout(()=>document.getElementById('loginErr').style.display='none',3000);
   }
 }
+function showAdmin(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('adminApp').style.display='block';
+  initAdmin();
+}
+function doLogout(){
+  sessionStorage.removeItem('husni_admin');
+  localStorage.removeItem('husni_admin');
+  document.getElementById('adminApp').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+}
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-function doLogout(){document.getElementById('adminApp').style.display='none';document.getElementById('loginScreen').style.display='flex';}
+// Auto-restore session on page load/refresh
+window.addEventListener('load',()=>{
+  if(sessionStorage.getItem('husni_admin')||localStorage.getItem('husni_admin')){
+    showAdmin();
+  }
+});
 
 // PANELS
 function showPanel(name, el){
