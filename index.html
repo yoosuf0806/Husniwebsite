@@ -327,7 +327,10 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
       <form class="contact-form" id="contactForm">
         <input class="form-input" id="cf-name" type="text" placeholder="Full Name" required/>
         <input class="form-input" id="cf-email" type="email" placeholder="Email Address" required/>
+        <input class="form-input" id="cf-phone" type="tel" placeholder="Phone Number (optional)"/>
+        <input class="form-input" id="cf-location" type="text" placeholder="Project Location (e.g. West London)"/>
         <select class="form-select" id="cf-type"><option value="" disabled selected>Project Type</option><option>Home Renovation</option><option>New Build Design</option><option>Interior Design</option><option>Space Planning</option><option>3D BIM Visualisation</option><option>Planning &amp; Approvals</option><option>Other</option></select>
+        <input class="form-input" id="cf-budget" type="text" placeholder="Approximate Budget (optional)"/>
         <textarea class="form-textarea" id="cf-msg" placeholder="Tell me about your project…"></textarea>
         <button type="submit" class="btn-gold">Send Enquiry →</button>
         <div class="form-divider">or</div>
@@ -377,7 +380,16 @@ document.getElementById('contactForm').addEventListener('submit',function(e){
   const name=document.getElementById('cf-name').value;
   const email=document.getElementById('cf-email').value;
   if(!name||!email)return;
-  saveEnquiry({name,email,projectType:document.getElementById('cf-type').value,message:document.getElementById('cf-msg').value,source:'homepage'});
+  saveEnquiry({
+    name,
+    email,
+    phone:document.getElementById('cf-phone').value,
+    location:document.getElementById('cf-location').value,
+    projectType:document.getElementById('cf-type').value,
+    budget:document.getElementById('cf-budget').value,
+    message:document.getElementById('cf-msg').value,
+    source:'homepage'
+  });
   document.getElementById('formSuccess').style.display='block';
   this.reset();
   setTimeout(()=>document.getElementById('formSuccess').style.display='none',5000);
