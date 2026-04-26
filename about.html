@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About Husni Marikkar | Architect & Project Manager, London</title>
+<meta name="description" content="Meet Husni Marikkar — London-based architect with BSc Architecture and Masters in Project Management from University of Westminster."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.about-page-hero{padding:160px 48px 80px;background:var(--offwhite);position:relative;overflow:hidden}
+.about-page-hero .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(27,42,74,0.1) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse 80% 80% at 20% 50%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 20% 50%,black 0%,transparent 70%);}
+.about-page-inner{max-width:1200px;margin:0 auto;position:relative}
+.about-page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,80px);font-weight:400;line-height:1.05;color:var(--navy);margin-bottom:24px}
+.about-page-hero h1 em{font-style:italic;color:var(--gold)}
+.about-page-hero .sub{font-size:16px;line-height:1.7;color:var(--muted);max-width:520px}
+.about-content{max-width:1200px;margin:0 auto;padding:80px 48px}
+.about-two-col{display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:start}
+.about-body h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--navy);margin-bottom:20px;margin-top:48px}
+.about-body h2:first-child{margin-top:0}
+.about-body h2 em{font-style:italic;color:var(--gold)}
+.about-body p{font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:16px}
+.about-sidebar{position:sticky;top:100px}
+.profile-img{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#C5BAB0 0%,#9E9288 50%,#7A6E65 100%);position:relative;overflow:hidden;margin-bottom:24px}
+.profile-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.profile-bar{background:var(--navy);padding:14px 20px;text-align:center}
+.profile-bar p{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.8)}
+.credentials{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.cred-item{padding:16px;border:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
+.cred-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.cred-val{font-size:14px;color:var(--navy);font-weight:500}
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.timeline-item{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
+.timeline-item:last-child{border-bottom:none}
+.timeline-year{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);font-weight:500;min-width:60px}
+.timeline-content h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);font-weight:400;margin-bottom:6px}
+.timeline-content p{font-size:13px;line-height:1.6;color:var(--muted)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:16px}
+.value-card{background:var(--white);padding:28px 24px}
+.value-card .icon{font-size:24px;margin-bottom:12px}
+.value-card h3{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--navy);margin-bottom:8px}
+.value-card p{font-size:13px;line-height:1.6;color:var(--muted)}
+.cta-strip{background:var(--navy);padding:80px 48px;text-align:center;margin-top:80px}
+.cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3vw,44px);color:var(--white);font-weight:400;margin-bottom:16px}
+.cta-strip h2 em{color:var(--gold);font-style:italic}
+.cta-strip p{color:rgba(255,255,255,0.6);margin-bottom:32px;font-size:15px}
+.cta-strip-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.btn-gold{padding:14px 32px;background:var(--gold);color:var(--navy);border:none;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-weight:500;transition:opacity 0.25s;text-decoration:none;display:inline-block}
+.btn-gold:hover{opacity:0.88}
+.btn-ghost-white{padding:14px 32px;border:1px solid rgba(255,255,255,0.4);color:var(--white);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;display:inline-block}
+.btn-ghost-white:hover{background:rgba(255,255,255,0.1)}
+@media(max-width:900px){.about-two-col{grid-template-columns:1fr}.about-sidebar{position:static}.about-page-hero,.about-content{padding-left:24px;padding-right:24px}.values-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Husni Marikkar <span>Architects</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-enquire" onclick="location.href='contact.html'">Enquire</button>
+</nav>
+
+<div class="about-page-hero">
+  <div class="dot-grid"></div>
+  <div class="about-page-inner reveal">
+    <p class="eyebrow">About Me</p>
+    <h1>Architect. <em>Designer.</em><br>Problem Solver.</h1>
+    <p class="sub">I'm Husni — London-based architect and project manager with a passion for creating homes that genuinely improve the way people live.</p>
+  </div>
+</div>
+
+<svg class="wave-divider" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="background:#FAFAF8">
+  <path d="M0,0 C360,60 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,60 L0,60 Z" fill="#FFFFFF"/>
+</svg>
+
+<div class="about-content">
+  <div class="about-two-col">
+    <div class="about-body reveal">
+      <h2>My <em>story</em></h2>
+      <p>I grew up fascinated by the way buildings shape experience — how a well-considered room can make you feel calm, energised, or at home in a way you can't quite articulate. That curiosity led me to study Architecture at undergraduate level, and eventually to specialise in Project Management at the University of Westminster.</p>
+      <p>Over the past four years I've worked on a range of projects across Greater London and beyond — from full residential renovations in West London to institutional extensions in Sri Lanka. Each project has deepened my belief that the best architecture is invisible: it simply works, looks beautiful, and makes life better.</p>
+      <p>I work with homeowners who care about quality, who want their space to reflect who they are, and who want a single trusted professional managing the entire process — from first sketch to final snag.</p>
+
+      <h2>How I <em>work</em></h2>
+      <p>Every project begins with listening. Before I pick up a pen or open Revit, I want to understand how you actually use your home — the morning routine, the entertaining, the quiet moments. Architecture that doesn't respond to those realities is just decoration.</p>
+      <p>I use BIM software (Revit + 3D visualisation) throughout the process so you can see exactly what you're getting before anything is built. There are no surprises on site — just confident, informed decisions at every stage.</p>
+      <p>I keep my practice deliberately small. I take a limited number of projects at a time, so every client receives my full attention, from initial consultation to completion.</p>
+
+      <h2>Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-content"><h3>MSc Project Management — University of Westminster</h3><p>Currently completing Masters programme specialising in construction project delivery.</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2022</div><div class="timeline-content"><h3>Kandy Multimodal Transport Terminal</h3><p>Lead architectural designer for major civic infrastructure project in Sri Lanka.</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-content"><h3>Nova Apartments — Residential Interior</h3><p>Full interior design and space planning for luxury residential development.</p></div></div>
+        <div class="timeline-item"><div class="timeline-year">2020</div><div class="timeline-content"><h3>BSc Architecture — University of Westminster</h3><p>Graduated with first-class honours. Dissertation focused on adaptive reuse in urban residential contexts.</p></div></div>
+      </div>
+
+      <h2>What I <em>believe</em></h2>
+      <div class="values-grid">
+        <div class="value-card"><div class="icon">◇</div><h3>Clarity first</h3><p>No jargon, no surprises. You'll always know where the project stands.</p></div>
+        <div class="value-card"><div class="icon">◈</div><h3>Craft matters</h3><p>Details make the difference. I sweat the small stuff so you don't have to.</p></div>
+        <div class="value-card"><div class="icon">◉</div><h3>Budget is real</h3><p>I design to your budget, not around it. Good architecture doesn't require unlimited funds.</p></div>
+      </div>
+    </div>
+    <div class="about-sidebar reveal">
+      <div class="profile-img">
+        <img src="images/about.jpg" alt="Husni Marikkar" onerror="this.style.display='none'"/>
+        <div class="profile-bar"><p>Husni Marikkar · Architect</p></div>
+      </div>
+      <div class="credentials">
+        <div class="cred-item"><div class="cred-label">Education</div><div class="cred-val">MSc Project Management</div><div style="font-size:12px;color:var(--muted)">University of Westminster</div></div>
+        <div class="cred-item"><div class="cred-label">Education</div><div class="cred-val">BSc Architecture</div><div style="font-size:12px;color:var(--muted)">University of Westminster</div></div>
+        <div class="cred-item"><div class="cred-label">Software</div><div class="cred-val">Revit / BIM</div><div style="font-size:12px;color:var(--muted)">AutoCAD · SketchUp · Lumion</div></div>
+        <div class="cred-item"><div class="cred-label">Experience</div><div class="cred-val">4+ Years</div><div style="font-size:12px;color:var(--muted)">6+ high-budget projects</div></div>
+        <div class="cred-item"><div class="cred-label">Location</div><div class="cred-val">London, UK</div><div style="font-size:12px;color:var(--muted)">Greater London &amp; Home Counties</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h2>Ready to reimagine<br>your <em>home?</em></h2>
+  <p>Initial consultations are always free and completely unhurried.</p>
+  <div class="cta-strip-btns">
+    <a href="contact.html" class="btn-gold">Start a Conversation</a>
+    <a href="projects.html" class="btn-ghost-white">See My Work</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Husni Marikkar <span>Architects</span></div>
+  <div class="footer-copy">© 2025 Husni Marikkar Architects. All rights reserved.</div>
+  <div class="footer-links"><a href="#">LinkedIn</a><a href="#">Behance</a><a href="#">Privacy</a></div>
+</footer>
+
+<a class="wa-btn visible" href="https://wa.me/447466554153?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener">
+  <div class="wa-tooltip">Let's talk</div>
+  <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.477 2 3 6.477 3 12c0 1.89.522 3.66 1.432 5.175L3 23l5.98-1.41A10 10 0 0 0 13 22c5.523 0 10-4.477 10-10S18.523 2 13 2z" fill="white"/><path d="M9.5 8.5c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3-.3-.2-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2z" fill="#1B2A4A"/></svg>
+</a>
+<script src="shared.js"></script>
+<script>
+document.getElementById('navbar').classList.add('scrolled');
+const observer=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');observer.unobserve(x.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
