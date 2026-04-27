@@ -648,20 +648,48 @@ async function doSave() {
   }
 }
 
+// Section-scoped saves: About changes never touch Services rows and vice versa.
+// Each panel maps to a precise key prefix set — no cross-section pollution.
+const PANEL_KEYS = {
+  hero:     ['hero_eyebrow','hero_line1','hero_line2','hero_line3','hero_body',
+             'hero_badge_num','hero_badge_label','hero_image'],
+  about:    ['about_heading','about_p1','about_p2',
+             'stat1_num','stat1_label','stat2_num','stat2_label',
+             'stat3_num','stat3_label','stat4_num','stat4_label',
+             'about_story_heading','about_story_p1','about_story_p2','about_story_p3',
+             'about_work_heading','about_work_p1','about_work_p2',
+             'about_timeline_heading',
+             'tl1_year','tl1_title','tl1_desc','tl2_year','tl2_title','tl2_desc',
+             'tl3_year','tl3_title','tl3_desc','tl4_year','tl4_title','tl4_desc',
+             'about_believe_heading','val1_title','val1_desc','val2_title','val2_desc',
+             'val3_title','val3_desc',
+             'cred1_label','cred1_val','cred1_sub','cred2_label','cred2_val','cred2_sub',
+             'cred3_val','cred3_sub',
+             'cta_heading1','cta_heading2','cta_subtext','cta_btn1','cta_btn2',
+             'about_image'],
+  projects: ['projects_eyebrow','projects_heading'],
+  services: ['services_eyebrow','services_heading'],
+  contact:  ['contact_heading','contact_subheading','contact_email','contact_phone',
+             'whatsapp_number','contact_based','contact_serving','contact_availability',
+             'linkedin_url','behance_url','footer_copyright'],
+  seo:      ['seo_title','seo_description','seo_keywords','ga_tracking_id'],
+};
+
 async function saveCurrentPanel() {
-  // For panels with direct table operations (projects/services), save is done inline
   if (['dashboard','enquiries','images'].includes(curPanel)) return true;
-  // For content panels: collect all c- fields
-  const els = document.querySelectorAll('#panel-' + curPanel + ' [id^="c-"]');
+
+  const allowedKeys = PANEL_KEYS[curPanel];
+  if (!allowedKeys) return true;
+
+  // Only collect fields whose keys are in this panel's allowed set
   const rows = [];
-  els.forEach(el => {
-    const key = el.id.replace('c-', '').replace(/\d$/, m => m); // handle c-hero_image2 etc
-    // skip duplicated image fields (handled separately)
-    const actualKey = el.id.replace('c-', '');
-    rows.push({ key: actualKey, value: el.value });
+  allowedKeys.forEach(key => {
+    const el = document.getElementById('c-' + key);
+    if (el) rows.push({ key, value: el.value });
   });
+
   if (!rows.length) return true;
-  console.log('Saving', rows.length, 'fields:', rows.map(r => r.key));
+  console.log(`[savePanel:${curPanel}] Saving ${rows.length} keys:`, rows.map(r=>r.key));
   return await db.upsertBatch('site_content', rows, 'key');
 }
 
