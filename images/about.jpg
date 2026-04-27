@@ -1,52 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="500" height="625" viewBox="0 0 500 625">
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="625">
 <defs>
-  <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D4C8BC"/><stop offset="100%" stop-color="#8C7B6B"/></linearGradient>
-  <linearGradient id="desk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8B8A8"/><stop offset="100%" stop-color="#A89888"/></linearGradient>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#CFC5BB"/><stop offset="100%" stop-color="#8A7A6A"/></linearGradient>
 </defs>
-<rect width="500" height="625" fill="url(#bg2)"/>
-<!-- Office background -->
-<rect x="0" y="160" width="500" height="465" fill="#EDE5DC" opacity="0.7"/>
-<!-- Large window -->
-<rect x="60" y="180" width="180" height="250" fill="#D4EAF0" opacity="0.6"/>
-<rect x="60" y="180" width="3" height="250" fill="#8B7355"/>
-<rect x="237" y="180" width="3" height="250" fill="#8B7355"/>
-<rect x="60" y="302" width="180" height="3" fill="#8B7355"/>
-<rect x="148" y="180" width="3" height="250" fill="#8B7355" opacity="0.5"/>
-<!-- Light from window -->
-<polygon points="63,183 237,183 300,420 0,420" fill="#FFF8EE" opacity="0.2"/>
-<!-- Desk -->
-<rect x="0" y="440" width="500" height="12" fill="#8B6B4A"/>
-<rect x="0" y="452" width="500" height="173" fill="url(#desk2)"/>
-<!-- Architect at desk - person silhouette -->
-<ellipse cx="280" cy="360" rx="35" ry="38" fill="#5A4A3A" opacity="0.75"/>
-<rect x="245" y="395" width="70" height="100" fill="#4A3A2A" opacity="0.65" rx="6"/>
-<!-- Arms on desk -->
-<rect x="220" y="440" width="90" height="16" fill="#5A4A3A" opacity="0.6" rx="8"/>
-<!-- Drawing/plans on desk -->
-<rect x="60" y="445" width="160" height="120" fill="#FAFAF8" opacity="0.9" rx="2"/>
-<line x1="80" y1="465" x2="200" y2="465" stroke="#1B2A4A" stroke-width="1" opacity="0.4"/>
-<line x1="80" y1="480" x2="180" y2="480" stroke="#1B2A4A" stroke-width="1" opacity="0.3"/>
-<line x1="80" y1="495" x2="190" y2="495" stroke="#1B2A4A" stroke-width="1" opacity="0.3"/>
-<rect x="90" y="510" width="60" height="40" fill="none" stroke="#1B2A4A" stroke-width="1" opacity="0.4"/>
+<rect width="500" height="625" fill="url(#bg)"/>
+<!-- Office wall -->
+<rect y="140" width="500" height="485" fill="#EDE5DC" opacity="0.65"/>
+<!-- Window -->
+<rect x="40" y="160" width="170" height="240" fill="#C8E4F0" opacity="0.55"/>
+<rect x="36" y="156" width="4" height="248" fill="#8B7355"/>
+<rect x="208" y="156" width="4" height="248" fill="#8B7355"/>
+<rect x="36" y="156" width="176" height="4" fill="#8B7355"/>
+<rect x="36" y="400" width="176" height="4" fill="#8B7355"/>
+<rect x="121" y="160" width="4" height="240" fill="#8B7355" opacity="0.4"/>
+<rect x="40" y="276" width="168" height="4" fill="#8B7355" opacity="0.4"/>
+<!-- Light rays -->
+<polygon points="40,160 208,160 260,400 0,400" fill="#FFF8EE" opacity="0.15"/>
+<!-- Desk surface -->
+<rect y="430" width="500" height="14" fill="#7A5A3A"/>
+<rect y="444" width="500" height="181" fill="#9A7A5A" opacity="0.45"/>
+<!-- Person silhouette  -->
+<ellipse cx="290" cy="340" rx="32" ry="34" fill="#4A3828" opacity="0.7"/>
+<rect x="258" y="372" width="64" height="80" fill="#3A2818" opacity="0.6" rx="5"/>
+<!-- Arms -->
+<rect x="240" y="430" width="80" height="14" fill="#4A3828" opacity="0.5" rx="7"/>
 <!-- Laptop -->
-<rect x="330" y="415" width="130" height="90" fill="#2A3A4A" rx="4" opacity="0.85"/>
-<rect x="338" y="423" width="114" height="74" fill="#3A4A5A" rx="2"/>
-<rect x="315" y="503" width="160" height="6" fill="#2A3A4A" rx="2" opacity="0.7"/>
-<!-- Monitor glow -->
-<rect x="340" y="425" width="110" height="70" fill="#4A6B8A" opacity="0.3"/>
-<!-- Coffee cup -->
-<ellipse cx="470" cy="445" rx="16" ry="7" fill="#C8A870" opacity="0.8"/>
-<rect x="455" y="415" width="30" height="32" fill="#8B6B4A" rx="3"/>
-<!-- Bookshelf on wall -->
-<rect x="350" y="190" width="140" height="200" fill="#6B5A4A" opacity="0.4" rx="2"/>
-<rect x="358" y="198" width="20" height="60" fill="#8B4A3A" opacity="0.7"/>
-<rect x="382" y="198" width="16" height="60" fill="#3A5A4A" opacity="0.7"/>
-<rect x="402" y="198" width="22" height="60" fill="#4A4A6A" opacity="0.7"/>
-<rect x="428" y="198" width="18" height="60" fill="#6A5A2A" opacity="0.7"/>
-<rect x="358" y="268" width="88" height="4" fill="#5A4A3A" opacity="0.5"/>
-<rect x="358" y="272" width="25" height="50" fill="#5A3A2A" opacity="0.6"/>
-<rect x="387" y="272" width="18" height="50" fill="#2A4A5A" opacity="0.6"/>
-<!-- Gold accent bottom bar -->
-<rect x="0" y="580" width="500" height="45" fill="#1B2A4A"/>
+<rect x="300" y="395" width="140" height="90" fill="#1E2D3E" rx="4" opacity="0.9"/>
+<rect x="308" y="403" width="124" height="74" fill="#2A3D52" rx="2"/>
+<rect x="285" y="483" width="170" height="6" fill="#1E2D3E" rx="2" opacity="0.8"/>
+<!-- Screen glow -->
+<rect x="310" y="405" width="120" height="70" fill="#3A5A80" opacity="0.25"/>
+<!-- Drawings/plans on desk -->
+<rect x="30" y="440" width="160" height="115" fill="#FAFAF5" opacity="0.95" rx="1"/>
+<line x1="45" y1="460" x2="175" y2="460" stroke="#1B2A4A" stroke-width="0.8" opacity="0.4"/>
+<line x1="45" y1="474" x2="160" y2="474" stroke="#1B2A4A" stroke-width="0.8" opacity="0.3"/>
+<line x1="45" y1="488" x2="168" y2="488" stroke="#1B2A4A" stroke-width="0.8" opacity="0.3"/>
+<rect x="55" y="500" width="55" height="40" fill="none" stroke="#1B2A4A" stroke-width="0.8" opacity="0.4"/>
+<rect x="118" y="500" width="40" height="40" fill="none" stroke="#1B2A4A" stroke-width="0.8" opacity="0.3"/>
+<!-- Coffee mug -->
+<ellipse cx="460" cy="440" rx="18" ry="8" fill="#C8A870" opacity="0.8"/>
+<rect x="443" y="412" width="34" height="30" fill="#7A5A3A" rx="3"/>
+<path d="M477 422 Q490 422 490 432 Q490 442 477 442" fill="none" stroke="#7A5A3A" stroke-width="3"/>
+<!-- Books on wall shelf -->
+<rect x="280" y="170" width="210" height="4" fill="#7A5A3A"/>
+<rect x="285" y="174" width="22" height="60" fill="#8B3A2A" opacity="0.8" rx="1"/>
+<rect x="311" y="174" width="16" height="60" fill="#2A5A3A" opacity="0.8" rx="1"/>
+<rect x="331" y="174" width="24" height="60" fill="#3A3A6A" opacity="0.8" rx="1"/>
+<rect x="359" y="174" width="18" height="60" fill="#6A5A1A" opacity="0.8" rx="1"/>
+<rect x="381" y="174" width="20" height="60" fill="#4A2A1A" opacity="0.8" rx="1"/>
+<!-- Gold accent bottom -->
+<rect y="580" width="500" height="45" fill="#1B2A4A"/>
 <text x="250" y="608" font-family="Georgia,serif" font-size="11" fill="#C9A96E" text-anchor="middle" letter-spacing="3">HUSNI MARIKKAR · ARCHITECT · LONDON</text>
 </svg>

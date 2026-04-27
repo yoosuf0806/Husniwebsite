@@ -1,52 +1,134 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="500" height="625" viewBox="0 0 500 625">
 <defs>
-  <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D4C8BC"/><stop offset="100%" stop-color="#8C7B6B"/></linearGradient>
-  <linearGradient id="desk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8B8A8"/><stop offset="100%" stop-color="#A89888"/></linearGradient>
+  <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#E8DDD4"/>
+    <stop offset="100%" stop-color="#C4B0A0"/>
+  </linearGradient>
+  <linearGradient id="win2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#D8EEF8" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#B8D4E8" stop-opacity="0.3"/>
+  </linearGradient>
+  <linearGradient id="desk2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#8B6B4A"/>
+    <stop offset="100%" stop-color="#6B4A2A"/>
+  </linearGradient>
+  <filter id="blur2"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>
+
+<!-- Room background -->
 <rect width="500" height="625" fill="url(#bg2)"/>
-<!-- Office background -->
-<rect x="0" y="160" width="500" height="465" fill="#EDE5DC" opacity="0.7"/>
-<!-- Large window -->
-<rect x="60" y="180" width="180" height="250" fill="#D4EAF0" opacity="0.6"/>
-<rect x="60" y="180" width="3" height="250" fill="#8B7355"/>
-<rect x="237" y="180" width="3" height="250" fill="#8B7355"/>
-<rect x="60" y="302" width="180" height="3" fill="#8B7355"/>
-<rect x="148" y="180" width="3" height="250" fill="#8B7355" opacity="0.5"/>
-<!-- Light from window -->
-<polygon points="63,183 237,183 300,420 0,420" fill="#FFF8EE" opacity="0.2"/>
+
+<!-- Back wall - lighter -->
+<rect x="0" y="0" width="500" height="420" fill="#EDE5DC" opacity="0.7"/>
+
+<!-- Window -->
+<rect x="50" y="40" width="200" height="280" fill="url(#win2)"/>
+<rect x="50" y="40" width="4" height="280" fill="#8B7355"/>
+<rect x="246" y="40" width="4" height="280" fill="#8B7355"/>
+<rect x="50" y="40" width="200" height="4" fill="#8B7355"/>
+<rect x="50" y="318" width="200" height="4" fill="#8B7355"/>
+<rect x="148" y="40" width="4" height="280" fill="#8B7355" opacity="0.6"/>
+<rect x="50" y="178" width="200" height="4" fill="#8B7355" opacity="0.6"/>
+<!-- Window light -->
+<polygon points="54,44 248,44 350,420 0,420" fill="#FFF8EE" opacity="0.18" filter="url(#blur2)"/>
+
+<!-- Floor -->
+<rect x="0" y="420" width="500" height="205" fill="#B8A888"/>
+<!-- Floor texture -->
+<line x1="0" y1="460" x2="500" y2="460" stroke="#A89878" stroke-width="1" opacity="0.5"/>
+<line x1="0" y1="500" x2="500" y2="500" stroke="#A89878" stroke-width="1" opacity="0.5"/>
+<line x1="0" y1="540" x2="500" y2="540" stroke="#A89878" stroke-width="1" opacity="0.5"/>
+<line x1="0" y1="580" x2="500" y2="580" stroke="#A89878" stroke-width="1" opacity="0.5"/>
+<line x1="125" y1="420" x2="110" y2="625" stroke="#A89878" stroke-width="1" opacity="0.4"/>
+<line x1="250" y1="420" x2="240" y2="625" stroke="#A89878" stroke-width="1" opacity="0.4"/>
+<line x1="375" y1="420" x2="370" y2="625" stroke="#A89878" stroke-width="1" opacity="0.4"/>
+
 <!-- Desk -->
-<rect x="0" y="440" width="500" height="12" fill="#8B6B4A"/>
-<rect x="0" y="452" width="500" height="173" fill="url(#desk2)"/>
-<!-- Architect at desk - person silhouette -->
-<ellipse cx="280" cy="360" rx="35" ry="38" fill="#5A4A3A" opacity="0.75"/>
-<rect x="245" y="395" width="70" height="100" fill="#4A3A2A" opacity="0.65" rx="6"/>
-<!-- Arms on desk -->
-<rect x="220" y="440" width="90" height="16" fill="#5A4A3A" opacity="0.6" rx="8"/>
-<!-- Drawing/plans on desk -->
-<rect x="60" y="445" width="160" height="120" fill="#FAFAF8" opacity="0.9" rx="2"/>
-<line x1="80" y1="465" x2="200" y2="465" stroke="#1B2A4A" stroke-width="1" opacity="0.4"/>
-<line x1="80" y1="480" x2="180" y2="480" stroke="#1B2A4A" stroke-width="1" opacity="0.3"/>
-<line x1="80" y1="495" x2="190" y2="495" stroke="#1B2A4A" stroke-width="1" opacity="0.3"/>
-<rect x="90" y="510" width="60" height="40" fill="none" stroke="#1B2A4A" stroke-width="1" opacity="0.4"/>
-<!-- Laptop -->
-<rect x="330" y="415" width="130" height="90" fill="#2A3A4A" rx="4" opacity="0.85"/>
-<rect x="338" y="423" width="114" height="74" fill="#3A4A5A" rx="2"/>
-<rect x="315" y="503" width="160" height="6" fill="#2A3A4A" rx="2" opacity="0.7"/>
-<!-- Monitor glow -->
-<rect x="340" y="425" width="110" height="70" fill="#4A6B8A" opacity="0.3"/>
-<!-- Coffee cup -->
-<ellipse cx="470" cy="445" rx="16" ry="7" fill="#C8A870" opacity="0.8"/>
-<rect x="455" y="415" width="30" height="32" fill="#8B6B4A" rx="3"/>
-<!-- Bookshelf on wall -->
-<rect x="350" y="190" width="140" height="200" fill="#6B5A4A" opacity="0.4" rx="2"/>
-<rect x="358" y="198" width="20" height="60" fill="#8B4A3A" opacity="0.7"/>
-<rect x="382" y="198" width="16" height="60" fill="#3A5A4A" opacity="0.7"/>
-<rect x="402" y="198" width="22" height="60" fill="#4A4A6A" opacity="0.7"/>
-<rect x="428" y="198" width="18" height="60" fill="#6A5A2A" opacity="0.7"/>
-<rect x="358" y="268" width="88" height="4" fill="#5A4A3A" opacity="0.5"/>
-<rect x="358" y="272" width="25" height="50" fill="#5A3A2A" opacity="0.6"/>
-<rect x="387" y="272" width="18" height="50" fill="#2A4A5A" opacity="0.6"/>
-<!-- Gold accent bottom bar -->
+<rect x="0" y="405" width="500" height="18" fill="url(#desk2)" rx="2"/>
+<rect x="0" y="421" width="500" height="6" fill="#5A3A1A"/>
+
+<!-- Person - professional architect -->
+<!-- Body in suit -->
+<path d="M 160 240 L 140 405 L 340 405 L 320 240 Z" fill="#2A3545" rx="4"/>
+<!-- Shirt/tie visible -->
+<rect x="218" y="240" width="14" height="100" fill="#F5F0E8"/>
+<polygon points="225,260 220,310 225,305 230,310" fill="#C9A96E"/>
+<!-- Jacket lapels -->
+<path d="M 220 240 L 175 280 L 175 405" stroke="#1B2A4A" stroke-width="1.5" fill="none"/>
+<path d="M 230 240 L 275 280 L 275 405" stroke="#1B2A4A" stroke-width="1.5" fill="none"/>
+<!-- Shoulders/jacket shape -->
+<ellipse cx="170" cy="260" rx="35" ry="18" fill="#2A3545"/>
+<ellipse cx="280" cy="260" rx="35" ry="18" fill="#2A3545"/>
+
+<!-- Left arm resting on desk -->
+<path d="M 155 270 Q 130 340 110 405" stroke="#2A3545" stroke-width="28" fill="none" stroke-linecap="round"/>
+<!-- Hand on desk -->
+<ellipse cx="105" cy="408" rx="20" ry="10" fill="#D4A882"/>
+
+<!-- Right arm with pen -->
+<path d="M 295 270 Q 330 340 360 395" stroke="#2A3545" stroke-width="26" fill="none" stroke-linecap="round"/>
+<ellipse cx="362" cy="400" rx="18" ry="9" fill="#D4A882"/>
+<!-- Pen -->
+<line x1="375" y1="390" x2="355" y2="410" stroke="#2A3545" stroke-width="3" stroke-linecap="round"/>
+<circle cx="375" cy="389" r="4" fill="#C9A96E"/>
+
+<!-- Head and face -->
+<ellipse cx="225" cy="190" rx="52" ry="58" fill="#D4A882"/>
+<!-- Hair - dark, short professional cut -->
+<path d="M 175 175 Q 180 130 225 128 Q 270 128 278 175 Q 260 155 225 153 Q 190 155 175 175" fill="#1A0E06"/>
+<ellipse cx="225" cy="148" rx="42" ry="24" fill="#1A0E06"/>
+<!-- Facial features -->
+<!-- Eyes -->
+<ellipse cx="205" cy="188" rx="8" ry="7" fill="#1A0E06"/>
+<ellipse cx="245" cy="188" rx="8" ry="7" fill="#1A0E06"/>
+<ellipse cx="207" cy="186" rx="3" ry="3" fill="white" opacity="0.6"/>
+<ellipse cx="247" cy="186" rx="3" ry="3" fill="white" opacity="0.6"/>
+<!-- Eyebrows -->
+<path d="M 196 178 Q 205 174 214 177" stroke="#1A0E06" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M 236 177 Q 245 174 254 178" stroke="#1A0E06" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<!-- Nose -->
+<path d="M 225 192 Q 218 206 222 210 Q 225 212 228 210 Q 232 206 225 192" fill="#C49070"/>
+<!-- Mouth - slight smile -->
+<path d="M 211 220 Q 225 228 239 220" stroke="#A06848" stroke-width="2" fill="none" stroke-linecap="round"/>
+<!-- Beard/stubble hint -->
+<ellipse cx="225" cy="225" rx="30" ry="15" fill="#1A0E06" opacity="0.12"/>
+<!-- Ear -->
+<ellipse cx="173" cy="196" rx="10" ry="14" fill="#C89070"/>
+<ellipse cx="277" cy="196" rx="10" ry="14" fill="#C89070"/>
+<!-- Neck -->
+<rect x="210" y="238" width="28" height="20" fill="#D4A882"/>
+
+<!-- Items on desk -->
+<!-- Drawing/blueprint -->
+<rect x="120" y="388" width="180" height="130" fill="#F8F4EE" rx="2" opacity="0.95"/>
+<rect x="128" y="396" width="164" height="114" fill="#F0EBE2"/>
+<!-- Floor plan drawing -->
+<rect x="140" y="408" width="70" height="50" fill="none" stroke="#1B2A4A" stroke-width="1.5" opacity="0.5"/>
+<rect x="218" y="415" width="40" height="35" fill="none" stroke="#1B2A4A" stroke-width="1.5" opacity="0.5"/>
+<rect x="140" y="465" width="118" height="30" fill="none" stroke="#1B2A4A" stroke-width="1.5" opacity="0.5"/>
+<line x1="140" y1="403" x2="258" y2="403" stroke="#C9A96E" stroke-width="1"/>
+
+<!-- Books stacked -->
+<rect x="380" y="370" width="100" height="18" fill="#8B3A2A" rx="1"/>
+<rect x="383" y="354" width="94" height="18" fill="#2A4A6A" rx="1"/>
+<rect x="386" y="338" width="90" height="18" fill="#4A5A2A" rx="1"/>
+
+<!-- Laptop - closed on side -->
+<rect x="30" y="388" width="80" height="55" fill="#2A3545" rx="4" opacity="0.8"/>
+<rect x="34" y="392" width="72" height="47" fill="#1B2A4A" rx="2"/>
+<rect x="10" y="440" width="110" height="6" fill="#2A3545" rx="3" opacity="0.7"/>
+
+<!-- Glasses on desk -->
+<ellipse cx="330" cy="408" rx="14" ry="10" fill="none" stroke="#8B7355" stroke-width="2"/>
+<ellipse cx="355" cy="408" rx="14" ry="10" fill="none" stroke="#8B7355" stroke-width="2"/>
+<line x1="344" y1="407" x2="341" y2="407" stroke="#8B7355" stroke-width="2"/>
+<line x1="316" y1="407" x2="305" y2="404" stroke="#8B7355" stroke-width="2"/>
+<line x1="369" y1="407" x2="380" y2="404" stroke="#8B7355" stroke-width="2"/>
+
+<!-- Gold accent line -->
+<rect x="0" y="403" width="500" height="2" fill="#C9A96E" opacity="0.4"/>
+
+<!-- Navy footer bar -->
 <rect x="0" y="580" width="500" height="45" fill="#1B2A4A"/>
-<text x="250" y="608" font-family="Georgia,serif" font-size="11" fill="#C9A96E" text-anchor="middle" letter-spacing="3">HUSNI MARIKKAR · ARCHITECT · LONDON</text>
+<text x="250" y="606" font-family="Georgia,serif" font-size="11" fill="#C9A96E" text-anchor="middle" letter-spacing="3">HUSNI MARIKKAR · ARCHITECT &amp; PROJECT MANAGER · LONDON</text>
 </svg>
