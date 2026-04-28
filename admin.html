@@ -703,48 +703,55 @@ async function loadAllContentFields() {
   const banner = document.getElementById('warnBanner');
   const bannerText = document.getElementById('warnBannerText');
 
-  // Use raw fetch so we can see the actual HTTP status
+  // STEP 1: Always pre-fill with hardcoded defaults from supabase.js
+  // so fields are never blank even if DB is unreachable
+  if (window.DEFAULT_CONTENT) {
+    Object.entries(window.DEFAULT_CONTENT).forEach(([key, val]) => {
+      const el = document.getElementById('c-' + key);
+      if (el) el.value = val;
+    });
+  }
+
+  // STEP 2: Try to load from Supabase and override defaults
   const SUPA_URL = 'https://nthbgkuiusppwlpejtss.supabase.co';
   const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50aGJna3VpdXNwcHdscGVqdHNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxNjg5NTAsImV4cCI6MjA4Mjc0NDk1MH0.m0w7Jme2y_D3jxbnjhrWkwBYErdYEnnKHaCgAwhIlXM';
-  
-  let rows = [];
-  let httpStatus = null;
-  let errorMsg = null;
-  
+
+  let rows = [], httpStatus = null, errorMsg = null;
   try {
     const ctrl = new AbortController();
     setTimeout(() => ctrl.abort(), 8000);
     const r = await fetch(
-      `${SUPA_URL}/rest/v1/site_content?select=key,value`,
+      SUPA_URL + '/rest/v1/site_content?select=key,value',
       { headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }, signal: ctrl.signal }
     );
     httpStatus = r.status;
     if (r.ok) {
       rows = await r.json();
     } else {
-      errorMsg = `HTTP ${r.status}: ${await r.text().catch(() => 'no details')}`;
+      const txt = await r.text().catch(() => '');
+      errorMsg = 'HTTP ' + r.status + (txt ? ': ' + txt.slice(0,120) : '');
     }
   } catch(e) {
-    errorMsg = e.name === 'AbortError' ? 'Request timed out after 8s' : e.message;
+    errorMsg = e.name === 'AbortError' ? 'Connection timed out (8s)' : 'Cannot reach Supabase: ' + e.message;
   }
 
-  console.log(`[loadAllContentFields] status=${httpStatus} rows=${rows.length} error=${errorMsg}`);
+  console.log('[Admin] DB status=' + httpStatus + ' rows=' + rows.length + (errorMsg ? ' error=' + errorMsg : ''));
 
-  if (errorMsg || !rows.length) {
-    if (bannerText) {
-      if (errorMsg) {
-        bannerText.innerHTML = `⚠️ <strong>Database error:</strong> ${errorMsg} — Run <code>fix_write.sql</code> in Supabase SQL Editor.`;
-      } else {
-        bannerText.innerHTML = '⚠️ <strong>No content in database.</strong> Run <code>full_setup.sql</code> in Supabase SQL Editor, then refresh.';
-      }
-    }
+  if (errorMsg) {
+    // Show warning but fields are still pre-filled with defaults
+    if (bannerText) bannerText.innerHTML = '⚠️ <strong>Supabase unreachable:</strong> ' + errorMsg + 
+      '<br><small>Fields show default values. Changes cannot be saved until connection is restored. Try: disable VPN, check internet, or open Supabase dashboard.</small>';
     banner.style.display = 'block';
-    if (!rows.length) return;
+  } else if (!rows.length) {
+    if (bannerText) bannerText.innerHTML = '⚠️ <strong>Database empty.</strong> Run <code>full_setup.sql</code> in Supabase SQL Editor, then refresh.';
+    banner.style.display = 'block';
+    updateSEOPreview();
+    return; // fields already pre-filled with defaults above
   } else {
     banner.style.display = 'none';
   }
 
-  // Populate all form fields
+  // STEP 3: Override defaults with actual DB values
   rows.forEach(r => {
     const el = document.getElementById('c-' + r.key);
     if (el) el.value = r.value;
@@ -761,11 +768,10 @@ async function loadAllContentFields() {
       });
     }
   });
-  updateSEOPreview();
-  console.log('✅ Loaded', rows.length, 'content fields into admin forms');
-}
 
-// ─── DASHBOARD ────────────────────────────────────────────────────────────
+  updateSEOPreview();
+  console.log('✅ Admin fields loaded: ' + rows.length + ' from DB' + (window.DEFAULT_CONTENT ? ' + defaults' : ''));
+}
 async function loadDashboard() {
   const [enqs, projs, svcs] = await Promise.all([
     db.get('enquiries', 'select=id,read,name,email,project_type,created_at&order=created_at.desc&limit=5'),
@@ -852,7 +858,9 @@ function exportCSV() {
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────
 async function loadProjects() {
-  const projs = await db.get('projects', 'select=*&order=sort_order.asc');
+  let projs = await db.get('projects', 'select=*&order=sort_order.asc');
+  // Fall back to defaults if DB unreachable
+  if (!projs.length && window.DEFAULT_PROJECTS) projs = window.DEFAULT_PROJECTS;
   const tbody = document.getElementById('projTableBody');
   if (!projs.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--mu)">No projects. Click + Add Project.</td></tr>'; return; }
   tbody.innerHTML = projs.map(p => `
@@ -973,7 +981,9 @@ async function delProject(id) { if (confirm('Delete this project?')) { await db.
 
 // ─── SERVICES ──────────────────────────────────────────────────────────────
 async function loadServices() {
-  const svcs = await db.get('services', 'select=*&order=sort_order.asc');
+  let svcs = await db.get('services', 'select=*&order=sort_order.asc');
+  // Fall back to defaults if DB unreachable
+  if (!svcs.length && window.DEFAULT_SERVICES) svcs = window.DEFAULT_SERVICES;
   const tbody = document.getElementById('svcTableBody');
   if (!svcs.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--mu)">No services. Click + Add Service.</td></tr>'; return; }
   tbody.innerHTML = svcs.map(s => `
