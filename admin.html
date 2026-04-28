@@ -224,7 +224,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy)}
     </div>
 
     <div class="warn-banner" id="warnBanner">
-      ⚠️ <strong>No content in database.</strong> Run <code>full_setup.sql</code> in Supabase SQL Editor, then refresh this page.
+      <span id="warnBannerText">⚠️ <strong>No content in database.</strong> Run <code>full_setup.sql</code> in Supabase SQL Editor, then refresh.</span>
     </div>
 
     <div class="ac">
@@ -700,16 +700,54 @@ async function initAdmin() {
 }
 
 async function loadAllContentFields() {
-  const rows = await db.get('site_content', 'select=key,value');
-  if (!rows.length) {
-    document.getElementById('warnBanner').style.display = 'block';
-    return;
+  const banner = document.getElementById('warnBanner');
+  const bannerText = document.getElementById('warnBannerText');
+
+  // Use raw fetch so we can see the actual HTTP status
+  const SUPA_URL = 'https://nthbgkuiusppwlpejtss.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50aGJna3VpdXNwcHdscGVqdHNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxNjg5NTAsImV4cCI6MjA4Mjc0NDk1MH0.m0w7Jme2y_D3jxbnjhrWkwBYErdYEnnKHaCgAwhIlXM';
+  
+  let rows = [];
+  let httpStatus = null;
+  let errorMsg = null;
+  
+  try {
+    const ctrl = new AbortController();
+    setTimeout(() => ctrl.abort(), 8000);
+    const r = await fetch(
+      `${SUPA_URL}/rest/v1/site_content?select=key,value`,
+      { headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }, signal: ctrl.signal }
+    );
+    httpStatus = r.status;
+    if (r.ok) {
+      rows = await r.json();
+    } else {
+      errorMsg = `HTTP ${r.status}: ${await r.text().catch(() => 'no details')}`;
+    }
+  } catch(e) {
+    errorMsg = e.name === 'AbortError' ? 'Request timed out after 8s' : e.message;
   }
-  document.getElementById('warnBanner').style.display = 'none';
+
+  console.log(`[loadAllContentFields] status=${httpStatus} rows=${rows.length} error=${errorMsg}`);
+
+  if (errorMsg || !rows.length) {
+    if (bannerText) {
+      if (errorMsg) {
+        bannerText.innerHTML = `⚠️ <strong>Database error:</strong> ${errorMsg} — Run <code>fix_write.sql</code> in Supabase SQL Editor.`;
+      } else {
+        bannerText.innerHTML = '⚠️ <strong>No content in database.</strong> Run <code>full_setup.sql</code> in Supabase SQL Editor, then refresh.';
+      }
+    }
+    banner.style.display = 'block';
+    if (!rows.length) return;
+  } else {
+    banner.style.display = 'none';
+  }
+
+  // Populate all form fields
   rows.forEach(r => {
     const el = document.getElementById('c-' + r.key);
     if (el) el.value = r.value;
-    // Handle image preview fields
     if (r.key === 'hero_image' && r.value) {
       ['heroImgPreview','heroImgPreview2'].forEach(id => {
         const img = document.getElementById(id);
@@ -724,7 +762,7 @@ async function loadAllContentFields() {
     }
   });
   updateSEOPreview();
-  console.log('✅ Loaded', rows.length, 'content fields');
+  console.log('✅ Loaded', rows.length, 'content fields into admin forms');
 }
 
 // ─── DASHBOARD ────────────────────────────────────────────────────────────

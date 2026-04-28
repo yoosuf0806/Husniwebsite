@@ -114,9 +114,16 @@ function _fetch(url, opts = {}, ms = 8000) {
 async function _get(table, params = '') {
   try {
     const r = await _fetch(`${SUPA_URL}/rest/v1/${table}?${params}`, { headers: _headers() });
-    if (!r.ok) return [];
+    if (!r.ok) {
+      const txt = await r.text().catch(() => '');
+      console.warn(`[DB] GET ${table} failed: HTTP ${r.status}`, txt.slice(0,200));
+      return [];
+    }
     return await r.json();
-  } catch(e) { return []; }
+  } catch(e) {
+    if (e.name !== 'AbortError') console.warn(`[DB] GET ${table} error:`, e.message);
+    return [];
+  }
 }
 
 // ─── CENTRALIZED FETCH ─────────────────────────────────────────────────────
