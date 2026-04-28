@@ -384,7 +384,7 @@ window.renderAll      = renderAll;
 window.renderSection  = renderSection;
 window.loadSiteContent= loadSiteContent;
 window.submitEnquiry  = submitEnquiry;
-// Expose defaults so admin can pre-fill fields without DB
+window._cache         = _cache;          // expose for immediate sync render
 window.DEFAULT_CONTENT  = DEFAULT_CONTENT;
 window.DEFAULT_PROJECTS = DEFAULT_PROJECTS;
 window.DEFAULT_SERVICES = DEFAULT_SERVICES;

@@ -263,9 +263,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
       </div>
       <a href="projects.html" class="section-link-white">View all projects →</a>
     </div>
-    <div class="projects-grid reveal" id="projectsGrid">
-      <!-- Loaded from Supabase -->
-      <div class="project-card" style="grid-column:1/-1;aspect-ratio:auto;padding:48px;text-align:center;color:rgba(255,255,255,0.4);font-size:14px">Loading projects…</div>
+    
     </div>
   </div>
 </section>
@@ -366,10 +364,15 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 // APPLY SECTION VISIBILITY
 
 
-// INIT — single fetch, four parallel queries, each section rendered independently
-async function initPage() {
-  const cache = await fetchContent(); // one call, populates all four namespaces
-  renderAll(cache);                   // batch-apply [data-content], then each section
+// INIT — render defaults immediately (sync), then update from DB (async)
+function initPage() {
+  // 1. Render hardcoded defaults RIGHT NOW — page never shows "Loading..."
+  renderAll(_cache);
+
+  // 2. Fetch from DB in background — update only if DB has data
+  fetchContent(true).then(cache => {
+    renderAll(cache);
+  });
 }
 initPage();
 

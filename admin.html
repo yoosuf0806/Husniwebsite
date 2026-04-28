@@ -197,10 +197,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy)}
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10.5a1 1 0 0 1-1 1h-1l-3 3-3-3H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1z"/></svg>
         Contact
       </div>
-      <div class="sb-item" onclick="goPanel('images',this)">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1"/><circle cx="5" cy="6" r="1.5"/><path d="M1 11l4-4 3 3 2-2 5 5"/></svg>
-        Images
-      </div>
+
       <div class="sb-section">Settings</div>
       <div class="sb-item" onclick="goPanel('seo',this)">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M14 14l-3-3"/></svg>
@@ -434,35 +431,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy)}
         </div></div>
       </div>
 
-      <!-- IMAGES -->
-      <div class="panel" id="panel-images">
-        <div class="card"><div class="card-header"><h3>Website Images</h3></div><div class="card-body">
-          <p style="font-size:13px;color:var(--mu);margin-bottom:20px">Upload images for the main sections. After uploading, click <strong>Save Changes</strong> to apply.</p>
-          <div class="g2">
-            <div>
-              <div class="section-label" style="margin-top:0">Hero Photo</div>
-              <div class="img-drop"><input type="file" accept="image/*" onchange="uploadImg(this,'hero')"/>
-                <img id="heroImgPreview2" class="img-preview" style="margin-bottom:8px"/>
-                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="#aaa" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
-                <p>Portrait · Recommended 600×800px</p>
-              </div>
-              <div class="img-status" id="heroImgStatus2"></div>
-              <div class="field" style="margin-top:10px"><label>Or paste URL</label><input type="text" id="c-hero_image2" placeholder="https://..." oninput="previewImg('hero2',this.value)"/></div>
-            </div>
-            <div>
-              <div class="section-label" style="margin-top:0">About Photo</div>
-              <div class="img-drop"><input type="file" accept="image/*" onchange="uploadImg(this,'about')"/>
-                <img id="aboutImgPreview2" class="img-preview" style="margin-bottom:8px"/>
-                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="#aaa" stroke-width="1.5"><rect x="2" y="6" width="28" height="20" rx="2"/><circle cx="16" cy="16" r="5"/></svg>
-                <p>4:5 ratio · Recommended 500×625px</p>
-              </div>
-              <div class="img-status" id="aboutImgStatus2"></div>
-              <div class="field" style="margin-top:10px"><label>Or paste URL</label><input type="text" id="c-about_image2" placeholder="https://..." oninput="previewImg('about2',this.value)"/></div>
-            </div>
-          </div>
-        </div></div>
-      </div>
-
       <!-- SEO -->
       <div class="panel" id="panel-seo">
         <div class="card"><div class="card-header"><h3>Google Search Preview</h3></div><div class="card-body">
@@ -676,7 +644,7 @@ const PANEL_KEYS = {
 };
 
 async function saveCurrentPanel() {
-  if (['dashboard','enquiries','images'].includes(curPanel)) return true;
+  if (['dashboard','enquiries'].includes(curPanel)) return true;
 
   const allowedKeys = PANEL_KEYS[curPanel];
   if (!allowedKeys) return true;
@@ -857,12 +825,9 @@ function exportCSV() {
 }
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────
-async function loadProjects() {
-  let projs = await db.get('projects', 'select=*&order=sort_order.asc');
-  // Fall back to defaults if DB unreachable
-  if (!projs.length && window.DEFAULT_PROJECTS) projs = window.DEFAULT_PROJECTS;
+function renderProjTable(projs) {
   const tbody = document.getElementById('projTableBody');
-  if (!projs.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--mu)">No projects. Click + Add Project.</td></tr>'; return; }
+  if (!tbody) return;
   tbody.innerHTML = projs.map(p => `
     <tr>
       <td>${p.image_url ? `<img class="thumb" src="${p.image_url}" onerror="this.style.display='none'" alt=""/>` : '<div class="no-thumb">No img</div>'}</td>
@@ -870,12 +835,24 @@ async function loadProjects() {
       <td style="font-size:12px;color:var(--mu)">${p.type||'—'}</td>
       <td>${p.year||'—'}</td>
       <td style="font-size:12px;color:var(--mu)">${p.location||'—'}</td>
-      <td><span class="pill ${p.visible?'live':'hidden'}">${p.visible?'● Live':'● Hidden'}</span></td>
+      <td><span class="pill ${p.visible!==false?'live':'hidden'}">${p.visible!==false?'● Live':'● Hidden'}</span></td>
       <td><div class="btn-row">
         <button class="btn" onclick='openProjModal(${JSON.stringify(p)})'>Edit</button>
         <button class="btn danger" onclick="delProject(${p.id})">Delete</button>
       </div></td>
     </tr>`).join('');
+}
+
+async function loadProjects() {
+  const tbody = document.getElementById('projTableBody');
+  // Show defaults immediately while DB loads
+  let projs = window.DEFAULT_PROJECTS || [];
+  if (projs.length) renderProjTable(projs);
+  // Try DB
+  const dbProjs = await db.get('projects', 'select=*&order=sort_order.asc');
+  if (dbProjs.length) projs = dbProjs;
+  if (!projs.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--mu)">No projects. Click + Add Project.</td></tr>'; return; }
+  renderProjTable(projs);
 }
 
 function openProjModal(p) {
@@ -980,11 +957,31 @@ async function saveProject() {
 async function delProject(id) { if (confirm('Delete this project?')) { await db.delete('projects', id); loadProjects(); } }
 
 // ─── SERVICES ──────────────────────────────────────────────────────────────
-async function loadServices() {
-  let svcs = await db.get('services', 'select=*&order=sort_order.asc');
-  // Fall back to defaults if DB unreachable
-  if (!svcs.length && window.DEFAULT_SERVICES) svcs = window.DEFAULT_SERVICES;
+function renderSvcTable(svcs) {
   const tbody = document.getElementById('svcTableBody');
+  if (!tbody) return;
+  tbody.innerHTML = svcs.map(s => `
+    <tr>
+      <td style="color:var(--mu)">${s.sort_order||'—'}</td>
+      <td style="font-weight:500">${s.name}</td>
+      <td style="font-size:12px;color:var(--mu);max-width:260px">${(s.description||'').slice(0,70)}${(s.description||'').length>70?'…':''}</td>
+      <td style="font-size:12px;color:var(--mu)">${s.icon||'default'}</td>
+      <td><span class="pill ${s.visible!==false?'live':'hidden'}">${s.visible!==false?'● Live':'● Hidden'}</span></td>
+      <td><div class="btn-row">
+        <button class="btn" onclick='openSvcModal(${JSON.stringify(s)})'>Edit</button>
+        <button class="btn danger" onclick="delService(${s.id})">Delete</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+async function loadServices() {
+  const tbody = document.getElementById('svcTableBody');
+  // Show defaults immediately
+  let svcs = window.DEFAULT_SERVICES || [];
+  if (svcs.length) renderSvcTable(svcs);
+  // Try DB
+  const dbSvcs = await db.get('services', 'select=*&order=sort_order.asc');
+  if (dbSvcs.length) svcs = dbSvcs;
   if (!svcs.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--mu)">No services. Click + Add Service.</td></tr>'; return; }
   tbody.innerHTML = svcs.map(s => `
     <tr>
@@ -1079,19 +1076,66 @@ function updateSEOPreview() {
 
 // ─── TEST DB ───────────────────────────────────────────────────────────────
 async function testDB() {
-  const btn = document.getElementById('testBtn'); btn.textContent = 'Testing…'; btn.disabled = true;
-  const rows = await db.get('site_content', 'select=key&limit=1');
-  if (!rows.length) {
-    btn.textContent = '❌ No Data'; btn.disabled = false;
-    alert('Cannot read from Supabase, or no data found.\n\n1. Check your internet connection\n2. Run full_setup.sql in Supabase SQL Editor');
-    setTimeout(() => btn.textContent = 'Test DB', 4000); return;
-  }
-  const ok = await db.upsertBatch('site_content', [{ key: '_ping', value: new Date().toISOString() }], 'key');
-  btn.disabled = false;
-  if (ok) { btn.textContent = '✅ DB OK'; setTimeout(() => btn.textContent = 'Test DB', 3000); }
-  else {
-    btn.textContent = '⚠️ Write FAIL';
-    alert('READ works but WRITE is blocked.\n\nSolution: Run fix_write.sql in Supabase SQL Editor.\n\nThis fixes Row Level Security that is blocking saves.');
+  const btn = document.getElementById('testBtn');
+  btn.textContent = 'Testing…'; btn.disabled = true;
+
+  // Hard timeout — button resets after 7s no matter what
+  const hardReset = setTimeout(() => {
+    btn.textContent = '⚠️ DNS Error';
+    btn.disabled = false;
+    alert('Cannot reach Supabase.\n\nYour network/DNS is blocking supabase.co.\n\nFixes to try:\n• Disconnect VPN\n• Switch to mobile hotspot\n• Change DNS to 8.8.8.8\n• Try a different browser\n\nThe admin fields still show default values and the website still works from its hardcoded data.');
+    setTimeout(() => btn.textContent = 'Test DB', 5000);
+  }, 7000);
+
+  try {
+    const SUPA_URL = 'https://nthbgkuiusppwlpejtss.supabase.co';
+    const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50aGJna3VpdXNwcHdscGVqdHNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxNjg5NTAsImV4cCI6MjA4Mjc0NDk1MH0.m0w7Jme2y_D3jxbnjhrWkwBYErdYEnnKHaCgAwhIlXM';
+    const ctrl = new AbortController();
+    setTimeout(() => ctrl.abort(), 6000);
+    const r = await fetch(SUPA_URL + '/rest/v1/site_content?select=key&limit=1', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY },
+      signal: ctrl.signal
+    });
+    clearTimeout(hardReset);
+    btn.disabled = false;
+    if (r.ok) {
+      const data = await r.json();
+      if (!data.length) {
+        btn.textContent = '⚠️ DB Empty';
+        alert('Connected but no data.\nRun full_setup.sql in Supabase SQL Editor.');
+        setTimeout(() => btn.textContent = 'Test DB', 4000);
+      } else {
+        // Test write
+        const wr = await fetch(SUPA_URL + '/rest/v1/site_content?on_conflict=key', {
+          method: 'POST',
+          headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY,
+                     'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+          body: JSON.stringify([{ key: '_ping', value: new Date().toISOString() }])
+        });
+        if (wr.ok) {
+          btn.textContent = '✅ DB OK (' + data.length + ' rows)';
+          setTimeout(() => { btn.textContent = 'Test DB'; }, 3000);
+          // Reload content fields now that we know DB is reachable
+          loadAllContentFields();
+        } else {
+          btn.textContent = '⚠️ Read OK / Write FAIL';
+          alert('DB reads work but writes are blocked.\nRun fix_write.sql in Supabase SQL Editor.');
+          setTimeout(() => btn.textContent = 'Test DB', 5000);
+        }
+      }
+    } else {
+      btn.textContent = '❌ HTTP ' + r.status;
+      alert('Supabase returned HTTP ' + r.status + '.\nRun fix_write.sql to fix permissions.');
+      setTimeout(() => btn.textContent = 'Test DB', 4000);
+    }
+  } catch(e) {
+    clearTimeout(hardReset);
+    btn.disabled = false;
+    const msg = e.name === 'AbortError' ? '⏱ Timeout (6s)' : '❌ DNS Error';
+    btn.textContent = msg;
+    if (e.name === 'AbortError') {
+      alert('Connection timed out after 6 seconds.\n\nYour network cannot reach Supabase.\nTry: VPN off, mobile hotspot, or different network.');
+    }
     setTimeout(() => btn.textContent = 'Test DB', 5000);
   }
 }
