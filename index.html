@@ -347,7 +347,7 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
   <div class="wa-tooltip">Let's talk</div>
 </div>
 
-<script src="supabase.js"></script>
+<script src="cms.js"></script>
 <script>
 // SERVICE ICONS
 
@@ -364,17 +364,8 @@ footer{background:#111C30;padding:40px 48px;display:flex;flex-direction:row;alig
 // APPLY SECTION VISIBILITY
 
 
-// INIT — render defaults immediately (sync), then update from DB (async)
-function initPage() {
-  // 1. Render hardcoded defaults RIGHT NOW — page never shows "Loading..."
-  renderAll(_cache);
-
-  // 2. Fetch from DB in background — update only if DB has data
-  fetchContent(true).then(cache => {
-    renderAll(cache);
-  });
-}
-initPage();
+// INIT — load content.json (same domain, no DNS issues) then render
+CMS.loadContent().then(data => CMS.renderAll(data));
 
 // NAV
 const navbar = document.getElementById('navbar');
@@ -396,11 +387,11 @@ const obs = new IntersectionObserver(e => {
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // CONTACT FORM
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
+document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = this.querySelector('button[type=submit]');
   btn.textContent = 'Sending…'; btn.disabled = true;
-  const ok = await submitEnquiry({
+  const ok = CMS.saveEnquiry({
     name: document.getElementById('cf-name').value,
     email: document.getElementById('cf-email').value,
     phone: document.getElementById('cf-phone').value || null,
