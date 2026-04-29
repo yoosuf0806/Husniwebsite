@@ -54,6 +54,36 @@ function _applyText(site) {
     el.innerHTML = val;
   });
 }
+function _renderImages(site) {
+  const h = document.getElementById('heroImg');
+  const a = document.getElementById('aboutImg');
+  if (h && site.hero_image)  { h.src = site.hero_image; }
+  if (a && site.about_image) { a.src = site.about_image; }
+}
+
+function _renderLinks(site) {
+  const el = document.getElementById('emailLink');
+  if (el && site.contact_email) {
+    el.href = 'mailto:' + site.contact_email;
+    el.textContent = site.contact_email;
+  }
+  if (site.whatsapp_number) {
+    const url = 'https://wa.me/' + site.whatsapp_number + '?text=Hi%20Husni%2C%20I%27d%20like%20to%20discuss%20a%20project.';
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => a.href = url);
+  }
+  const li = document.getElementById('linkedinLink');
+  const be = document.getElementById('behanceLink');
+  if (li && site.linkedin_url && site.linkedin_url !== '#') { li.href = site.linkedin_url; li.style.display = ''; }
+  if (be && site.behance_url && site.behance_url !== '#')   { be.href = site.behance_url;  be.style.display = ''; }
+}
+
+function _renderSEO(site) {
+  if (site.seo_title) document.title = site.seo_title;
+  const m = document.querySelector('meta[name="description"]');
+  if (m && site.seo_description) m.content = site.seo_description;
+}
+
+
 
 function _renderProjects(projects) {
   const grid = document.getElementById('projectsGrid');
