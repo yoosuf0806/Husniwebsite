@@ -57,17 +57,47 @@ function _applyText(site) {
 
 function _renderProjects(projects) {
   const grid = document.getElementById('projectsGrid');
+  const featuredEl = document.getElementById('featuredProject');
   if (!grid) return;
-  const visible = projects.filter(p => p.visible !== false).slice(0, 4);
+
+  const visible = projects.filter(p => p.visible !== false);
   if (!visible.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;padding:48px;text-align:center;color:rgba(255,255,255,.4)">No projects yet.</div>';
+    if (featuredEl) featuredEl.innerHTML = '';
     return;
   }
-  grid.innerHTML = visible.map((p, i) => `
+
+  // Render featured project banner (first project marked featured, else first project)
+  const featured = visible.find(p => p.featured) || visible[0];
+  if (featuredEl) {
+    featuredEl.innerHTML = `
+      <div class="featured-project">
+        <div class="fp-image">
+          <img src="${featured.image_url || ''}" alt="${featured.title}" loading="lazy" onerror="this.style.opacity='0'"/>
+          <div class="fp-badge">Featured Project</div>
+        </div>
+        <div class="fp-info">
+          <div class="fp-label">${featured.category || 'Architecture'} · ${featured.year || ''}</div>
+          <h3 class="fp-title">${featured.title}</h3>
+          <p class="fp-desc">${(featured.description || '').slice(0, 160)}${(featured.description||'').length > 160 ? '…' : ''}</p>
+          <div class="fp-meta">
+            ${featured.client ? `<div class="fp-meta-item"><label>Client</label><span>${featured.client}</span></div>` : ''}
+            ${featured.consultant ? `<div class="fp-meta-item"><label>Architect</label><span>${featured.consultant}</span></div>` : ''}
+            ${featured.area ? `<div class="fp-meta-item"><label>Area</label><span>${featured.area}</span></div>` : ''}
+            ${featured.role ? `<div class="fp-meta-item"><label>Funded by</label><span>${featured.role}</span></div>` : ''}
+          </div>
+          <a href="projects.html" class="fp-cta">View all projects →</a>
+        </div>
+      </div>`;
+  }
+
+  // Render remaining projects in grid (exclude featured, show up to 3)
+  const gridProjects = visible.filter(p => p.id !== featured.id).slice(0, 3);
+  grid.innerHTML = gridProjects.map((p, i) => `
     <div class="project-card" onclick="location.href='projects.html'" role="link" tabindex="0">
       <img src="${p.image_url || ''}" alt="${p.title}" loading="lazy" onerror="this.style.opacity='0'"/>
       <div class="project-overlay"></div>
-      <div class="project-num">0${i+1}/0${visible.length}</div>
+      <div class="project-num">0${i+1}/0${gridProjects.length}</div>
       <div class="project-info">
         <div class="project-name">${p.title}</div>
         <div class="project-type">${p.type || ''}</div>
@@ -79,19 +109,22 @@ function _renderServices(services) {
   const grid = document.getElementById('servicesGrid');
   if (!grid) return;
   const ICONS = {
-    home:     `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M5 22V10l9-7 9 7v12"/><path d="M10 22v-6h8v6"/></svg>`,
-    building: `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M4 24L14 4l10 20"/><path d="M8 18h12"/></svg>`,
-    screen:   `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="4" y="4" width="20" height="16" rx="1"/><path d="M10 20v4M18 20v4M7 24h14"/></svg>`,
-    grid:     `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="3" y="3" width="22" height="22" rx="1"/><path d="M3 10h22M10 10v15"/></svg>`,
-    interior: `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><rect x="3" y="8" width="22" height="17" rx="1"/><path d="M8 8V5a6 6 0 0 1 12 0v3"/><path d="M3 13h22"/></svg>`,
-    document: `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><path d="M14 3l11 9H3z"/><path d="M6 12v10M22 12v10M3 22h22"/></svg>`,
-    default:  `<svg class="service-icon" viewBox="0 0 28 28" fill="none" stroke="#1B2A4A" stroke-width="1.5"><circle cx="14" cy="14" r="10"/></svg>`
+    home:     `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 22V10l9-7 9 7v12"/><path d="M10 22v-6h8v6"/></svg>`,
+    building: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 24L14 4l10 20"/><path d="M8 18h12"/></svg>`,
+    screen:   `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="20" height="16" rx="1"/><path d="M10 20v4M18 20v4M7 24h14"/></svg>`,
+    grid:     `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="22" height="22" rx="1"/><path d="M3 10h22M10 10v15"/></svg>`,
+    interior: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="22" height="17" rx="1"/><path d="M8 8V5a6 6 0 0 1 12 0v3"/><path d="M3 13h22"/></svg>`,
+    document: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3l11 9H3z"/><path d="M6 12v10M22 12v10M3 22h22"/></svg>`,
+    default:  `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="14" r="10"/><path d="M14 9v5l3 3"/></svg>`
   };
-  grid.innerHTML = services.filter(s => s.visible !== false).map(s => `
-    <div class="service-tile">
-      ${ICONS[s.icon] || ICONS.default}
-      <div class="service-name">${s.name}</div>
-      <div class="service-desc">${s.description || ''}</div>
+  const visible = services.filter(s => s.visible !== false);
+  grid.innerHTML = visible.map((s, i) => `
+    <div class="svc-card">
+      <div class="svc-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="svc-icon-wrap">${ICONS[s.icon] || ICONS.default}</div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-desc">${s.description || ''}</div>
+      <a href="services.html" class="svc-link">Learn more →</a>
     </div>`).join('');
 }
 
