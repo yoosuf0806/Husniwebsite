@@ -59,51 +59,47 @@ function _renderProjects(projects) {
   const grid = document.getElementById('projectsGrid');
   const featuredEl = document.getElementById('featuredProject');
   if (!grid) return;
-
   const visible = projects.filter(p => p.visible !== false);
   if (!visible.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;padding:48px;text-align:center;color:rgba(255,255,255,.4)">No projects yet.</div>';
     if (featuredEl) featuredEl.innerHTML = '';
     return;
   }
-
-  // Render featured project banner (first project marked featured, else first project)
   const featured = visible.find(p => p.featured) || visible[0];
   if (featuredEl) {
     featuredEl.innerHTML = `
       <div class="featured-project">
         <div class="fp-image">
-          <img src="${featured.image_url || ''}" alt="${featured.title}" loading="lazy" onerror="this.style.opacity='0'"/>
+          <img src="${featured.image_url||''}" alt="${featured.title}" loading="lazy" onerror="this.style.opacity='0'"/>
           <div class="fp-badge">Featured Project</div>
         </div>
         <div class="fp-info">
-          <div class="fp-label">${featured.category || 'Architecture'} · ${featured.year || ''}</div>
+          <div class="fp-label">${featured.category||'Architecture'} · ${featured.year||''}</div>
           <h3 class="fp-title">${featured.title}</h3>
-          <p class="fp-desc">${(featured.description || '').slice(0, 160)}${(featured.description||'').length > 160 ? '…' : ''}</p>
+          <p class="fp-desc">${(featured.description||'').slice(0,180)}${(featured.description||'').length>180?'…':''}</p>
           <div class="fp-meta">
-            ${featured.client ? `<div class="fp-meta-item"><label>Client</label><span>${featured.client}</span></div>` : ''}
-            ${featured.consultant ? `<div class="fp-meta-item"><label>Architect</label><span>${featured.consultant}</span></div>` : ''}
-            ${featured.area ? `<div class="fp-meta-item"><label>Area</label><span>${featured.area}</span></div>` : ''}
-            ${featured.role ? `<div class="fp-meta-item"><label>Funded by</label><span>${featured.role}</span></div>` : ''}
+            ${featured.client?`<div class="fp-meta-item"><label>Client</label><span>${featured.client}</span></div>`:''}
+            ${featured.consultant?`<div class="fp-meta-item"><label>Architect</label><span>${featured.consultant}</span></div>`:''}
+            ${featured.area?`<div class="fp-meta-item"><label>Area</label><span>${featured.area}</span></div>`:''}
+            ${featured.role?`<div class="fp-meta-item"><label>Funded by</label><span>${featured.role}</span></div>`:''}
           </div>
           <a href="projects.html" class="fp-cta">View all projects →</a>
         </div>
       </div>`;
   }
-
-  // Render remaining projects in grid (exclude featured, show up to 3)
-  const gridProjects = visible.filter(p => p.id !== featured.id).slice(0, 3);
-  grid.innerHTML = gridProjects.map((p, i) => `
+  const rest = visible.filter(p => p.id !== featured.id).slice(0,3);
+  grid.innerHTML = rest.map((p,i) => `
     <div class="project-card" onclick="location.href='projects.html'" role="link" tabindex="0">
-      <img src="${p.image_url || ''}" alt="${p.title}" loading="lazy" onerror="this.style.opacity='0'"/>
+      <img src="${p.image_url||''}" alt="${p.title}" loading="lazy" onerror="this.style.opacity='0'"/>
       <div class="project-overlay"></div>
-      <div class="project-num">0${i+1}/0${gridProjects.length}</div>
+      <div class="project-num">0${i+1}/0${rest.length}</div>
       <div class="project-info">
         <div class="project-name">${p.title}</div>
-        <div class="project-type">${p.type || ''}</div>
+        <div class="project-type">${p.type||''}</div>
       </div>
     </div>`).join('');
 }
+
 
 function _renderServices(services) {
   const grid = document.getElementById('servicesGrid');
@@ -128,27 +124,6 @@ function _renderServices(services) {
     </div>`).join('');
 }
 
-function _renderImages(site) {
-  const h = document.getElementById('heroImg');
-  const a = document.getElementById('aboutImg');
-  if (h && site.hero_image)  h.src = site.hero_image;
-  if (a && site.about_image) a.src = site.about_image;
-}
-
-function _renderLinks(site) {
-  const el = document.getElementById('emailLink');
-  if (el && site.contact_email) { el.href = 'mailto:' + site.contact_email; el.textContent = site.contact_email; }
-  if (site.whatsapp_number) {
-    const url = `https://wa.me/${site.whatsapp_number}?text=Hi%20Husni%2C%20I'd%20like%20to%20discuss%20a%20project.`;
-    document.querySelectorAll('a[href*="wa.me"]').forEach(a => a.href = url);
-  }
-}
-
-function _renderSEO(site) {
-  if (site.seo_title) document.title = site.seo_title;
-  const m = document.querySelector('meta[name="description"]');
-  if (m && site.seo_description) m.content = site.seo_description;
-}
 
 function _renderGA(site) {
   if (!site.ga_tracking_id || !site.ga_tracking_id.startsWith('G-') || window._gaLoaded) return;

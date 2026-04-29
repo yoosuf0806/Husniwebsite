@@ -1,33 +1,78 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "**/*", "use": "@vercel/static" }
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
+    {
+      "src": "/about",
+      "dest": "/about.html"
+    },
+    {
+      "src": "/projects",
+      "dest": "/projects.html"
+    },
+    {
+      "src": "/services",
+      "dest": "/services.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact.html"
+    }
   ],
   "headers": [
     {
-      "source": "/images/(.*)\\.jpg",
+      "source": "/images/(.*)",
       "headers": [
-        { "key": "Content-Type", "value": "image/svg+xml" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    },
-    {
-      "source": "/images/(.*)\\.svg",
-      "headers": [
-        { "key": "Content-Type", "value": "image/svg+xml" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        {
+          "key": "Content-Type",
+          "value": "image/svg+xml"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
       ]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
       ]
     },
     {
       "source": "/(.*)\\.js",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/content.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
       ]
     }
   ]
